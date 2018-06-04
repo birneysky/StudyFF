@@ -10,21 +10,46 @@ if [ ! -s fdk_aac ]; then
 fi
 
 cd fdk_aac
-./autogen.sh
+if [ ! -s configure ]; then
+	./autogen.sh
+fi
 
-./configure --enable-static \
---with-pic=yes \
---disable-shared \
---host=arm-apple-darwin \
---prefix="`pwd`/../thin/armv7/" \
-CC="xcrun -sdk iphoneos clang" \
-AS="./gas-preprocessof.pl $CC" \
-CXX="$CC" \
-CPP="/usr/bin/cpp" \
-CFLAGS="-arch armv7 -fembed-bitcode -miphoneos-version-min=7.0" \
-LDFLAGS="-arch armv7 -fembed-bitcode -miphoneos-version-min=7.0" \
-CPPFLAGS="$CFLAGS"
-make clean
-make -j8
-make install
+build() 
+{
+	ARCH=$1
+	SDK=$2	
+	./configure --enable-static \
+	--with-pic=yes \
+	--disable-shared \
+	--host=arm-apple-darwin \
+	--prefix="`pwd`/../thin/$ARCH/" \
+	CC="xcrun -sdk $SDK clang" \
+	AS="./gas-preprocessof.pl xcrun -sdk $SDK clang" \
+	CXX="xcrun -sdk $SDK clang" \
+	CPP="xcrun -sdk $SDK clang -E" \
+	CFLAGS="-arch $ARCH -fembed-bitcode -miphoneos-version-min=7.0" \
+	LDFLAGS="-arch $ARCH -fembed-bitcode -miphoneos-version-min=7.0" \
+	CPPFLAGS="-arch $ARCH -fembed-bitcode -miphoneos-version-min=7.0"
 
+	make clean
+	make -j8
+	make install
+}
+
+build "arm64" "iphoneos"
+build "x86_64" "iphonesimulator"
+
+if [ ! -s ../../vendor/fdk-aac/lib ]; then
+	mkdir ../../vendor/fdk-aac/lib
+fi
+
+lipo -create \
+	../thin/arm64/lib/libfdk-aac.a \
+	../thin/x86_64/lib/libfdk-aac.a \
+-output ../../vendor/fdk-aac/lib/libfdk-aac.a
+
+
+mv  ../thin/arm64/include ../../vendor/fdk-aac/include
+lipo -info ../../vendor/fdk-aac/lib/libfdk-aac.a
+rm -rf ../thin
+rm -rf ../fdk_aac
