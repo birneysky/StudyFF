@@ -33,14 +33,19 @@ for item in history_data:
 #获取a股所有股票的基本信息
 stocks = ts.get_stock_basics()
 print(stocks)
-recorder = namedtuple('recorder',('date','open','high','close','low','volume','price_change','p_change','v_ma5','v_ma20'))
+stock_infotuple = namedtuple('stock_info',('name','industry','area','pe','outstanding','totals','totalAssets','liquidAssets','fixedAssets','reserved','reservedPerShare','esp','bvps','pb','timeToMarket','undp','perundp','rev','profit','gpr','npr','holders'))
+#stock_info_list = [stock_infotuple(name,industry,area,pe,outstanding,totals,totalAssets,liquidAssets,fixedAssets,reserved,reserved,PerShare,esp,bvps,pb,timeToMarket,undp,perundp,rev,profit,gpr,npr,holders) for name,industry,area,pe,outstanding,totals,totalAssets,liquidAssets,fixedAssets,reserved,reservedPerShare,esp,bvps,pb,timeToMarket,undp,perundp,rev,profit,gpr,npr,holders in stocks.values]
 print(stocks.values)
-print(stocks.dtypes.index)
-'''
-fig = matplotlib.pyplot.gcf()
-df=ts.get_hist_data('600415',start='2015-04-01',end='2015-06-18')
-with pd.plotting.plot_params.use('x_compat', 'true'):
-    df.high.plot(color='r',figsize=(10,4),grid='on')
-    df.low.plot(color='b',figsize=(10,4),grid='on')
-    fig.savefig('./graph.png')
-'''
+print(type(stocks.dtypes.index.values))
+print(stocks.dtypes.index.values)
+for info in stocks.values:
+	stock_infotuple = namedtuple('stock_info',('name','industry','area','pe'))
+	#print(type(info),type(stocks.dtypes.index.values),type([1,2,3,4]))
+	#print(info.tolist(),stocks.dtypes.index.values.tolist())
+	for index_name,value in zip(stocks.dtypes.index.values.tolist(),info.tolist()):
+		print(index_name,':',value)
+	print('😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂')
+names = ['joy','jack','toney','blink']
+ages = [23,22,34,68]
+for name,age in zip(names,ages):
+	print('name:',name,'age:',age)
