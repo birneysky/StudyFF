@@ -38,12 +38,17 @@ stock_infotuple = namedtuple('stock_info',('name','industry','area','pe','outsta
 print(stocks.values)
 print(type(stocks.dtypes.index.values))
 print(stocks.dtypes.index.values)
+print(stocks.dtypes)
+print('stocks.value type:',type(stocks.values))
+print('stocks type:',type(stocks))
+print('stocks.columns type:',type(stocks.columns),stocks.columns)
+print('stocks.index type:',type(stocks.index),stocks.index)
 for info in stocks.values:
-	stock_infotuple = namedtuple('stock_info',('name','industry','area','pe'))
+	stock_infotuple = namedtuple('stock_info',('index_name','value'))
 	#print(type(info),type(stocks.dtypes.index.values),type([1,2,3,4]))
 	#print(info.tolist(),stocks.dtypes.index.values.tolist())
-	for index_name,value in zip(stocks.dtypes.index.values.tolist(),info.tolist()):
-		print(index_name,':',value)
+	stock_list = [stock_infotuple(index_name,value) for index_name,value in zip(stocks.dtypes.index.values.tolist(),info.tolist())]
+	print(stock_list)
 	print('😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂')
 names = ['joy','jack','toney','blink']
 ages = [23,22,34,68]
