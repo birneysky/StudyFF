@@ -30,6 +30,92 @@ for item in history_data:
 	print(item)
 '''
 
+'''
+columns type <class 'str'> name
+columns type <class 'str'> industry
+columns type <class 'str'> area
+columns type <class 'str'> pe
+columns type <class 'str'> outstanding
+columns type <class 'str'> totals
+columns type <class 'str'> totalAssets
+columns type <class 'str'> liquidAssets
+columns type <class 'str'> fixedAssets
+columns type <class 'str'> reserved
+columns type <class 'str'> reservedPerShare
+columns type <class 'str'> esp
+columns type <class 'str'> bvps
+columns type <class 'str'> pb
+columns type <class 'str'> timeToMarket
+columns type <class 'str'> undp
+columns type <class 'str'> perundp
+columns type <class 'str'> rev
+columns type <class 'str'> profit
+columns type <class 'str'> gpr
+columns type <class 'str'> npr
+columns type <class 'str'> holders
+'''
+
+class stock:
+	def setName(self, name):
+		self.name = name
+
+	def getName(self):
+		return self.name
+
+	def setIndustry(self, industry):
+		self.industry = industry
+
+	def getIndustry(self):
+		return self.industry
+
+	def setArea(self, area):
+		self.area = area
+
+	def getArea(self):
+		return self.area
+
+	def setPe(self, pe):
+		self.pe = pe
+
+	def getPe(self):
+		return self.pe
+
+	def setOutstanding(self, outstanding):
+		self.outstanding = outstanding
+
+	def getOutstanding(self):
+		return self.outstanding
+
+	def setTotals(self,totals):
+		self.totals = totals
+
+	def getTotals(self):
+		return self.totals
+
+	def setTotalAssets(self, totalAssets):
+		self.totalAssets = totalAssets
+
+	def getTotalAssets(self):
+		return self.totalAssets
+
+	def setLiquidAssets(self,liquidAssets):
+		self.liquidAssets = liquidAssets
+
+	def getLiquidAssets(self):
+		return self.liquidAssets
+
+	def setFixedAssets(self,fixedAssets):
+		self.fixedAssets = fixedAssets
+
+	def getFixedAssets(self):
+		return self.fixedAssets
+
+	def setReserved(self,reserved):
+		self.reserved = reserved
+
+	def getReserved(self):
+		return self.reserved
+
 #获取a股所有股票的基本信息
 stocks = ts.get_stock_basics()
 #print('stocks type',type(stocks),stocks)
@@ -60,7 +146,10 @@ for columns in stocks.columns:
 	#stock_list = [stock_infotuple(index_name,value) for index_name,value in zip(stocks.dtypes.index.values.tolist(),info.tolist())]
 	#print(stock_list)
 	#print('😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂')
-names = ['joy','jack','toney','blink']
-ages = [23,22,34,68]
-for name,age in zip(names,ages):
-	print('name:',name,'age:',age)
+for code, info in zip(stocks.index,stocks.values):
+	stockDic = {}
+	stockDic['code'] = code
+	for index_name, value in zip(stocks.columns.tolist(),info.tolist()):
+		stockDic[index_name] = value
+	print('stockDic type',type(stockDic),'value:',stockDic)
+	print('😂😂😂😂😂😂😂😂😂😂')
