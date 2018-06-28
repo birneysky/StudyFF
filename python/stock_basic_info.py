@@ -1,9 +1,5 @@
 import tushare as ts
 
-#获取a股所有股票的基本信息
-stocks = ts.get_stock_basics()
-
-
 class Stock:
 	__code__ = 0               #证券代码
 	__name__ = ''      	       #股票名
@@ -108,19 +104,23 @@ class Stock:
 
 
 	def __str__(self):
-		return 'name:{},\nindustry:{},\narea:{},\npe:{:.2f},\noutstanding:{:.2f},\
+		return 'code:{},\nname:{},\nindustry:{},\narea:{},\npe:{:.2f},\noutstanding:{:.2f},\
 				\ntotals:{:.2f},\ntotalAssets:{:.2f},\nliquidAssets:{:.2f},\
 				\nfixedAssets:{:.2f},\nreserved:{:.2f},\nreservedPerShare:{:.2f},\
 				\nesp:{:.2f},\nbvps:{:.2f},\npb:{:.2f},\ntimeToMarket:{},\
 				\nundp:{:.2f},\nperundp:{:.2f},\nrev:{:.2f},\nprofit:{:.2f},\
 				\ngpr:{:.2f},\nnpr:{:.2f},\nholders:{:.2f}'\
-				.format(self.__name__,self.__industry__,self.__area__,self.__pe__,
+				.format(self.__code__,self.__name__,self.__industry__,self.__area__,self.__pe__,
 					self.__outstanding__,self.__totals__,self.__totalAssets__,
 					self.__liquidAssets__,self.__fixedAssets__,self.__reserved__,
 					self.__reservedPerShare__,self.__esp__,self.__bvps__,self.__pb__,
 					self.__timeToMarket__,self.__undp__,self.__perundp__,
 					self.__rev__,self.__profit__,self.__gpr__,self.__npr__,
 					self.__holders__)
+
+
+#获取a股所有股票的基本信息
+stocks = ts.get_stock_basics()
 for code, info in zip(stocks.index,stocks.values):
 	stockDic = {}
 	stockDic['__code__'] = code
