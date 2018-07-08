@@ -3,16 +3,19 @@
 GAS_PREPROCESSOR=/usr/local/bin/gas-preprocessor.pl
 export CC="xcrun -sdk iphoneos clang -Wno-error=unused-command-line-argument-hard-error-in-future"
 export AS="gas-preprocessor.pl -arch arm -- xcrun -sdk iphoneos clang"
-CFLAGS="-arch armv7 -mios-version-min=7.0"
-LDFLAGS="$CFLAGS"
-HOST="arm-apple-darwin"
-./configure \
+CFLAGS="-arch armv7 -miphoneos-version-min=7.0"
+LDFLAGS=$CFLAGS
+CWD=`pwd`
+
+CC=$CC
+$CWD/configure \
 --enable-static \
 --enable-pic \
---host= \
---extra-cflags=$CFLAGS \
---extra-ldfalgs=$LDFLAGS \
---prefix="`pwd`/../thin/$ARCH/"
+--host="arm-apple-darwin" \
+--extra-cflags="-arch armv7 -mios-version-min=7.0" \
+--extra-asflags="-arch armv7 -mios-version-min=7.0" \
+--extra-ldflags="-arch armv7 -mios-version-min=7.0" \
+--prefix="`pwd`/../thin/armv7/" || exit 1
 
 mkdir extras
 ln -s $GAS_PREPROCESSOR extras
