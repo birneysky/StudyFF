@@ -103,7 +103,7 @@ do
 	echo $target
 	lipo -create $target -output vendor/ffmpeg/lib/$FILENAME
 done
-cp -rf thin/arm64/include vendor/ffmpeg/include/
+cp -rf thin/arm64/include vendor/ffmpeg
 rm -rf thin
 echo done
 say "I'm done"

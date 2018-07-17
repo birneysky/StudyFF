@@ -16,4 +16,4 @@ FOUNDATION_EXPORT const unsigned char ffmpegVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <ffmpeg/PublicHeader.h>
 
-
+void initFFmpeg(void);

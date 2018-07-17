@@ -7,3 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#include <libavformat/avformat.h>
+
+void initFFmpeg() {
+    avformat_network_init();
+    av_register_all();
+}
