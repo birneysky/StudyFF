@@ -2,18 +2,12 @@
 //  ffmpeg.h
 //  ffmpeg
 //
-//  Created by birneysky on 2018/7/12.
+//  Created by birneysky on 2018/7/18.
 //  Copyright © 2018年 Grocery. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
-//! Project version number for ffmpeg.
-FOUNDATION_EXPORT double ffmpegVersionNumber;
+@interface ffmpeg : NSObject
 
-//! Project version string for ffmpeg.
-FOUNDATION_EXPORT const unsigned char ffmpegVersionString[];
-
-// In this header, you should import all the public headers of your framework using statements like #import <ffmpeg/PublicHeader.h>
-
-void initFFmpeg(void);
+@end

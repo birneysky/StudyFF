@@ -2,9 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:ApiDemo/ApiDemo.xcodeproj">
+      location = "group:ffmpeg/ffmpeg.xcodeproj">
    </FileRef>
    <FileRef
-      location = "container:ffmpeg/ffmpeg.xcodeproj">
+      location = "group:ApiDemo/ApiDemo.xcodeproj">
    </FileRef>
 </Workspace>

@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import <ffmpeg/ffmpeg.h>
+#include <libavformat/avformat.h>
 
 @interface AppDelegate ()
 
@@ -18,7 +18,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    initFFmpeg();
+    avformat_network_init();
+    av_register_all();
     return YES;
 }
 

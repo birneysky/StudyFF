@@ -15,11 +15,11 @@
 		74FE722520FE43A7005F024C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 74FE722420FE43A7005F024C /* main.m */; };
 		74FE722F20FE43A7005F024C /* ApiDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 74FE722E20FE43A7005F024C /* ApiDemoTests.m */; };
 		74FE723A20FE43A7005F024C /* ApiDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 74FE723920FE43A7005F024C /* ApiDemoUITests.m */; };
-		74FE724920FE4405005F024C /* ffmpeg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FE724820FE4405005F024C /* ffmpeg.framework */; };
 		74FE725120FE4D30005F024C /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FE725020FE4D30005F024C /* VideoToolbox.framework */; };
 		74FE725320FE4D85005F024C /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FE725220FE4D85005F024C /* libiconv.tbd */; };
 		74FE725520FE4D9B005F024C /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FE725420FE4D9B005F024C /* CoreMedia.framework */; };
 		74FE725720FE4DBA005F024C /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FE725620FE4DBA005F024C /* libz.tbd */; };
+		74FE72F220FE517F005F024C /* libffmpeg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FE72F120FE517F005F024C /* libffmpeg.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +61,7 @@
 		74FE725220FE4D85005F024C /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		74FE725420FE4D9B005F024C /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		74FE725620FE4DBA005F024C /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		74FE72F120FE517F005F024C /* libffmpeg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libffmpeg.a; path = ../ffmpeg/lib/libffmpeg.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,11 +69,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74FE72F220FE517F005F024C /* libffmpeg.a in Frameworks */,
 				74FE725720FE4DBA005F024C /* libz.tbd in Frameworks */,
 				74FE725520FE4D9B005F024C /* CoreMedia.framework in Frameworks */,
 				74FE725320FE4D85005F024C /* libiconv.tbd in Frameworks */,
 				74FE725120FE4D30005F024C /* VideoToolbox.framework in Frameworks */,
-				74FE724920FE4405005F024C /* ffmpeg.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,6 +152,7 @@
 		74FE724720FE4405005F024C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				74FE72F120FE517F005F024C /* libffmpeg.a */,
 				74FE725620FE4DBA005F024C /* libz.tbd */,
 				74FE725420FE4D9B005F024C /* CoreMedia.framework */,
 				74FE725220FE4D85005F024C /* libiconv.tbd */,
@@ -462,12 +464,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../ffmpeg/framework";
+				FRAMEWORK_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../ffmpeg/lib";
 				INFOPLIST_FILE = ApiDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../ffmpeg/lib";
 				PRODUCT_BUNDLE_IDENTIFIER = grocery.tech.cn.ApiDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -479,12 +483,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../ffmpeg/framework";
+				FRAMEWORK_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../ffmpeg/lib";
 				INFOPLIST_FILE = ApiDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../ffmpeg/lib";
 				PRODUCT_BUNDLE_IDENTIFIER = grocery.tech.cn.ApiDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";

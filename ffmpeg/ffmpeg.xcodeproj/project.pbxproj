@@ -7,143 +7,106 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7491F6BB20F7A7C400DB4D19 /* ffmpeg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7491F6B120F7A7C400DB4D19 /* ffmpeg.framework */; };
-		7491F6C020F7A7C400DB4D19 /* ffmpegTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7491F6BF20F7A7C400DB4D19 /* ffmpegTests.m */; };
-		7491F6C220F7A7C400DB4D19 /* ffmpeg.h in Headers */ = {isa = PBXBuildFile; fileRef = 7491F6B420F7A7C400DB4D19 /* ffmpeg.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7491F6CC20F7A80D00DB4D19 /* ffmpeg.m in Sources */ = {isa = PBXBuildFile; fileRef = 7491F6CB20F7A80D00DB4D19 /* ffmpeg.m */; };
-		74FE70B220FE3FB8005F024C /* libswresample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FE70AC20FE3FB7005F024C /* libswresample.a */; };
-		74FE70B320FE3FB8005F024C /* libavformat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FE70AD20FE3FB7005F024C /* libavformat.a */; };
-		74FE70B420FE3FB8005F024C /* libswscale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FE70AE20FE3FB7005F024C /* libswscale.a */; };
-		74FE70B520FE3FB8005F024C /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FE70AF20FE3FB7005F024C /* libavcodec.a */; };
-		74FE70B620FE3FB8005F024C /* libavfilter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FE70B020FE3FB7005F024C /* libavfilter.a */; };
-		74FE70B720FE3FB8005F024C /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FE70B120FE3FB8005F024C /* libavutil.a */; };
+		74FE727420FE5028005F024C /* libswresample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FE726E20FE5028005F024C /* libswresample.a */; };
+		74FE727520FE5028005F024C /* libavformat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FE726F20FE5028005F024C /* libavformat.a */; };
+		74FE727620FE5028005F024C /* libswscale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FE727020FE5028005F024C /* libswscale.a */; };
+		74FE727720FE5028005F024C /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FE727120FE5028005F024C /* libavcodec.a */; };
+		74FE727820FE5028005F024C /* libavfilter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FE727220FE5028005F024C /* libavfilter.a */; };
+		74FE727920FE5028005F024C /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FE727320FE5028005F024C /* libavutil.a */; };
+		74FE72EF20FE5096005F024C /* ffmpeg.m in Sources */ = {isa = PBXBuildFile; fileRef = 74FE72ED20FE5096005F024C /* ffmpeg.m */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		7491F6BC20F7A7C400DB4D19 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7491F6A820F7A7C400DB4D19 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 7491F6B020F7A7C400DB4D19;
-			remoteInfo = ffmpeg;
-		};
-/* End PBXContainerItemProxy section */
-
-/* Begin PBXFileReference section */
-		7491F6B120F7A7C400DB4D19 /* ffmpeg.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ffmpeg.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7491F6B420F7A7C400DB4D19 /* ffmpeg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ffmpeg.h; sourceTree = "<group>"; };
-		7491F6B520F7A7C400DB4D19 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7491F6BA20F7A7C400DB4D19 /* ffmpegTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ffmpegTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		7491F6BF20F7A7C400DB4D19 /* ffmpegTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ffmpegTests.m; sourceTree = "<group>"; };
-		7491F6C120F7A7C400DB4D19 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7491F6CB20F7A80D00DB4D19 /* ffmpeg.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ffmpeg.m; sourceTree = "<group>"; };
-		74FE70AC20FE3FB7005F024C /* libswresample.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libswresample.a; path = vendor/ffmpeg/lib/libswresample.a; sourceTree = "<group>"; };
-		74FE70AD20FE3FB7005F024C /* libavformat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavformat.a; path = vendor/ffmpeg/lib/libavformat.a; sourceTree = "<group>"; };
-		74FE70AE20FE3FB7005F024C /* libswscale.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libswscale.a; path = vendor/ffmpeg/lib/libswscale.a; sourceTree = "<group>"; };
-		74FE70AF20FE3FB7005F024C /* libavcodec.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavcodec.a; path = vendor/ffmpeg/lib/libavcodec.a; sourceTree = "<group>"; };
-		74FE70B020FE3FB7005F024C /* libavfilter.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavfilter.a; path = vendor/ffmpeg/lib/libavfilter.a; sourceTree = "<group>"; };
-		74FE70B120FE3FB8005F024C /* libavutil.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavutil.a; path = vendor/ffmpeg/lib/libavutil.a; sourceTree = "<group>"; };
-/* End PBXFileReference section */
-
-/* Begin PBXFrameworksBuildPhase section */
-		7491F6AD20F7A7C400DB4D19 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
+/* Begin PBXCopyFilesBuildPhase section */
+		74FE725F20FE4F87005F024C /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
 			files = (
-				74FE70B220FE3FB8005F024C /* libswresample.a in Frameworks */,
-				74FE70B320FE3FB8005F024C /* libavformat.a in Frameworks */,
-				74FE70B420FE3FB8005F024C /* libswscale.a in Frameworks */,
-				74FE70B520FE3FB8005F024C /* libavcodec.a in Frameworks */,
-				74FE70B620FE3FB8005F024C /* libavfilter.a in Frameworks */,
-				74FE70B720FE3FB8005F024C /* libavutil.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7491F6B720F7A7C400DB4D19 /* Frameworks */ = {
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		74FE726120FE4F87005F024C /* libffmpeg.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libffmpeg.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		74FE726E20FE5028005F024C /* libswresample.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libswresample.a; path = vendor/ffmpeg/lib/libswresample.a; sourceTree = "<group>"; };
+		74FE726F20FE5028005F024C /* libavformat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavformat.a; path = vendor/ffmpeg/lib/libavformat.a; sourceTree = "<group>"; };
+		74FE727020FE5028005F024C /* libswscale.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libswscale.a; path = vendor/ffmpeg/lib/libswscale.a; sourceTree = "<group>"; };
+		74FE727120FE5028005F024C /* libavcodec.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavcodec.a; path = vendor/ffmpeg/lib/libavcodec.a; sourceTree = "<group>"; };
+		74FE727220FE5028005F024C /* libavfilter.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavfilter.a; path = vendor/ffmpeg/lib/libavfilter.a; sourceTree = "<group>"; };
+		74FE727320FE5028005F024C /* libavutil.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavutil.a; path = vendor/ffmpeg/lib/libavutil.a; sourceTree = "<group>"; };
+		74FE72ED20FE5096005F024C /* ffmpeg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ffmpeg.m; sourceTree = "<group>"; };
+		74FE72EE20FE5096005F024C /* ffmpeg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffmpeg.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		74FE725E20FE4F87005F024C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7491F6BB20F7A7C400DB4D19 /* ffmpeg.framework in Frameworks */,
+				74FE727420FE5028005F024C /* libswresample.a in Frameworks */,
+				74FE727520FE5028005F024C /* libavformat.a in Frameworks */,
+				74FE727620FE5028005F024C /* libswscale.a in Frameworks */,
+				74FE727720FE5028005F024C /* libavcodec.a in Frameworks */,
+				74FE727820FE5028005F024C /* libavfilter.a in Frameworks */,
+				74FE727920FE5028005F024C /* libavutil.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7491F6A720F7A7C400DB4D19 = {
+		74FE725820FE4F87005F024C = {
 			isa = PBXGroup;
 			children = (
-				7491F6B320F7A7C400DB4D19 /* ffmpeg */,
-				7491F6BE20F7A7C400DB4D19 /* ffmpegTests */,
-				7491F6B220F7A7C400DB4D19 /* Products */,
-				74FE70AB20FE3FB6005F024C /* Frameworks */,
+				74FE726320FE4F87005F024C /* ffmpeg */,
+				74FE726220FE4F87005F024C /* Products */,
+				74FE726D20FE5028005F024C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		7491F6B220F7A7C400DB4D19 /* Products */ = {
+		74FE726220FE4F87005F024C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7491F6B120F7A7C400DB4D19 /* ffmpeg.framework */,
-				7491F6BA20F7A7C400DB4D19 /* ffmpegTests.xctest */,
+				74FE726120FE4F87005F024C /* libffmpeg.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		7491F6B320F7A7C400DB4D19 /* ffmpeg */ = {
+		74FE726320FE4F87005F024C /* ffmpeg */ = {
 			isa = PBXGroup;
 			children = (
-				7491F6B420F7A7C400DB4D19 /* ffmpeg.h */,
-				7491F6CB20F7A80D00DB4D19 /* ffmpeg.m */,
-				7491F6B520F7A7C400DB4D19 /* Info.plist */,
+				74FE72EE20FE5096005F024C /* ffmpeg.h */,
+				74FE72ED20FE5096005F024C /* ffmpeg.m */,
 			);
 			path = ffmpeg;
 			sourceTree = "<group>";
 		};
-		7491F6BE20F7A7C400DB4D19 /* ffmpegTests */ = {
+		74FE726D20FE5028005F024C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7491F6BF20F7A7C400DB4D19 /* ffmpegTests.m */,
-				7491F6C120F7A7C400DB4D19 /* Info.plist */,
-			);
-			path = ffmpegTests;
-			sourceTree = "<group>";
-		};
-		74FE70AB20FE3FB6005F024C /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				74FE70AF20FE3FB7005F024C /* libavcodec.a */,
-				74FE70B020FE3FB7005F024C /* libavfilter.a */,
-				74FE70AD20FE3FB7005F024C /* libavformat.a */,
-				74FE70B120FE3FB8005F024C /* libavutil.a */,
-				74FE70AC20FE3FB7005F024C /* libswresample.a */,
-				74FE70AE20FE3FB7005F024C /* libswscale.a */,
+				74FE727120FE5028005F024C /* libavcodec.a */,
+				74FE727220FE5028005F024C /* libavfilter.a */,
+				74FE726F20FE5028005F024C /* libavformat.a */,
+				74FE727320FE5028005F024C /* libavutil.a */,
+				74FE726E20FE5028005F024C /* libswresample.a */,
+				74FE727020FE5028005F024C /* libswscale.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
-/* Begin PBXHeadersBuildPhase section */
-		7491F6AE20F7A7C400DB4D19 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7491F6C220F7A7C400DB4D19 /* ffmpeg.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
-
 /* Begin PBXNativeTarget section */
-		7491F6B020F7A7C400DB4D19 /* ffmpeg */ = {
+		74FE726020FE4F87005F024C /* ffmpeg */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7491F6C520F7A7C400DB4D19 /* Build configuration list for PBXNativeTarget "ffmpeg" */;
+			buildConfigurationList = 74FE726A20FE4F87005F024C /* Build configuration list for PBXNativeTarget "ffmpeg" */;
 			buildPhases = (
-				7491F6AC20F7A7C400DB4D19 /* Sources */,
-				7491F6AD20F7A7C400DB4D19 /* Frameworks */,
-				7491F6AE20F7A7C400DB4D19 /* Headers */,
-				7491F6AF20F7A7C400DB4D19 /* Resources */,
-				74FE724F20FE4A8A005F024C /* ShellScript */,
+				74FE725D20FE4F87005F024C /* Sources */,
+				74FE725E20FE4F87005F024C /* Frameworks */,
+				74FE725F20FE4F87005F024C /* CopyFiles */,
+				74FE72F020FE50B6005F024C /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -151,81 +114,42 @@
 			);
 			name = ffmpeg;
 			productName = ffmpeg;
-			productReference = 7491F6B120F7A7C400DB4D19 /* ffmpeg.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		7491F6B920F7A7C400DB4D19 /* ffmpegTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 7491F6C820F7A7C400DB4D19 /* Build configuration list for PBXNativeTarget "ffmpegTests" */;
-			buildPhases = (
-				7491F6B620F7A7C400DB4D19 /* Sources */,
-				7491F6B720F7A7C400DB4D19 /* Frameworks */,
-				7491F6B820F7A7C400DB4D19 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				7491F6BD20F7A7C400DB4D19 /* PBXTargetDependency */,
-			);
-			name = ffmpegTests;
-			productName = ffmpegTests;
-			productReference = 7491F6BA20F7A7C400DB4D19 /* ffmpegTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
+			productReference = 74FE726120FE4F87005F024C /* libffmpeg.a */;
+			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		7491F6A820F7A7C400DB4D19 /* Project object */ = {
+		74FE725920FE4F87005F024C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = Grocery;
 				TargetAttributes = {
-					7491F6B020F7A7C400DB4D19 = {
-						CreatedOnToolsVersion = 9.4.1;
-					};
-					7491F6B920F7A7C400DB4D19 = {
+					74FE726020FE4F87005F024C = {
 						CreatedOnToolsVersion = 9.4.1;
 					};
 				};
 			};
-			buildConfigurationList = 7491F6AB20F7A7C400DB4D19 /* Build configuration list for PBXProject "ffmpeg" */;
+			buildConfigurationList = 74FE725C20FE4F87005F024C /* Build configuration list for PBXProject "ffmpeg" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = 7491F6A720F7A7C400DB4D19;
-			productRefGroup = 7491F6B220F7A7C400DB4D19 /* Products */;
+			mainGroup = 74FE725820FE4F87005F024C;
+			productRefGroup = 74FE726220FE4F87005F024C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				7491F6B020F7A7C400DB4D19 /* ffmpeg */,
-				7491F6B920F7A7C400DB4D19 /* ffmpegTests */,
+				74FE726020FE4F87005F024C /* ffmpeg */,
 			);
 		};
 /* End PBXProject section */
 
-/* Begin PBXResourcesBuildPhase section */
-		7491F6AF20F7A7C400DB4D19 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7491F6B820F7A7C400DB4D19 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
 /* Begin PBXShellScriptBuildPhase section */
-		74FE724F20FE4A8A005F024C /* ShellScript */ = {
+		74FE72F020FE50B6005F024C /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -236,39 +160,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cp -af ${PROJECT_DIR}/vendor/ffmpeg/include/  ${PROJECT_DIR}/framework/ffmpeg.framework/Headers/";
+			shellScript = "cp -af ${PROJECT_DIR}/vendor/ffmpeg/include/ ${PROJECT_DIR}/lib";
 		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		7491F6AC20F7A7C400DB4D19 /* Sources */ = {
+		74FE725D20FE4F87005F024C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7491F6CC20F7A80D00DB4D19 /* ffmpeg.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7491F6B620F7A7C400DB4D19 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7491F6C020F7A7C400DB4D19 /* ffmpegTests.m in Sources */,
+				74FE72EF20FE5096005F024C /* ffmpeg.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		7491F6BD20F7A7C400DB4D19 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 7491F6B020F7A7C400DB4D19 /* ffmpeg */;
-			targetProxy = 7491F6BC20F7A7C400DB4D19 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin XCBuildConfiguration section */
-		7491F6C320F7A7C400DB4D19 /* Debug */ = {
+		74FE726820FE4F87005F024C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -302,7 +210,6 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -324,12 +231,10 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		7491F6C420F7A7C400DB4D19 /* Release */ = {
+		74FE726920FE4F87005F024C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -363,7 +268,6 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -379,103 +283,37 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
-		7491F6C620F7A7C400DB4D19 /* Debug */ = {
+		74FE726B20FE4F87005F024C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
-				CONFIGURATION_BUILD_DIR = "$(PROJECT_DIR)/framework";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/vendor/ffmpeg/include";
-				INFOPLIST_FILE = ffmpeg/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				CONFIGURATION_BUILD_DIR = "$(PROJECT_DIR)/lib";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/vendor/ffmpeg/lib",
 				);
-				MACH_O_TYPE = staticlib;
-				PRODUCT_BUNDLE_IDENTIFIER = grocery.tech.cn.ffmpeg;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
 		};
-		7491F6C720F7A7C400DB4D19 /* Release */ = {
+		74FE726C20FE4F87005F024C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
-				CONFIGURATION_BUILD_DIR = "$(PROJECT_DIR)/framework";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/vendor/ffmpeg/include";
-				INFOPLIST_FILE = ffmpeg/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				CONFIGURATION_BUILD_DIR = "$(PROJECT_DIR)/lib";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/vendor/ffmpeg/lib",
 				);
-				MACH_O_TYPE = staticlib;
-				PRODUCT_BUNDLE_IDENTIFIER = grocery.tech.cn.ffmpeg;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "";
-			};
-			name = Release;
-		};
-		7491F6C920F7A7C400DB4D19 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = ffmpegTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = grocery.tech.cn.ffmpegTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		7491F6CA20F7A7C400DB4D19 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = ffmpegTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = grocery.tech.cn.ffmpegTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -483,34 +321,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7491F6AB20F7A7C400DB4D19 /* Build configuration list for PBXProject "ffmpeg" */ = {
+		74FE725C20FE4F87005F024C /* Build configuration list for PBXProject "ffmpeg" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7491F6C320F7A7C400DB4D19 /* Debug */,
-				7491F6C420F7A7C400DB4D19 /* Release */,
+				74FE726820FE4F87005F024C /* Debug */,
+				74FE726920FE4F87005F024C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7491F6C520F7A7C400DB4D19 /* Build configuration list for PBXNativeTarget "ffmpeg" */ = {
+		74FE726A20FE4F87005F024C /* Build configuration list for PBXNativeTarget "ffmpeg" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7491F6C620F7A7C400DB4D19 /* Debug */,
-				7491F6C720F7A7C400DB4D19 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		7491F6C820F7A7C400DB4D19 /* Build configuration list for PBXNativeTarget "ffmpegTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				7491F6C920F7A7C400DB4D19 /* Debug */,
-				7491F6CA20F7A7C400DB4D19 /* Release */,
+				74FE726B20FE4F87005F024C /* Debug */,
+				74FE726C20FE4F87005F024C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 7491F6A820F7A7C400DB4D19 /* Project object */;
+	rootObject = 74FE725920FE4F87005F024C /* Project object */;
 }
