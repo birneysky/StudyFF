@@ -20,6 +20,7 @@
 		74FE725520FE4D9B005F024C /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FE725420FE4D9B005F024C /* CoreMedia.framework */; };
 		74FE725720FE4DBA005F024C /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FE725620FE4DBA005F024C /* libz.tbd */; };
 		74FE72F220FE517F005F024C /* libffmpeg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FE72F120FE517F005F024C /* libffmpeg.a */; };
+		74FE72F420FF8C02005F024C /* test.MP4 in Resources */ = {isa = PBXBuildFile; fileRef = 74FE72F320FF8C02005F024C /* test.MP4 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 		74FE725420FE4D9B005F024C /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		74FE725620FE4DBA005F024C /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		74FE72F120FE517F005F024C /* libffmpeg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libffmpeg.a; path = ../ffmpeg/lib/libffmpeg.a; sourceTree = "<group>"; };
+		74FE72F320FF8C02005F024C /* test.MP4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.MP4; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +124,7 @@
 				74FE721620FE43A3005F024C /* AppDelegate.m */,
 				74FE721820FE43A3005F024C /* ViewController.h */,
 				74FE721920FE43A4005F024C /* ViewController.m */,
+				74FE72F320FF8C02005F024C /* test.MP4 */,
 				74FE721B20FE43A4005F024C /* Main.storyboard */,
 				74FE721E20FE43A7005F024C /* Assets.xcassets */,
 				74FE722020FE43A7005F024C /* LaunchScreen.storyboard */,
@@ -268,6 +271,7 @@
 				74FE722220FE43A7005F024C /* LaunchScreen.storyboard in Resources */,
 				74FE721F20FE43A7005F024C /* Assets.xcassets in Resources */,
 				74FE721D20FE43A4005F024C /* Main.storyboard in Resources */,
+				74FE72F420FF8C02005F024C /* test.MP4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

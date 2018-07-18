@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #include <libavformat/avformat.h>
-
 @interface AppDelegate ()
 
 @end
@@ -19,7 +18,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     avformat_network_init();
-    av_register_all();
+    //av_register_all();
     return YES;
 }
 
