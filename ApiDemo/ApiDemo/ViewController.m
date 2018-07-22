@@ -82,6 +82,9 @@ static int interruptCallBack(void* arg) {
     }
     /// 读取流内容，解码
     AVPacket packet;
+    packet.data = NULL;
+    packet.size = 0;
+    av_init_packet(&packet);
     while (true) {
         if (av_read_frame(formatContext, &packet) < 0) {
             /// 小于0 出错或者读取完文件
@@ -89,14 +92,39 @@ static int interruptCallBack(void* arg) {
         }
         int packetStreamIndex = packet.stream_index;
         if (packetStreamIndex == videoStreamIndex) {
-            AVFrame* frame = av_frame_alloc();
-            if(avcodec_receive_frame(videoCodeCtx, frame) == 0) {
-                
+            AVFrame* videoFrame = av_frame_alloc();
+            //int gotFrame = 0;
+            //avcodec_decode_video2(videoCodeCtx, videoFrame, &gotFrame, &packet);
+            int result = avcodec_send_packet(videoCodeCtx, &packet);
+            if (result != 0) {
+                NSLog(@"video avcodec_send_packet");
             }
+            if(avcodec_receive_frame(videoCodeCtx, videoFrame) == 0) {
+                NSLog(@"video width %d, height %d",videoFrame->width,videoFrame->height);
+            } else {
+                NSLog(@"video decode failed");
+            }
+            av_frame_free(&videoFrame);
         } else if(packetStreamIndex == audioStreamIndex) {
-            
+            AVFrame* audioFrame = av_frame_alloc();
+            //int gotFrame = 0;
+            //int result = avcodec_decode_video2(audioCodecCtx, audioFrame, &gotFrame, &packet);
+            int result = avcodec_send_packet(audioCodecCtx,&packet);
+            if (result != 0) {
+                NSLog(@"audio avcodec_send_packet failed");
+            }
+            if( avcodec_receive_frame(audioCodecCtx, audioFrame) == 0) {
+                NSLog(@"audio width %d, height %d",audioFrame->width,audioFrame->height);
+            } else {
+                NSLog(@"audio decode failed %d",result);
+            }
+            av_frame_free(&audioFrame);
         }
     }
+    
+    avcodec_free_context(&videoCodeCtx);
+    avcodec_free_context(&audioCodecCtx);
+    avformat_free_context(formatContext);
 }
 
 
