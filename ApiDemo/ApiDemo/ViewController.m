@@ -11,8 +11,11 @@
 #include <libswscale/swscale.h>
 #include <libswresample/swresample.h>
 #include <libavutil/pixdesc.h>
+#include <libavutil/imgutils.h>
 
 @interface ViewController ()
+
+@property(nonatomic,strong) NSOutputStream* output;
 
 @end
 
@@ -22,8 +25,20 @@ static int interruptCallBack(void* arg) {
 
 @implementation ViewController
 
+#pragma mark - properties
+- (NSOutputStream*)output {
+    if (!_output) {
+        long long millSeconds =  [[NSDate date] timeIntervalSince1970] * 1000;
+        NSString* path = [NSTemporaryDirectory() stringByAppendingFormat:@"%lld.yuv",millSeconds];
+        _output = [[NSOutputStream alloc] initWithURL:[NSURL fileURLWithPath:path] append:YES];
+    }
+    return _output;
+}
+
+#pragma mark - Life Cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.output open];
 }
 
 
@@ -93,14 +108,40 @@ static int interruptCallBack(void* arg) {
         int packetStreamIndex = packet.stream_index;
         if (packetStreamIndex == videoStreamIndex) {
             AVFrame* videoFrame = av_frame_alloc();
+            
             //int gotFrame = 0;
             //avcodec_decode_video2(videoCodeCtx, videoFrame, &gotFrame, &packet);
             int result = avcodec_send_packet(videoCodeCtx, &packet);
             if (result != 0) {
                 NSLog(@"video avcodec_send_packet");
             }
+            AVFrame* yuvFrame = av_frame_alloc();
+            int sizeYUV = av_image_get_buffer_size(AV_PIX_FMT_YUV420P, videoCodeCtx->width, videoCodeCtx->height, 1);
+            uint8_t *out_yuv_buffer = (uint8_t *)av_malloc(sizeYUV);
+            av_image_fill_arrays(yuvFrame->data, yuvFrame->linesize, out_yuv_buffer, AV_PIX_FMT_YUV420P, videoCodeCtx->width, videoCodeCtx->height, 1);
+            struct SwsContext *img_convert_ctx = sws_getContext(videoCodeCtx->width, videoCodeCtx->height, AV_PIX_FMT_YUV420P, videoCodeCtx->width, videoCodeCtx->height, AV_PIX_FMT_YUV420P, SWS_BICUBIC, NULL, NULL, NULL);
             if(avcodec_receive_frame(videoCodeCtx, videoFrame) == 0) {
                 NSLog(@"video width %d, height %d",videoFrame->width,videoFrame->height);
+                sws_scale(img_convert_ctx, videoFrame->data, videoFrame->linesize, 0, videoCodeCtx->height, yuvFrame->data, yuvFrame->linesize);
+                if (videoCodeCtx->pix_fmt == AV_PIX_FMT_YUV420P || videoCodeCtx->pix_fmt == AV_PIX_FMT_YUVJ420P) {
+                    
+                    int videoSize = videoCodeCtx->width * videoCodeCtx->height;
+                    uint8_t* yData = calloc(videoSize,1);
+                    memcmp(yData, videoFrame->data[0], videoSize);
+                    [self.output write:yData maxLength:videoSize];
+                    uint8_t* uData = calloc(videoSize / 4,1);
+                    memcmp(uData, videoFrame->data[1], videoSize / 4);
+                    [self.output write:uData maxLength:videoSize/4];
+                    uint8_t* vData = calloc(videoSize / 4,1);
+                    memcmp(uData, videoFrame->data[2], videoSize / 4);
+                    [self.output write:vData maxLength:videoSize / 4];
+                    free(yData);
+                    free(uData);
+                    free(vData);
+                    //videoFrame->data[0]
+                } else {
+                    
+                }
             } else {
                 NSLog(@"video decode failed");
             }
@@ -125,6 +166,7 @@ static int interruptCallBack(void* arg) {
     avcodec_free_context(&videoCodeCtx);
     avcodec_free_context(&audioCodecCtx);
     avformat_free_context(formatContext);
+    [self.output close];
 }
 
 
