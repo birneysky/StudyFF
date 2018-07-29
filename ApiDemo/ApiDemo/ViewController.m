@@ -14,9 +14,8 @@
 #include <libavutil/imgutils.h>
 
 @interface ViewController ()
-
-@property(nonatomic,strong) NSOutputStream* output;
-
+@property(nonatomic,strong) NSOutputStream* videoOutput;
+@property(nonatomic,strong) NSOutputStream* audioOutput;
 @end
 
 static int interruptCallBack(void* arg) {
@@ -26,19 +25,32 @@ static int interruptCallBack(void* arg) {
 @implementation ViewController
 
 #pragma mark - properties
-- (NSOutputStream*)output {
-    if (!_output) {
+- (NSOutputStream*)videoOutput {
+    if (!_videoOutput) {
         long long millSeconds =  [[NSDate date] timeIntervalSince1970] * 1000;
         NSString* path = [NSTemporaryDirectory() stringByAppendingFormat:@"%lld.yuv",millSeconds];
-        _output = [[NSOutputStream alloc] initWithURL:[NSURL fileURLWithPath:path] append:YES];
+        NSLog(@"path = %@",path);
+        _videoOutput = [[NSOutputStream alloc] initWithURL:[NSURL fileURLWithPath:path] append:YES];
     }
-    return _output;
+    return _videoOutput;
 }
+
+- (NSOutputStream*)audioOutput {
+    if (!_audioOutput) {
+        long long millSeconds =  [[NSDate date] timeIntervalSince1970] * 1000;
+        NSString* path = [NSTemporaryDirectory() stringByAppendingFormat:@"%lld.pcm",millSeconds];
+        NSLog(@"path = %@",path);
+        _audioOutput = [[NSOutputStream alloc] initWithURL:[NSURL fileURLWithPath:path] append:YES];
+    }
+    return _audioOutput;
+}
+
 
 #pragma mark - Life Cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.output open];
+    [self.videoOutput open];
+    [self.audioOutput open];
 }
 
 
@@ -115,30 +127,10 @@ static int interruptCallBack(void* arg) {
             if (result != 0) {
                 NSLog(@"video avcodec_send_packet");
             }
-            AVFrame* yuvFrame = av_frame_alloc();
-            int sizeYUV = av_image_get_buffer_size(AV_PIX_FMT_YUV420P, videoCodeCtx->width, videoCodeCtx->height, 1);
-            uint8_t *out_yuv_buffer = (uint8_t *)av_malloc(sizeYUV);
-            av_image_fill_arrays(yuvFrame->data, yuvFrame->linesize, out_yuv_buffer, AV_PIX_FMT_YUV420P, videoCodeCtx->width, videoCodeCtx->height, 1);
-            struct SwsContext *img_convert_ctx = sws_getContext(videoCodeCtx->width, videoCodeCtx->height, AV_PIX_FMT_YUV420P, videoCodeCtx->width, videoCodeCtx->height, AV_PIX_FMT_YUV420P, SWS_BICUBIC, NULL, NULL, NULL);
             if(avcodec_receive_frame(videoCodeCtx, videoFrame) == 0) {
                 NSLog(@"video width %d, height %d",videoFrame->width,videoFrame->height);
-                sws_scale(img_convert_ctx, videoFrame->data, videoFrame->linesize, 0, videoCodeCtx->height, yuvFrame->data, yuvFrame->linesize);
                 if (videoCodeCtx->pix_fmt == AV_PIX_FMT_YUV420P || videoCodeCtx->pix_fmt == AV_PIX_FMT_YUVJ420P) {
-                    
-                    int videoSize = videoCodeCtx->width * videoCodeCtx->height;
-                    uint8_t* yData = calloc(videoSize,1);
-                    memcmp(yData, videoFrame->data[0], videoSize);
-                    [self.output write:yData maxLength:videoSize];
-                    uint8_t* uData = calloc(videoSize / 4,1);
-                    memcmp(uData, videoFrame->data[1], videoSize / 4);
-                    [self.output write:uData maxLength:videoSize/4];
-                    uint8_t* vData = calloc(videoSize / 4,1);
-                    memcmp(uData, videoFrame->data[2], videoSize / 4);
-                    [self.output write:vData maxLength:videoSize / 4];
-                    free(yData);
-                    free(uData);
-                    free(vData);
-                    //videoFrame->data[0]
+                    [self saveToYUVFile:videoFrame codecCtx:videoCodeCtx];
                 } else {
                     
                 }
@@ -155,7 +147,8 @@ static int interruptCallBack(void* arg) {
                 NSLog(@"audio avcodec_send_packet failed");
             }
             if( avcodec_receive_frame(audioCodecCtx, audioFrame) == 0) {
-                NSLog(@"audio width %d, height %d",audioFrame->width,audioFrame->height);
+                //NSLog(@"audio width %d, height %d",audioFrame->width,audioFrame->height);
+                [self saveToPCMFile:audioFrame codecCtx:audioCodecCtx];
             } else {
                 NSLog(@"audio decode failed %d",result);
             }
@@ -166,8 +159,58 @@ static int interruptCallBack(void* arg) {
     avcodec_free_context(&videoCodeCtx);
     avcodec_free_context(&audioCodecCtx);
     avformat_free_context(formatContext);
-    [self.output close];
+    [self.videoOutput close];
+    [self.audioOutput close];
 }
+
+- (void)saveToYUVFile:(AVFrame*)frame codecCtx:(AVCodecContext*)ctx {
+    /// ffplay -f rawvideo -video_size 1280x960 1532872056009.yuv
+    int i = 0;
+    int width = ctx->width;
+    int height = ctx->height;
+    int halfWidth = width / 2;
+    int halfHeight = height / 2;
+    int yWrap = frame->linesize[0];
+    int uWrap = frame->linesize[1];
+    int vWrap = frame->linesize[2];
+    
+    uint8_t* yBuf = frame->data[0];
+    uint8_t* uBuf = frame->data[1];
+    uint8_t* vBuf = frame->data[2];
+    for(i = 0; i < height; i++) {
+        [self.videoOutput write:yBuf + i * yWrap maxLength:width];
+    }
+    
+    for(i = 0; i < halfHeight; i++) {
+        [self.videoOutput write:uBuf + i * uWrap maxLength:halfWidth];
+    }
+    
+    for (i = 0; i < halfHeight; i++) {
+        [self.videoOutput write:vBuf + i * vWrap maxLength:halfWidth];
+    }
+}
+
+- (void)saveToPCMFile:(AVFrame*)frame codecCtx:(AVCodecContext*)ctx  {
+    
+    ///ffplay 1532876154300.pcm -f f32le -channels 1 -ar 44100
+    /// -f 表示格式 -channels 表示声道数 -ar 表示采样率
+    if (av_sample_fmt_is_planar(frame->format)) {
+         int data_size = av_get_bytes_per_sample(ctx->sample_fmt);
+        for(int i = 0 ;i < frame->nb_samples; i ++) {
+            for (int ch = 0; ch < ctx->channels; ch ++) {
+                [self.audioOutput write:frame->data[ch] + data_size * i maxLength:data_size];
+            }
+        }
+    } else {
+        int data_size = av_samples_get_buffer_size(NULL, frame->channels, frame->nb_samples, frame->format, 0);
+        //    if (data_size < 0) {
+        //        NSLog(@"save to pcm file av_samples_get_buffer_size %ld",data_size);
+        //        return;
+        //    }
+        [self.audioOutput write:frame->data[0] maxLength:data_size];
+    }
+}
+
 
 
 
