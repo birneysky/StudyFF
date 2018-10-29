@@ -468,6 +468,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6K45GAZW62;
 				FRAMEWORK_SEARCH_PATHS = "";
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../ffmpeg/lib";
 				INFOPLIST_FILE = ApiDemo/Info.plist;
@@ -476,7 +477,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../ffmpeg/lib";
-				PRODUCT_BUNDLE_IDENTIFIER = grocery.tech.cn.ApiDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = RongCloud.tech.CloudChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -487,6 +488,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6K45GAZW62;
 				FRAMEWORK_SEARCH_PATHS = "";
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../ffmpeg/lib";
 				INFOPLIST_FILE = ApiDemo/Info.plist;
@@ -495,7 +497,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../ffmpeg/lib";
-				PRODUCT_BUNDLE_IDENTIFIER = grocery.tech.cn.ApiDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = RongCloud.tech.CloudChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
