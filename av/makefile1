@@ -2,8 +2,8 @@
 SRCDIR := src
 BUILDDIR := build
 TARGETDIR := bin
-SOURCES := $(shell find . -name *.cpp)
-OBJECTS := $(notdir $(SOURCES:%.cpp=%.o))
+SOURCES := $(wildcard $(SRCDIR)/*.cpp)
+OBJECTS := $(patsubst $(SRCDIR)/%, %, $(SOURCES:.cpp=.o))
 VPATH := src
 OBJS    := $(patsubst $(SRCDIR)/%, $(BUILDDIR)/%, $(SOURCES:.cpp=.o))
 SRCS := $(shell find . -name *.cpp)
@@ -20,7 +20,7 @@ TESTS :=  $(SRCS:%.cpp=	%.o)
 av:$(OBJECTS)
 	@clang++ $(OBJS) -lavutil -o av
 
-$(OBJECTS): $(SOURCES)
+$(OBJECTS): %.o: %.cpp
 	@echo compiling $<
 	@mkdir -p build
 	@clang++ -Wall -std=c++11 -stdlib=libc++ -c $< -o $(BUILDDIR)/$@
