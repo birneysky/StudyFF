@@ -5,12 +5,13 @@ OBJECTS := $(patsubst %, $(BUILDDIR)/%,$(notdir $(SRCS:%.cpp=%.o)))
 SPATH := $(sort $(dir $(SRCS)))
 VPATH := $(SPATH)
 DEP := $(OBJECTS:%.o=%.d)
+LIBS := -lavutil -lavformat
 # -m - MM 表示输出文件依赖关系
 # -MT 指定目标文件名
 
 av:$(OBJECTS)
 	@mkdir -p $(TARGETDIR)
-	clang++ $^ -lavutil -o $(TARGETDIR)/av
+	clang++ $^ $(LIBS) -o $(TARGETDIR)/av
 
 $(BUILDDIR)/%.d: %.cpp
 	@mkdir -p $(BUILDDIR)
