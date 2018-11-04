@@ -1,41 +1,32 @@
-#目录
-SRCDIR := src
 BUILDDIR := build
 TARGETDIR := bin
-SOURCES := $(shell find . -name *.cpp)
-OBJECTS := $(notdir $(SOURCES:%.cpp=%.o))
-VPATH := src
-OBJS    := $(patsubst $(SRCDIR)/%, $(BUILDDIR)/%, $(SOURCES:.cpp=.o))
 SRCS := $(shell find . -name *.cpp)
-OBS :=	$(patsubst %.cpp, $(BUILDDIR)%.o, $(SRCS))
-TESTS :=  $(SRCS:%.cpp=	%.o)
-# $@ 目标文件的名称
-# $^ 所有依赖文件，以空格分开，不包含重复的依赖文件
-# $<
-#
-# foo := a.o b.o c.o
-# bar := $(foo:.o=.c) 把foo 中的所有的以"o"结尾的字符串全部替换成以 "c" 结尾, 所以这时bar 的值就是 "a.c b.c c.c" 
-#
+OBJECTS := $(patsubst %, $(BUILDDIR)/%,$(notdir $(SRCS:%.cpp=%.o)))
+SPATH := $(sort $(dir $(SRCS)))
+VPATH := $(SPATH)
+DEP := $(OBJECTS:%.o=%.d)
+# -m - MM 表示输出文件依赖关系
+# -MT 指定目标文件名
 
 av:$(OBJECTS)
-	@clang++ $(OBJS) -lavutil -o av
+	@mkdir -p $(TARGETDIR)
+	clang++ $^ -lavutil -o $(TARGETDIR)/av
 
-$(OBJECTS): $(SOURCES)
-	@echo compiling $<
-	@mkdir -p build
-	@clang++ -Wall -std=c++11 -stdlib=libc++ -c $< -o $(BUILDDIR)/$@
-#.PHONY : clean 
-#clean : `
-#rm av av.o
+$(BUILDDIR)/%.d: %.cpp
+	@mkdir -p $(BUILDDIR)
+	clang++ -MM $< -o $@ -MT $(patsubst %.d, %.o, $@)
+	
+include $(DEP)
+
+$(BUILDDIR)/%.o: %.cpp
+	clang++ -Wall -std=c++11 -stdlib=libc++ -c $< -o $@
 
 .PHONY : test
 test:
 	@echo "objects" $(OBJECTS)
-	@echo "objs:" $(OBJS)
 	@echo "srcs:" $(SRCS)
-	@echo "pwd:" $(PWD)
-	@echo "sources": $(SOURCES)
-	@echo "obs:": $(OBS)
-	@echo "tests": $(TESTS)
-	@echo "dir:" $(dir $(TESTS))
-	@echo "notdir:" $(notdir $(TESTS))
+	@echo "dir:" $(dir $(SRCS))		
+	@echo "notdir:" $(notdir $(SRCS))
+	@echo "sort": $(SPATH)
+	@echo "dep:" $(DEP)
+	@echo "cpp:" $(notdir $(DEP:%.d=%.cpp))

@@ -1,0 +1,28 @@
+BUILDDIR := build
+TARGETDIR := bin
+SRCS := $(shell find . -name *.cpp)
+OBJECTS := $(notdir $(SRCS:%.cpp=%.o))
+SPATH := $(sort $(dir $(SRCS)))
+VPATH := $(SPATH)
+
+
+av:$(OBJECTS)
+	@mkdir -p $(TARGETDIR)
+	@cd build;clang++ $(OBJECTS) -lavutil -o ../$(TARGETDIR)/av
+
+$(OBJECTS): %.o : %.cpp
+	@echo compiling $<
+	@mkdir -p build
+	@clang++ -Wall -std=c++11 -stdlib=libc++ -c $< -o $(BUILDDIR)/$@ -I $(SPATH)
+.PHONY : clean 
+clean : 
+	rm $(BUILDDIR)
+	rm $(TARGETDIR)
+
+.PHONY : test
+test:
+	@echo "objects" $(OBJECTS)
+	@echo "srcs:" $(SRCS)
+	@echo "dir:" $(dir $(SRCS))
+	@echo "notdir:" $(notdir $(SRCS))
+	@echo "sort": $(SPATH)
