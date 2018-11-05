@@ -11,7 +11,7 @@ LIBS := -lavutil -lavformat
 
 av:$(OBJECTS)
 	@mkdir -p $(TARGETDIR)
-	clang++ $^ $(LIBS) -o $(TARGETDIR)/av
+	clang++ $^ $(LIBS) -g -o $(TARGETDIR)/av
 
 $(BUILDDIR)/%.d: %.cpp
 	@mkdir -p $(BUILDDIR)
@@ -20,7 +20,7 @@ $(BUILDDIR)/%.d: %.cpp
 include $(DEP)
 
 $(BUILDDIR)/%.o: %.cpp
-	clang++ -Wall -std=c++11 -stdlib=libc++ -c $< -o $@
+	clang++ -Wall -std=c++11 -stdlib=libc++ -g -c $<  -o $@
 
 .PHONY : test
 test:
