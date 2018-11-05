@@ -9,7 +9,7 @@ using namespace std;
 int main( int argc, char *argv[] ) {
   avformat_network_init();
   av_log_set_level(AV_LOG_DEBUG);
-	av_log(NULL, AV_LOG_INFO, "%s\n", "Hello AV World");
+	av_log(nullptr, AV_LOG_INFO, "%s\n", "Hello AV World");
   file_test();
   print_media_info("");
   avformat_network_deinit();
