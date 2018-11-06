@@ -61,7 +61,10 @@ int extra_audio_data(const std::string& fileName) {
     return -1;
   }
   AVStream* audio_stream = fmt_ctx->streams[audio_index];
-  av_log(nullptr,AV_LOG_INFO, "audio codec name: %s\n",avcodec_get_name(audio_stream->codec->codec_id));
+  const char* codec_name = avcodec_get_name(audio_stream->codecpar->codec_id);
+  std::string audio_file_name = fileName + codec_name;
+  av_log(nullptr,AV_LOG_INFO, "audio file name: %s\n",audio_file_name.c_str());
+
   AVPacket pkt;
   av_init_packet(&pkt);
   while(av_read_frame(fmt_ctx, &pkt) >= 0){
