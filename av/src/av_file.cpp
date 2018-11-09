@@ -3,6 +3,8 @@
 #include <fstream>
 extern "C" {
   #include <libavutil/log.h>
+  #include <libavutil/mathematics.h>
+  #include <libavformat/avio.h>
   #include <libavformat/avformat.h>
 }
 
@@ -34,6 +36,7 @@ int  print_media_info(const std::string& fileName) {
   avformat_close_input(&fmt_ctx);
   return 0;
 }
+
 
 int extra_audio_data(const std::string& file_name) {
   /// av_init_packet() av_packet_unref()   初始化一个数据包结构体
@@ -77,23 +80,51 @@ int extra_audio_data(const std::string& file_name) {
   audio_file_name = audio_file_name.substr(0,pos+1) + codec_name;
 
   av_log(nullptr,AV_LOG_INFO, "audio file name: %s\n",audio_file_name.c_str());
+  AVOutputFormat* output_fmt = av_guess_format(nullptr,audio_file_name.c_str(),nullptr);
+  if(!output_fmt) {
+    av_log(nullptr,AV_LOG_ERROR,"could not guss file format");
+    avformat_close_input(&fmt_ctx);
+    return -1;
+  }
+  AVFormatContext* ofmt_ctx = avformat_alloc_context();
+  ofmt_ctx->oformat = output_fmt;
+  AVStream* out_stream = avformat_new_stream(ofmt_ctx,nullptr);
+ 
+  int err_code = avcodec_parameters_copy(out_stream->codecpar, audio_stream->codecpar);
+  if(err_code < 0) {
+    char errors[1024]; 
+    av_strerror(err_code, errors, 1024);
+     av_log(NULL, AV_LOG_ERROR, "Could not copy file parameters %s, %d(%s)\n",
+               audio_file_name.c_str(),
+               err_code,
+               errors);
+  }
 
-  std::ofstream audioFile(audio_file_name);
+  out_stream->codecpar->codec_tag = 0;
+  err_code = avio_open(&ofmt_ctx->pb, audio_file_name.c_str(), AVIO_FLAG_WRITE);
+  if(err_code < 0) {
+    
+  }
+
+  if(avformat_write_header(ofmt_ctx,nullptr) < 0 ) {
+    av_log(NULL, AV_LOG_DEBUG, "Error occurred when opening output file");
+    return -1;
+  }
   AVPacket pkt;
   av_init_packet(&pkt);
   while(av_read_frame(fmt_ctx, &pkt) >= 0){
     if(pkt.stream_index == audio_index) {
-      /// https://blog.csdn.net/sz76211822/article/details/53693018
-      ///http://www.mworkbox.com/wp/work/642.html
-      /// https://www.cnblogs.com/bigrabbit/archive/2012/09/20/2695543.html
-      /// https://blog.csdn.net/xiaolewennofollow/article/details/51172247
-      audioFile.write((const char*)pkt.data, pkt.size);
-      //fwrite(pkt.data, 1, pkt.size, nullptr);
-
+      pkt.pts = av_rescale_q_rnd(pkt.pts, audio_stream->time_base, out_stream->time_base, (AVRounding)(AV_ROUND_NEAR_INF|AV_ROUND_PASS_MINMAX));
+      pkt.dts = pkt.pts;
+      pkt.duration = av_rescale_q(pkt.duration, audio_stream->time_base, out_stream->time_base);
+      pkt.pos = -1;
+      pkt.stream_index = 0;
+      av_interleaved_write_frame(ofmt_ctx, &pkt);
+      av_packet_unref(&pkt);
     }
   }
-  audioFile.close();
 
+  av_write_trailer(ofmt_ctx); 
   avformat_close_input(&fmt_ctx);
   return 0;
 }
