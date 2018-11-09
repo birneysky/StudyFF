@@ -5,6 +5,7 @@ class Test {
 public:
 	Test();
 	~Test();
+	void testFileStream();
 };
 
 #endif

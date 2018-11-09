@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include "av_file.h"
+#include <fstream>
 extern "C" {
   #include <libavutil/log.h>
   #include <libavformat/avformat.h>
@@ -77,13 +78,21 @@ int extra_audio_data(const std::string& file_name) {
 
   av_log(nullptr,AV_LOG_INFO, "audio file name: %s\n",audio_file_name.c_str());
 
+  std::ofstream audioFile(audio_file_name);
   AVPacket pkt;
   av_init_packet(&pkt);
   while(av_read_frame(fmt_ctx, &pkt) >= 0){
     if(pkt.stream_index == audio_index) {
+      /// https://blog.csdn.net/sz76211822/article/details/53693018
+      ///http://www.mworkbox.com/wp/work/642.html
+      /// https://www.cnblogs.com/bigrabbit/archive/2012/09/20/2695543.html
+      /// https://blog.csdn.net/xiaolewennofollow/article/details/51172247
+      audioFile.write((const char*)pkt.data, pkt.size);
       //fwrite(pkt.data, 1, pkt.size, nullptr);
+
     }
   }
+  audioFile.close();
 
   avformat_close_input(&fmt_ctx);
   return 0;
