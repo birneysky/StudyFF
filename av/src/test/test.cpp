@@ -1,10 +1,10 @@
 #include "test.h"
 #include<iostream>
 
-void test() {
+Test::Test() {
 	std::cout << "test" << std::endl;	
 }
 
-void test2() {
-  std::cout << "test2" << std::endl;
+Test::~Test() {
+  std::cout << "~ test" << std::endl;
 }
