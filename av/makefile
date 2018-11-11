@@ -5,7 +5,7 @@ OBJECTS := $(patsubst %, $(BUILDDIR)/%,$(notdir $(SRCS:%.cpp=%.o)))
 SPATH := $(sort $(dir $(SRCS)))
 VPATH := $(SPATH)
 DEP := $(OBJECTS:%.o=%.d)
-LIBS := -lavutil -lavformat
+LIBS := -lavutil -lavformat -lSDL2
 # -m - MM 表示输出文件依赖关系
 # -MT 指定目标文件名
 
