@@ -278,7 +278,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CONFIGURATION_BUILD_DIR = "$(PROJECT_DIR)/bin/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				CONFIGURATION_BUILD_DIR = "$(PROJECT_DIR)/bin/";
 				HEADER_SEARCH_PATHS = /usr/local/include;
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				OTHER_LDFLAGS = (
@@ -295,7 +295,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CONFIGURATION_BUILD_DIR = "$(PROJECT_DIR)/bin/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				CONFIGURATION_BUILD_DIR = "$(PROJECT_DIR)/bin/";
 				HEADER_SEARCH_PATHS = /usr/local/include;
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				OTHER_LDFLAGS = (

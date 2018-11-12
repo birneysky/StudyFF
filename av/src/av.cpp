@@ -13,34 +13,34 @@ int main( int argc, char *argv[] ) {
 
     av_log_set_level(AV_LOG_INFO);
     av_log(NULL, AV_LOG_INFO, "%s\n", "Hello AV World");
-    if (argc < 2 ){
-        av_log(nullptr,AV_LOG_ERROR, "argc less than 2 \n");
-        return -1;
-    }
-    std::string file_full_name(argv[1]);
-    //avformat_network_init();
-
-    //file_test();
-    //print_media_info(fileName);
-    extra_audio_data(file_full_name);
-    //avformat_network_deinit();
-
-    std::shared_ptr<Test> p1 = std::make_shared<Test>();
-    std::cout <<  "1 ref:" << p1.use_count() << std::endl;
-    {
-        std::shared_ptr<Test> p2 = p1;
-        std::cout << "2 ref:" << p1.use_count() <<std::endl;
-    }
-    std::cout << "3 ref:" << p1.use_count() << std::endl;
-    p1->testFileStream();
+//    if (argc < 2 ){
+//        av_log(nullptr,AV_LOG_ERROR, "argc less than 2 \n");
+//        return -1;
+//    }
+//    std::string file_full_name(argv[1]);
+//    //avformat_network_init();
+//
+//    //file_test();
+//    //print_media_info(fileName);
+//    extra_audio_data(file_full_name);
+//    //avformat_network_deinit();
+//
+//    std::shared_ptr<Test> p1 = std::make_shared<Test>();
+//    std::cout <<  "1 ref:" << p1.use_count() << std::endl;
+//    {
+//        std::shared_ptr<Test> p2 = p1;
+//        std::cout << "2 ref:" << p1.use_count() <<std::endl;
+//    }
+//    std::cout << "3 ref:" << p1.use_count() << std::endl;
+//    p1->testFileStream();
     
     
     /// 初始化SDL
     SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
     
     SDL_Window* window = SDL_CreateWindow("SDL2 Window",
-                                            200,
-                                            200,
+                                            SDL_WINDOWPOS_UNDEFINED,
+                                            SDL_WINDOWPOS_UNDEFINED,
                                             640,
                                             480,
                                             SDL_WINDOW_SHOWN );
@@ -54,11 +54,13 @@ int main( int argc, char *argv[] ) {
     /// 创建渲染器 CreateRender
     SDL_Renderer* render =  SDL_CreateRenderer(window, -1, 0);
     //SDL_SetRenderDrawBlendMode(render, SDL_BLENDMODE_BLEND);
-    SDL_SetRenderDrawColor(render, 255, 0, 0, 255);
-    SDL_Rect window_rect = (SDL_Rect){0,0,640,480};
-    SDL_RenderDrawRect(render, &window_rect);
+     SDL_SetRenderDrawColor(render, 255, 0, 0, 255);
+    //SDL_Rect window_rect = (SDL_Rect){0,0,640,480};
+    //SDL_RenderFillRect(render, &window_rect);
     SDL_RenderClear(render);
     SDL_RenderPresent(render);
+    SDL_Delay(30000);
+    //SDL_ShowWindow(window);
     /// 销毁渲染器
     if (!render) {
         SDL_DestroyWindow(window);
@@ -88,6 +90,7 @@ int main( int argc, char *argv[] ) {
         return -1;
     }
     do {
+
         SDL_Event event;
         SDL_WaitEvent(&event);
         switch (event.type) {
@@ -97,13 +100,15 @@ int main( int argc, char *argv[] ) {
             default:
                 av_log(nullptr, AV_LOG_INFO, "event type is %d \n", event.type);
         }
+        
+
 
 //        rect.x = rand() % 600;
 //        rect.y = rand() % 450;
 //        av_log(nullptr, AV_LOG_INFO, "x %d, y %d \n",rect.x,rect.y);
 //        SDL_SetRenderTarget(render, texture);
-//        SDL_SetRenderDrawColor(render, 0, 0, 0, 0);
 //        SDL_RenderClear(render);
+//        SDL_SetRenderDrawColor(render, 0, 0, 0, 0);
 //
 //        SDL_RenderDrawRect(render, &rect);
 //        SDL_SetRenderDrawColor(render, 255, 0, 0, 0);
