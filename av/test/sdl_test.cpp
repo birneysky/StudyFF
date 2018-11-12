@@ -1,5 +1,6 @@
 #include <SDL2/SDL.h>
 #include <stdio.h>
+#include <iostream>
 
 int main(int argc, char* argv[]) {
 
@@ -17,7 +18,7 @@ int main(int argc, char* argv[]) {
         SDL_WINDOWPOS_UNDEFINED,           // initial y position
         640,                               // width, in pixels
         480,                               // height, in pixels
-        SDL_WINDOW_SHOWN | SDL_WINDOW_BORDERLESS// flags - see below
+        SDL_WINDOW_SHOWN // flags - see below
     );
 
     // Check that the window was successfully created
@@ -31,7 +32,7 @@ int main(int argc, char* argv[]) {
     renderer = SDL_CreateRenderer(window, -1, 0);
 
     /* Select the color for drawing. It is set to red here. */
-    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
     /* Clear the entire screen to our selected color. */
     SDL_RenderClear(renderer);
@@ -41,9 +42,19 @@ int main(int argc, char* argv[]) {
     SDL_RenderPresent(renderer);
 
     // The window is open: could enter program loop here (see SDL_PollEvent())
-
-    SDL_Delay(3000);  // Pause execution for 3000 milliseconds, for example
-
+    //SDL_Delay(3000);  // Pause execution for 3000 milliseconds, for example
+	bool quit = true;
+	do {
+		SDL_Event event;
+		SDL_WaitEvent(&event);
+		switch(event.type){
+			case SDL_QUIT:
+				quit = false;
+				break;
+			default:
+				std::cout << "event type is " << event.type << std::endl;	
+		}
+	} while(quit);	
     //destory renderer
     if (renderer) {
         SDL_DestroyRenderer(renderer);

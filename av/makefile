@@ -1,6 +1,6 @@
 BUILDDIR := build
 TARGETDIR := bin
-SRCS := $(shell find . -name *.cpp)
+SRCS := $(shell find ./src -name *.cpp)
 OBJECTS := $(patsubst %, $(BUILDDIR)/%,$(notdir $(SRCS:%.cpp=%.o)))
 SPATH := $(sort $(dir $(SRCS)))
 VPATH := $(SPATH)
