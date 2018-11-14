@@ -14,6 +14,7 @@
 		74B98DD5219730080063C05E /* add.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74B98DCE219730080063C05E /* add.cpp */; };
 		74B98DD6219730080063C05E /* av.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74B98DCF219730080063C05E /* av.cpp */; };
 		74B98DD7219730080063C05E /* sub.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74B98DD0219730080063C05E /* sub.cpp */; };
+		74B98DDA219C7DF40063C05E /* AVDecoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74B98DD8219C7DF40063C05E /* AVDecoder.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -40,6 +41,8 @@
 		74B98DCE219730080063C05E /* add.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = add.cpp; sourceTree = "<group>"; };
 		74B98DCF219730080063C05E /* av.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = av.cpp; sourceTree = "<group>"; };
 		74B98DD0219730080063C05E /* sub.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sub.cpp; sourceTree = "<group>"; };
+		74B98DD8219C7DF40063C05E /* AVDecoder.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AVDecoder.cpp; sourceTree = "<group>"; };
+		74B98DD9219C7DF40063C05E /* AVDecoder.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AVDecoder.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +84,8 @@
 				74B98DCE219730080063C05E /* add.cpp */,
 				74B98DCF219730080063C05E /* av.cpp */,
 				74B98DD0219730080063C05E /* sub.cpp */,
+				74B98DD8219C7DF40063C05E /* AVDecoder.cpp */,
+				74B98DD9219C7DF40063C05E /* AVDecoder.hpp */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -153,6 +158,7 @@
 				74B98DD3219730080063C05E /* mul.cpp in Sources */,
 				74B98DD1219730080063C05E /* av_file.cpp in Sources */,
 				74B98DD5219730080063C05E /* add.cpp in Sources */,
+				74B98DDA219C7DF40063C05E /* AVDecoder.cpp in Sources */,
 				74B98DD2219730080063C05E /* test.cpp in Sources */,
 				74B98DD6219730080063C05E /* av.cpp in Sources */,
 				74B98DD7219730080063C05E /* sub.cpp in Sources */,
