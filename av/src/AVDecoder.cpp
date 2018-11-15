@@ -26,7 +26,6 @@ bool AVDecoder::open() {
         av_log(nullptr, AV_LOG_ERROR,
                "codec context alloc failde");
         return false;
-        return false;
     }
     avcodec_parameters_to_context(codecCtx,codecParam);
     if(avcodec_open2(codecCtx, codec, NULL) < 0 ) {

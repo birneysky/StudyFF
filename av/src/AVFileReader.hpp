@@ -9,15 +9,26 @@
 #ifndef AVFileReader_hpp
 #define AVFileReader_hpp
 
-#include <stdio.h>
+#include <cstdio>
 #include <string>
 
+extern "C"{
+    #include <libavutil/log.h>
+    #include <libavformat/avformat.h>
+}
+
+
+
 class AVFileReader {
+private:
+    std::string localPath;
+    AVFormatContext* formatCtx;
 public:
     AVFileReader(const std::string& path);
     ~AVFileReader();
     bool startReading();
     bool stopReading();
+    AVPacket* readNextFrame();
 };
 
 #endif /* AVFileReader_hpp */
