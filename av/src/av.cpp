@@ -1,6 +1,7 @@
 #include <iostream>
 #include "av_file.h"
 #include "test/test.h"
+#include "AVFileReader.hpp"
 
 extern "C"{
     #include <libavutil/log.h>
@@ -33,7 +34,15 @@ int main( int argc, char *argv[] ) {
 //    }
 //    std::cout << "3 ref:" << p1.use_count() << std::endl;
 //    p1->testFileStream();
-    
+    AVFileReader* reader = nullptr;
+    try {
+        
+        reader = new AVFileReader("");
+//        delete reader;
+    } catch (std::exception e) {
+        delete reader;
+        //throw;
+    }
     
     /// 初始化SDL
     SDL_Init(SDL_INIT_VIDEO);

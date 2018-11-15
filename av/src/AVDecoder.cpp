@@ -10,21 +10,48 @@
 
 
 AVDecoder::AVDecoder(AVCodecParameters* parameters) {
-    codecParam = new AVCodecParameters();
-    memcpy(codecParam, parameters, (size_t)sizeof(parameters));
+    codecParam = parameters;
+}
+
+bool AVDecoder::open() {
     AVCodec* codec = avcodec_find_decoder(codecParam->codec_id);
+    if (!codec) {
+        av_log(nullptr, AV_LOG_ERROR,
+               "codec_id %d was not found",
+               codecParam->codec_id);
+        return false;
+    }
     codecCtx  = avcodec_alloc_context3(codec);
+    if (!codecCtx) {
+        av_log(nullptr, AV_LOG_ERROR,
+               "codec context alloc failde");
+        return false;
+        return false;
+    }
     avcodec_parameters_to_context(codecCtx,codecParam);
     if(avcodec_open2(codecCtx, codec, NULL) < 0 ) {
-        av_log(nullptr, AV_LOG_ERROR, "open decoder failed,codec_id %d",codecParam->codec_id);
+        av_log(nullptr, AV_LOG_ERROR,
+               "open decoder failed,codec_id %d",
+               codecParam->codec_id);
     }
-    av_free(codec);
+    return false;
+}
+bool AVDecoder::close() {
+    if (codecCtx) {
+        avcodec_close(codecCtx);
+        av_free(codecCtx);
+        codecCtx = nullptr;
+    }
+    
+    return false;
 }
 
 AVDecoder::~AVDecoder() {
-    delete codecParam;
-    avcodec_free_context(&codecCtx);
-    
+    if (codecCtx) {
+        avcodec_close(codecCtx);
+        av_free(codecCtx);
+        codecCtx = nullptr;
+    }
 }
 
 AVFrame* AVDecoder::decode(AVPacket* packet) {

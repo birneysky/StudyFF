@@ -22,6 +22,8 @@ private:
 public:
     AVDecoder(AVCodecParameters* parameters);
     ~AVDecoder();
+    bool open();
+    bool close();
     AVFrame* decode(AVPacket* packet);
 };
 
