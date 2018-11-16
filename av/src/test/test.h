@@ -6,6 +6,7 @@ public:
 	Test();
 	~Test();
 	void testFileStream();
+    void testSmartPoint();
 };
 
 #endif

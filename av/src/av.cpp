@@ -14,29 +14,14 @@ int main( int argc, char *argv[] ) {
 
     av_log_set_level(AV_LOG_INFO);
     av_log(NULL, AV_LOG_INFO, "%s\n", "Hello AV World");
-//    if (argc < 2 ){
-//        av_log(nullptr,AV_LOG_ERROR, "argc less than 2 \n");
-//        return -1;
-//    }
-//    std::string file_full_name(argv[1]);
-//    //avformat_network_init();
-//
-//    //file_test();
-//    //print_media_info(fileName);
-//    extra_audio_data(file_full_name);
-//    //avformat_network_deinit();
-//
-//    std::shared_ptr<Test> p1 = std::make_shared<Test>();
-//    std::cout <<  "1 ref:" << p1.use_count() << std::endl;
-//    {
-//        std::shared_ptr<Test> p2 = p1;
-//        std::cout << "2 ref:" << p1.use_count() <<std::endl;
-//    }
-//    std::cout << "3 ref:" << p1.use_count() << std::endl;
+    if (argc < 2 ){
+        av_log(nullptr,AV_LOG_ERROR, "argc less than 2 \n");
+        return -1;
+    }
 //    p1->testFileStream();
     AVFileReader* reader = nullptr;
     try {
-        
+        std::move(nullptr);
         reader = new AVFileReader("");
 //        delete reader;
     } catch (std::exception e) {
@@ -62,14 +47,7 @@ int main( int argc, char *argv[] ) {
     }
     /// 创建渲染器 CreateRender
     SDL_Renderer* render =  SDL_CreateRenderer(window, -1, 0);
-//    //SDL_SetRenderDrawBlendMode(render, SDL_BLENDMODE_BLEND);
-//     SDL_SetRenderDrawColor(render, 255, 255, 255, 255);
-////    //SDL_Rect window_rect = (SDL_Rect){0,0,640,480};
-////    //SDL_RenderFillRect(render, &window_rect);
-//    SDL_RenderClear(render);
-//    SDL_RenderPresent(render);
-//    //SDL_Delay(30000);
-    //SDL_ShowWindow(window);
+
     /// 销毁渲染器
     if (!render) {
         SDL_DestroyWindow(window);
@@ -91,13 +69,13 @@ int main( int argc, char *argv[] ) {
     SDL_Rect rect;
     rect.w = 50;
     rect.h = 50;
-//    if (!texture) {
-//        av_log(nullptr, AV_LOG_ERROR, "create texture failed \n");
-//        SDL_DestroyWindow(window);
-//        SDL_DestroyRenderer(render);
-//        SDL_Quit();
-//        return -1;
-//    }
+    if (!texture) {
+        av_log(nullptr, AV_LOG_ERROR, "create texture failed \n");
+        SDL_DestroyWindow(window);
+        SDL_DestroyRenderer(render);
+        SDL_Quit();
+        return -1;
+    }
     while (quit) {
 
         SDL_Event event;
