@@ -10,6 +10,7 @@ Test::~Test() {
  	std::cout << "~ test" << std::endl;
 }
 
+/// c++ 写文件操作
 void Test::testFileStream() {
 	std::ofstream test_file("./ttt.txt");
     test_file << "1234567" << std::endl;
@@ -17,12 +18,13 @@ void Test::testFileStream() {
     test_file << 2 << 5 << 3.08 << 3.9;
     const char buf[6] = {'1','b','d','e','f','g'};
     for(int i = 0; i < 10; i++) {
-    test_file.write(buf,6);
+        test_file.write(buf,6);
     }
     test_file.close();
 }
 
 
+/// shared_ptr 引用计数操作
 void Test::testSmartPoint() {
 
     //std::string file_full_name(argv[1]);

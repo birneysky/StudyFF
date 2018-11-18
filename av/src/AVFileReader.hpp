@@ -28,6 +28,7 @@ public:
     ~AVFileReader();
     bool startReading();
     bool stopReading();
+    AVCodecParameters* getCodecParameters(int streamIndex);
     AVPacket* readNextFrame();
 };
 

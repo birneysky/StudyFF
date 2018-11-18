@@ -63,7 +63,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "../ApiDemo/ApiDemo/test.MP4"
+            argument = "../../ApiDemo/ApiDemo/test.MP4"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

@@ -16,8 +16,6 @@
 		74B98DD7219730080063C05E /* sub.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74B98DD0219730080063C05E /* sub.cpp */; };
 		74B98DDA219C7DF40063C05E /* AVDecoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74B98DD8219C7DF40063C05E /* AVDecoder.cpp */; };
 		74B98DE0219DCA7D0063C05E /* AVFileReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74B98DDE219DCA7D0063C05E /* AVFileReader.cpp */; };
-		74B98DED219FB8FE0063C05E /* sdl_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74B98DE9219FB8FE0063C05E /* sdl_test.cpp */; };
-		74B98DEE219FB8FE0063C05E /* sdl_texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74B98DEC219FB8FE0063C05E /* sdl_texture.cpp */; };
 		74B98DFA219FB9B00063C05E /* sdl_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74B98DE9219FB8FE0063C05E /* sdl_test.cpp */; };
 		74B98E06219FBAD00063C05E /* sdl_texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74B98DEC219FB8FE0063C05E /* sdl_texture.cpp */; };
 /* End PBXBuildFile section */
@@ -132,8 +130,8 @@
 				74B98DCE219730080063C05E /* add.cpp */,
 				74B98DCF219730080063C05E /* av.cpp */,
 				74B98DD0219730080063C05E /* sub.cpp */,
-				74B98DDE219DCA7D0063C05E /* AVFileReader.cpp */,
 				74B98DDF219DCA7D0063C05E /* AVFileReader.hpp */,
+				74B98DDE219DCA7D0063C05E /* AVFileReader.cpp */,
 				74B98DD8219C7DF40063C05E /* AVDecoder.cpp */,
 				74B98DD9219C7DF40063C05E /* AVDecoder.hpp */,
 			);
@@ -265,7 +263,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				74B98DD3219730080063C05E /* mul.cpp in Sources */,
-				74B98DED219FB8FE0063C05E /* sdl_test.cpp in Sources */,
 				74B98DD1219730080063C05E /* av_file.cpp in Sources */,
 				74B98DE0219DCA7D0063C05E /* AVFileReader.cpp in Sources */,
 				74B98DD5219730080063C05E /* add.cpp in Sources */,
@@ -274,7 +271,6 @@
 				74B98DD6219730080063C05E /* av.cpp in Sources */,
 				74B98DD7219730080063C05E /* sub.cpp in Sources */,
 				74B98DD4219730080063C05E /* div.cpp in Sources */,
-				74B98DEE219FB8FE0063C05E /* sdl_texture.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

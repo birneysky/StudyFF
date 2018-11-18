@@ -2,6 +2,7 @@
 #include "av_file.h"
 #include "test/test.h"
 #include "AVFileReader.hpp"
+#include "AVDecoder.hpp"
 
 extern "C"{
     #include <libavutil/log.h>
@@ -18,15 +19,10 @@ int main( int argc, char *argv[] ) {
         av_log(nullptr,AV_LOG_ERROR, "argc less than 2 \n");
         return -1;
     }
-//    p1->testFileStream();
-    AVFileReader* reader = nullptr;
-    try {
-        std::move(nullptr);
-        reader = new AVFileReader("");
-//        delete reader;
-    } catch (std::exception e) {
-        delete reader;
-        //throw;
+    ////  p1->testFileStream();
+    AVFileReader reader = AVFileReader(argv[1]);
+    if(!reader.startReading()) {
+        av_log(nullptr, AV_LOG_ERROR, "open file error");
     }
     
     /// 初始化SDL
@@ -88,7 +84,8 @@ int main( int argc, char *argv[] ) {
                 av_log(nullptr, AV_LOG_INFO, "event type is %d \n", event.type);
         }
         
-
+        AVPacket* packet =  reader.readNextFrame();
+        AVCodecParameters* par = reader.getCodecParameters(packet->stream_index);
         rect.x = rand() % 600;
         rect.y = rand() % 400;
         av_log(nullptr, AV_LOG_INFO, "x %d, y %d \n",rect.x,rect.y);
@@ -104,21 +101,7 @@ int main( int argc, char *argv[] ) {
         SDL_RenderPresent(render);
     }
     
-    /* 纹理渲染
-                       渲染器                 交换
-        内存图像 -------->  纹理 -------- > 窗口展示
-     
-        纹理相关api
-            SDL_CreateTexture()
-                 format:YUV,RGB
-                 access: Texture Target ,stream
-                 SDL_DestoryTexture()
-        渲染相关的api
-             SDL_SetRenderTarget() ///  设置渲染目标
-             SDL_RenderClear() /// 清屏，
-             SDL_RenderCopy ///  将纹理拷贝的显卡
-             SDL_RenderPresent() /// 将图形渲染显示
-     */
+
     SDL_DestroyRenderer(render);
     SDL_DestroyWindow(window);
     SDL_Quit();

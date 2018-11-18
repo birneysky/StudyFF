@@ -10,7 +10,7 @@
 #include <iostream>
 
 static int avio_interruptCallBack(void* arg) {
-    av_log(nullptr, AV_LOG_INFO, "avio_interruptCallBack arg %p",arg);
+    av_log(nullptr, AV_LOG_INFO, "avio_interruptCallBack arg %p \n",arg);
     return 0;
 }
 
@@ -49,6 +49,10 @@ bool AVFileReader::startReading() {
 bool AVFileReader::stopReading() {
     avformat_close_input(&formatCtx);
     return true;
+}
+
+AVCodecParameters* AVFileReader::getCodecParameters(int streamIndex) {
+    return formatCtx->streams[streamIndex]->codecpar;
 }
 
 AVPacket* AVFileReader::readNextFrame() {
