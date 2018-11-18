@@ -16,10 +16,32 @@
 		74B98DD7219730080063C05E /* sub.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74B98DD0219730080063C05E /* sub.cpp */; };
 		74B98DDA219C7DF40063C05E /* AVDecoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74B98DD8219C7DF40063C05E /* AVDecoder.cpp */; };
 		74B98DE0219DCA7D0063C05E /* AVFileReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74B98DDE219DCA7D0063C05E /* AVFileReader.cpp */; };
+		74B98DED219FB8FE0063C05E /* sdl_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74B98DE9219FB8FE0063C05E /* sdl_test.cpp */; };
+		74B98DEE219FB8FE0063C05E /* sdl_texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74B98DEC219FB8FE0063C05E /* sdl_texture.cpp */; };
+		74B98DFA219FB9B00063C05E /* sdl_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74B98DE9219FB8FE0063C05E /* sdl_test.cpp */; };
+		74B98E06219FBAD00063C05E /* sdl_texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74B98DEC219FB8FE0063C05E /* sdl_texture.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		74B98DB921972FB40063C05E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		74B98DF1219FB94D0063C05E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		74B98DFD219FBAA60063C05E /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -47,10 +69,28 @@
 		74B98DDC219DCA3B0063C05E /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		74B98DDE219DCA7D0063C05E /* AVFileReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AVFileReader.cpp; sourceTree = "<group>"; };
 		74B98DDF219DCA7D0063C05E /* AVFileReader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AVFileReader.hpp; sourceTree = "<group>"; };
+		74B98DE9219FB8FE0063C05E /* sdl_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sdl_test.cpp; sourceTree = "<group>"; };
+		74B98DEC219FB8FE0063C05E /* sdl_texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sdl_texture.cpp; sourceTree = "<group>"; };
+		74B98DF3219FB94D0063C05E /* SDL_Base */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SDL_Base; sourceTree = BUILT_PRODUCTS_DIR; };
+		74B98DFF219FBAA60063C05E /* SDL_Texture */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SDL_Texture; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		74B98DB821972FB40063C05E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		74B98DF0219FB94D0063C05E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		74B98DFC219FBAA60063C05E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -63,6 +103,7 @@
 		74B98DB221972FB40063C05E = {
 			isa = PBXGroup;
 			children = (
+				74B98DE8219FB8FE0063C05E /* examples */,
 				74B98DC5219730080063C05E /* src */,
 				74B98DBC21972FB40063C05E /* Products */,
 				74B98DDB219DCA330063C05E /* Frameworks */,
@@ -73,6 +114,8 @@
 			isa = PBXGroup;
 			children = (
 				74B98DBB21972FB40063C05E /* AV */,
+				74B98DF3219FB94D0063C05E /* SDL_Base */,
+				74B98DFF219FBAA60063C05E /* SDL_Texture */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -114,6 +157,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		74B98DE8219FB8FE0063C05E /* examples */ = {
+			isa = PBXGroup;
+			children = (
+				74B98DE9219FB8FE0063C05E /* sdl_test.cpp */,
+				74B98DEC219FB8FE0063C05E /* sdl_texture.cpp */,
+			);
+			path = examples;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -134,6 +186,40 @@
 			productReference = 74B98DBB21972FB40063C05E /* AV */;
 			productType = "com.apple.product-type.tool";
 		};
+		74B98DF2219FB94D0063C05E /* SDL_Base */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 74B98DF7219FB94D0063C05E /* Build configuration list for PBXNativeTarget "SDL_Base" */;
+			buildPhases = (
+				74B98DEF219FB94D0063C05E /* Sources */,
+				74B98DF0219FB94D0063C05E /* Frameworks */,
+				74B98DF1219FB94D0063C05E /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SDL_Base;
+			productName = SDL_Base;
+			productReference = 74B98DF3219FB94D0063C05E /* SDL_Base */;
+			productType = "com.apple.product-type.tool";
+		};
+		74B98DFE219FBAA60063C05E /* SDL_Texture */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 74B98E03219FBAA60063C05E /* Build configuration list for PBXNativeTarget "SDL_Texture" */;
+			buildPhases = (
+				74B98DFB219FBAA60063C05E /* Sources */,
+				74B98DFC219FBAA60063C05E /* Frameworks */,
+				74B98DFD219FBAA60063C05E /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SDL_Texture;
+			productName = SDL_Texture;
+			productReference = 74B98DFF219FBAA60063C05E /* SDL_Texture */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -144,6 +230,12 @@
 				ORGANIZATIONNAME = Grocery;
 				TargetAttributes = {
 					74B98DBA21972FB40063C05E = {
+						CreatedOnToolsVersion = 10.1;
+					};
+					74B98DF2219FB94D0063C05E = {
+						CreatedOnToolsVersion = 10.1;
+					};
+					74B98DFE219FBAA60063C05E = {
 						CreatedOnToolsVersion = 10.1;
 					};
 				};
@@ -161,6 +253,8 @@
 			projectRoot = "";
 			targets = (
 				74B98DBA21972FB40063C05E /* AV */,
+				74B98DF2219FB94D0063C05E /* SDL_Base */,
+				74B98DFE219FBAA60063C05E /* SDL_Texture */,
 			);
 		};
 /* End PBXProject section */
@@ -171,6 +265,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				74B98DD3219730080063C05E /* mul.cpp in Sources */,
+				74B98DED219FB8FE0063C05E /* sdl_test.cpp in Sources */,
 				74B98DD1219730080063C05E /* av_file.cpp in Sources */,
 				74B98DE0219DCA7D0063C05E /* AVFileReader.cpp in Sources */,
 				74B98DD5219730080063C05E /* add.cpp in Sources */,
@@ -179,6 +274,23 @@
 				74B98DD6219730080063C05E /* av.cpp in Sources */,
 				74B98DD7219730080063C05E /* sub.cpp in Sources */,
 				74B98DD4219730080063C05E /* div.cpp in Sources */,
+				74B98DEE219FB8FE0063C05E /* sdl_texture.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		74B98DEF219FB94D0063C05E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				74B98DFA219FB9B00063C05E /* sdl_test.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		74B98DFB219FBAA60063C05E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				74B98E06219FBAD00063C05E /* sdl_texture.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,6 +442,48 @@
 			};
 			name = Release;
 		};
+		74B98DF8219FB94D0063C05E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				OTHER_LDFLAGS = "-lSDL2";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		74B98DF9219FB94D0063C05E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				OTHER_LDFLAGS = "-lSDL2";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		74B98E04219FBAA60063C05E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		74B98E05219FBAA60063C05E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -347,6 +501,24 @@
 			buildConfigurations = (
 				74B98DC321972FB40063C05E /* Debug */,
 				74B98DC421972FB40063C05E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		74B98DF7219FB94D0063C05E /* Build configuration list for PBXNativeTarget "SDL_Base" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				74B98DF8219FB94D0063C05E /* Debug */,
+				74B98DF9219FB94D0063C05E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		74B98E03219FBAA60063C05E /* Build configuration list for PBXNativeTarget "SDL_Texture" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				74B98E04219FBAA60063C05E /* Debug */,
+				74B98E05219FBAA60063C05E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
