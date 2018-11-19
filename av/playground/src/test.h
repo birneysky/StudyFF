@@ -7,6 +7,7 @@ public:
 	~Test();
 	void testFileStream();
     void testSmartPoint();
+    void testLambda();
 };
 
 #endif

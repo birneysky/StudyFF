@@ -11,7 +11,9 @@
 
 int main(int argc, char* argv[]) {
     Test t = Test();
-    t.testFileStream();
+    //t.testFileStream();
+    t.testLambda();
     t.testSmartPoint();
+    
     return 0;
 }
