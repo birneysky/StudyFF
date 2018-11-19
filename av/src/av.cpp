@@ -12,17 +12,16 @@ extern "C"{
 //using namespace std;
 
 int main( int argc, char *argv[] ) {
-
     av_log_set_level(AV_LOG_INFO);
     av_log(NULL, AV_LOG_INFO, "%s\n", "Hello AV World");
     if (argc < 2 ){
         av_log(nullptr,AV_LOG_ERROR, "argc less than 2 \n");
         return -1;
     }
-    ////  p1->testFileStream();
     AVFileReader reader = AVFileReader(argv[1]);
     if(!reader.startReading()) {
         av_log(nullptr, AV_LOG_ERROR, "open file error");
+        return -1;
     }
     AVDecoder* videoDecoder = nullptr;
     AVDecoder* audioDecoder = nullptr;
@@ -65,25 +64,18 @@ int main( int argc, char *argv[] ) {
     }
     /// 创建渲染器 CreateRender
     SDL_Renderer* render =  SDL_CreateRenderer(window, -1, 0);
-
-    /// 销毁渲染器
     if (!render) {
         SDL_DestroyWindow(window);
         SDL_Quit();
         return -1;
     }
-    /// 清空渲染器
-
-    /// sdl 所有的事件都存放在一个队列中
-    /// 所有对事件的操作，其实就是对队列的操作
-    ///  事件类型
-        /// SDL_WindowEvent :窗口事件
-        /// SDL_KeyboardEvent: 键盘事件
-        /// SDL_MouseMotionEvent: 鼠标事件
-    /// 事件的两种方式 SDL_PoolEvent 轮询  SDL_WaitEvent 等待触发，
-    ///SDL_Delay(30000);
+    
     bool quit = true;
-   SDL_Texture* texture = SDL_CreateTexture(render, SDL_PIXELFORMAT_IYUV, SDL_TEXTUREACCESS_STREAMING, videoWidth, videoHeight);
+    SDL_Texture* texture = SDL_CreateTexture(render,
+                                             SDL_PIXELFORMAT_IYUV,
+                                             SDL_TEXTUREACCESS_STREAMING,
+                                             videoWidth,
+                                             videoHeight);
     SDL_Rect rect;
     rect.w = videoWidth;
     rect.h = videoHeight;
@@ -105,6 +97,7 @@ int main( int argc, char *argv[] ) {
             default:
                 av_log(nullptr, AV_LOG_INFO, "event type is %d \n", event.type);
         }
+        
         SDL_SetRenderTarget(render, texture);
         AVPacket* packet =  reader.readNextFrame();
         if (packet != nullptr) {
@@ -112,7 +105,13 @@ int main( int argc, char *argv[] ) {
                 av_log(nullptr, AV_LOG_INFO, "视频包 \n");
                 AVFrame* videoFrame = videoDecoder->decode(packet);
                 if (videoFrame) {
-                    SDL_UpdateYUVTexture(texture, nullptr, videoFrame->data[0], videoFrame->linesize[0], videoFrame->data[1], videoFrame->linesize[1], videoFrame->data[2], videoFrame->linesize[2]);
+                    SDL_UpdateYUVTexture(texture,nullptr,
+                                         videoFrame->data[0],
+                                         videoFrame->linesize[0],
+                                         videoFrame->data[1],
+                                         videoFrame->linesize[1],
+                                         videoFrame->data[2],
+                                         videoFrame->linesize[2]);
                 }
                 av_frame_free(&videoFrame);
             } else if(packet->stream_index == audioStreamIndex ){

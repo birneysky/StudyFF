@@ -11,16 +11,17 @@ LIBS := -lavutil -lavformat -lSDL2
 
 av:$(OBJECTS)
 	@mkdir -p $(TARGETDIR)
-	clang++ $^ $(LIBS) -g -o $(TARGETDIR)/av
+	@clang++ $^ $(LIBS) -g -o $(TARGETDIR)/av
 
 $(BUILDDIR)/%.d: %.cpp
 	@mkdir -p $(BUILDDIR)
-	clang++ -MM $< -o $@ -MT $(patsubst %.d, %.o, $@)
+	@clang++ -MM $< -o $@ -MT $(patsubst %.d, %.o, $@)
 	
 include $(DEP)
 
 $(BUILDDIR)/%.o: %.cpp
-	clang++ -Wall -std=c++11 -stdlib=libc++ -g -c $<  -o $@
+	@echo "Compiling " $<
+	@clang++ -Wall -std=c++11 -stdlib=libc++ -g -c $<  -o $@
 
 .PHONY : test
 test:
