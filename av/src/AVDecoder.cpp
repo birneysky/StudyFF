@@ -28,12 +28,13 @@ bool AVDecoder::open() {
         return false;
     }
     avcodec_parameters_to_context(codecCtx,codecParam);
-    if(avcodec_open2(codecCtx, codec, NULL) < 0 ) {
+    if(avcodec_open2(codecCtx, codec, nullptr) < 0 ) {
         av_log(nullptr, AV_LOG_ERROR,
                "open decoder failed,codec_id %d",
                codecParam->codec_id);
+        return false;
     }
-    return false;
+    return true;
 }
 bool AVDecoder::close() {
     if (codecCtx) {
@@ -54,11 +55,15 @@ AVDecoder::~AVDecoder() {
 }
 
 AVFrame* AVDecoder::decode(AVPacket* packet) {
-    if(avcodec_send_packet(codecCtx, packet) != 0 ) {
+    int code = avcodec_send_packet(codecCtx, packet);
+    if(code != 0 ) {
+        av_log(nullptr, AV_LOG_ERROR, "avcode_send_packet error %s",av_err2str(code));
         return nullptr;
     }
     AVFrame* avFrame = av_frame_alloc();
-    if(avcodec_receive_frame(codecCtx,avFrame) != 0) {
+    code = avcodec_receive_frame(codecCtx,avFrame);
+    if(code != 0) {
+        av_log(nullptr, AV_LOG_ERROR, "avcodec_receive_frame error %s",av_err2str(code));
         av_frame_free(&avFrame);
         return nullptr;
     }

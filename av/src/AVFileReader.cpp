@@ -51,8 +51,12 @@ bool AVFileReader::stopReading() {
     return true;
 }
 
-AVCodecParameters* AVFileReader::getCodecParameters(int streamIndex) {
-    return formatCtx->streams[streamIndex]->codecpar;
+AVStream* AVFileReader::getStream(int streamIndex) {
+    return formatCtx->streams[streamIndex];
+}
+
+unsigned int AVFileReader::getStreamCount() {
+    return formatCtx->nb_streams;
 }
 
 AVPacket* AVFileReader::readNextFrame() {

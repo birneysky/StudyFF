@@ -17,8 +17,6 @@ extern "C"{
     #include <libavformat/avformat.h>
 }
 
-
-
 class AVFileReader {
 private:
     std::string localPath;
@@ -28,7 +26,8 @@ public:
     ~AVFileReader();
     bool startReading();
     bool stopReading();
-    AVCodecParameters* getCodecParameters(int streamIndex);
+    AVStream* getStream(int streamIndex);
+    unsigned int getStreamCount();
     AVPacket* readNextFrame();
 };
 

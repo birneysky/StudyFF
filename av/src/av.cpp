@@ -24,6 +24,28 @@ int main( int argc, char *argv[] ) {
     if(!reader.startReading()) {
         av_log(nullptr, AV_LOG_ERROR, "open file error");
     }
+    AVDecoder* videoDecoder = nullptr;
+    AVDecoder* audioDecoder = nullptr;
+    int videoStreamIndex = -1;
+    int audioStreamIndex = -1;
+    int videoWidth = 0;
+    int videoHeight = 0;
+    unsigned int streamCount = reader.getStreamCount();
+    for (int i = 0; i < streamCount; i++) {
+        AVStream* stream =  reader.getStream(i);
+        if (stream->codecpar->codec_type == AVMEDIA_TYPE_VIDEO) {
+            videoDecoder = new AVDecoder(stream->codecpar);
+            videoStreamIndex = i;
+            videoWidth = stream->codecpar->width;
+            videoHeight = stream->codecpar->height;
+        } else if(stream->codecpar->codec_type == AVMEDIA_TYPE_AUDIO ) {
+            audioDecoder = new AVDecoder(stream->codecpar);
+            audioStreamIndex = i;
+        }
+    }
+    
+    videoDecoder->open();
+    audioDecoder->open();
     
     /// 初始化SDL
     SDL_Init(SDL_INIT_VIDEO);
@@ -31,8 +53,8 @@ int main( int argc, char *argv[] ) {
     SDL_Window* window = SDL_CreateWindow("SDL2 Window",
                                             SDL_WINDOWPOS_UNDEFINED,
                                             SDL_WINDOWPOS_UNDEFINED,
-                                            640,
-                                            480,
+                                            videoWidth,
+                                            videoHeight,
                                             SDL_WINDOW_SHOWN );
     
     if (!window) {
@@ -61,10 +83,10 @@ int main( int argc, char *argv[] ) {
     /// 事件的两种方式 SDL_PoolEvent 轮询  SDL_WaitEvent 等待触发，
     ///SDL_Delay(30000);
     bool quit = true;
-   SDL_Texture* texture = SDL_CreateTexture(render, SDL_PIXELFORMAT_RGB888, SDL_TEXTUREACCESS_TARGET, 640, 480);
+   SDL_Texture* texture = SDL_CreateTexture(render, SDL_PIXELFORMAT_IYUV, SDL_TEXTUREACCESS_STREAMING, videoWidth, videoHeight);
     SDL_Rect rect;
-    rect.w = 50;
-    rect.h = 50;
+    rect.w = videoWidth;
+    rect.h = videoHeight;
     if (!texture) {
         av_log(nullptr, AV_LOG_ERROR, "create texture failed \n");
         SDL_DestroyWindow(window);
@@ -83,21 +105,28 @@ int main( int argc, char *argv[] ) {
             default:
                 av_log(nullptr, AV_LOG_INFO, "event type is %d \n", event.type);
         }
-        
-        AVPacket* packet =  reader.readNextFrame();
-        AVCodecParameters* par = reader.getCodecParameters(packet->stream_index);
-        rect.x = rand() % 600;
-        rect.y = rand() % 400;
-        av_log(nullptr, AV_LOG_INFO, "x %d, y %d \n",rect.x,rect.y);
         SDL_SetRenderTarget(render, texture);
-        SDL_SetRenderDrawColor(render, 0, 0, 0, 0);
-        SDL_RenderClear(render);
+        AVPacket* packet =  reader.readNextFrame();
+        if (packet != nullptr) {
+            if (packet->stream_index == videoStreamIndex) {
+                av_log(nullptr, AV_LOG_INFO, "视频包 \n");
+                AVFrame* videoFrame = videoDecoder->decode(packet);
+                if (videoFrame) {
+                    SDL_UpdateYUVTexture(texture, nullptr, videoFrame->data[0], videoFrame->linesize[0], videoFrame->data[1], videoFrame->linesize[1], videoFrame->data[2], videoFrame->linesize[2]);
+                }
+                av_frame_free(&videoFrame);
+            } else if(packet->stream_index == audioStreamIndex ){
+                av_log(nullptr, AV_LOG_INFO, "音频包 \n");
+            } else {
+                av_log(nullptr, AV_LOG_INFO, "其他包 \n");
+            }
+        } else {
+            av_log(nullptr, AV_LOG_INFO, "读取结束");
+        }
+        av_packet_free(&packet);
 
-        SDL_RenderDrawRect(render, &rect);
-        SDL_SetRenderDrawColor(render, 255, 0, 0, 0);
-        SDL_RenderFillRect(render, &rect);
-        SDL_SetRenderTarget(render, nullptr);
-        SDL_RenderCopy(render, texture, nullptr, nullptr) ;
+        SDL_RenderClear(render);
+        SDL_RenderCopy(render, texture, nullptr, &rect) ;
         SDL_RenderPresent(render);
     }
     
