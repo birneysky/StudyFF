@@ -14,6 +14,6 @@ int main(int argc, char* argv[]) {
     //t.testFileStream();
     t.testLambda();
     t.testSmartPoint();
-    
+    t.testTypeId();
     return 0;
 }

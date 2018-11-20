@@ -80,3 +80,12 @@ void Test::testLambda() {
     std::cout << "muti_x:" << muti_x(4) << " x:" << x << std::endl;
     std::cout << "***************" <<  "end"  << "***************" << std::endl;
 }
+
+void Test::testTypeId() {
+    /// typeid操作符的返回结果是名为type_info的标准库类型的对象的引用 可以使用.name 方法获取
+     std::cout << "***************" <<  __func__ << "***************" << std::endl;
+    int a = 3;
+    auto simlambda = []()->void{ std::cout << "Hello, Lambda" << std::endl; };
+    std::cout << typeid(simlambda).name() << std::endl;
+    std::cout << "***************" <<  "end"  << "***************" << std::endl;
+}

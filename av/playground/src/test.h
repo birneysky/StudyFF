@@ -8,6 +8,7 @@ public:
 	void testFileStream();
     void testSmartPoint();
     void testLambda();
+    void testTypeId();
 };
 
 #endif
