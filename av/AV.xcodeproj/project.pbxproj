@@ -17,6 +17,7 @@
 		74B98DE0219DCA7D0063C05E /* AVFileReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74B98DDE219DCA7D0063C05E /* AVFileReader.cpp */; };
 		74B98DFA219FB9B00063C05E /* sdl_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74B98DE9219FB8FE0063C05E /* sdl_test.cpp */; };
 		74B98E06219FBAD00063C05E /* sdl_texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74B98DEC219FB8FE0063C05E /* sdl_texture.cpp */; };
+		74C0DF7921A5AC0A00B14E38 /* sdl_audio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74C0DF7821A5AC0A00B14E38 /* sdl_audio.cpp */; };
 		B21222DB21A2C0A100D196F7 /* makefile in Sources */ = {isa = PBXBuildFile; fileRef = B21222D721A2C0A100D196F7 /* makefile */; };
 		B21222DC21A2C0A100D196F7 /* test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B21222D921A2C0A100D196F7 /* test.cpp */; };
 		B21222DE21A2C0C500D196F7 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B21222DD21A2C0C500D196F7 /* main.cpp */; };
@@ -42,6 +43,15 @@
 			runOnlyForDeploymentPostprocessing = 1;
 		};
 		74B98DFD219FBAA60063C05E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		74C0DF7421A5AC0A00B14E38 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -80,6 +90,8 @@
 		74B98DEC219FB8FE0063C05E /* sdl_texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sdl_texture.cpp; sourceTree = "<group>"; };
 		74B98DF3219FB94D0063C05E /* SDL_Base */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SDL_Base; sourceTree = BUILT_PRODUCTS_DIR; };
 		74B98DFF219FBAA60063C05E /* SDL_Texture */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SDL_Texture; sourceTree = BUILT_PRODUCTS_DIR; };
+		74C0DF7621A5AC0A00B14E38 /* SDL_Audio */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SDL_Audio; sourceTree = BUILT_PRODUCTS_DIR; };
+		74C0DF7821A5AC0A00B14E38 /* sdl_audio.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sdl_audio.cpp; sourceTree = "<group>"; };
 		B21222CF21A2BFBC00D196F7 /* PlayGround */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PlayGround; sourceTree = BUILT_PRODUCTS_DIR; };
 		B21222D721A2C0A100D196F7 /* makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = makefile; sourceTree = "<group>"; };
 		B21222D921A2C0A100D196F7 /* test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = test.cpp; sourceTree = "<group>"; };
@@ -103,6 +115,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		74B98DFC219FBAA60063C05E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		74C0DF7321A5AC0A00B14E38 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -137,6 +156,7 @@
 				74B98DF3219FB94D0063C05E /* SDL_Base */,
 				74B98DFF219FBAA60063C05E /* SDL_Texture */,
 				B21222CF21A2BFBC00D196F7 /* PlayGround */,
+				74C0DF7621A5AC0A00B14E38 /* SDL_Audio */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -173,6 +193,7 @@
 			children = (
 				74B98DE9219FB8FE0063C05E /* sdl_test.cpp */,
 				74B98DEC219FB8FE0063C05E /* sdl_texture.cpp */,
+				74C0DF7821A5AC0A00B14E38 /* sdl_audio.cpp */,
 			);
 			path = examples;
 			sourceTree = "<group>";
@@ -250,6 +271,23 @@
 			productReference = 74B98DFF219FBAA60063C05E /* SDL_Texture */;
 			productType = "com.apple.product-type.tool";
 		};
+		74C0DF7521A5AC0A00B14E38 /* SDL_Audio */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 74C0DF7C21A5AC0A00B14E38 /* Build configuration list for PBXNativeTarget "SDL_Audio" */;
+			buildPhases = (
+				74C0DF7221A5AC0A00B14E38 /* Sources */,
+				74C0DF7321A5AC0A00B14E38 /* Frameworks */,
+				74C0DF7421A5AC0A00B14E38 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SDL_Audio;
+			productName = SDL_Audio;
+			productReference = 74C0DF7621A5AC0A00B14E38 /* SDL_Audio */;
+			productType = "com.apple.product-type.tool";
+		};
 		B21222CE21A2BFBC00D196F7 /* PlayGround */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B21222D521A2BFBC00D196F7 /* Build configuration list for PBXNativeTarget "PlayGround" */;
@@ -285,6 +323,9 @@
 					74B98DFE219FBAA60063C05E = {
 						CreatedOnToolsVersion = 10.1;
 					};
+					74C0DF7521A5AC0A00B14E38 = {
+						CreatedOnToolsVersion = 10.1;
+					};
 					B21222CE21A2BFBC00D196F7 = {
 						CreatedOnToolsVersion = 10.0;
 					};
@@ -305,6 +346,7 @@
 				74B98DBA21972FB40063C05E /* AV */,
 				74B98DF2219FB94D0063C05E /* SDL_Base */,
 				74B98DFE219FBAA60063C05E /* SDL_Texture */,
+				74C0DF7521A5AC0A00B14E38 /* SDL_Audio */,
 				B21222CE21A2BFBC00D196F7 /* PlayGround */,
 			);
 		};
@@ -339,6 +381,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				74B98E06219FBAD00063C05E /* sdl_texture.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		74C0DF7221A5AC0A00B14E38 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				74C0DF7921A5AC0A00B14E38 /* sdl_audio.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -544,6 +594,28 @@
 			};
 			name = Release;
 		};
+		74C0DF7A21A5AC0A00B14E38 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				OTHER_LDFLAGS = "-lSDL2";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		74C0DF7B21A5AC0A00B14E38 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				OTHER_LDFLAGS = "-lSDL2";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		B21222D321A2BFBC00D196F7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -597,6 +669,15 @@
 			buildConfigurations = (
 				74B98E04219FBAA60063C05E /* Debug */,
 				74B98E05219FBAA60063C05E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		74C0DF7C21A5AC0A00B14E38 /* Build configuration list for PBXNativeTarget "SDL_Audio" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				74C0DF7A21A5AC0A00B14E38 /* Debug */,
+				74C0DF7B21A5AC0A00B14E38 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

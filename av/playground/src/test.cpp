@@ -21,6 +21,16 @@ void Test::testFileStream() {
         test_file.write(buf,6);
     }
     test_file.close();
+    
+    std::ifstream w_test_file("./ttt.txt");
+    if(!w_test_file.is_open()) {
+        std::cout << "error opening file" << std::endl;
+        return;
+    }
+    std::streambuf buf;
+    w_test_file >> buf;
+    std::cout << buf << std::endl;
+    //w_test_file.read(<#char_type *__s#>, <#streamsize __n#>)
 }
 
 
