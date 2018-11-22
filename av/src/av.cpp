@@ -111,6 +111,12 @@ int main( int argc, char *argv[] ) {
                                          videoFrame->linesize[1],
                                          videoFrame->data[2],
                                          videoFrame->linesize[2]);
+                } else {
+                    SDL_SetRenderDrawColor(render, 0x00, 0x00, 0x00, 0x00);
+                    SDL_RenderClear(render);
+                    SDL_RenderDrawRect(render,&rect);
+                    SDL_SetRenderDrawColor(render, 0xFF, 0x00, 0x00, 0x00);
+                    av_log(nullptr, AV_LOG_ERROR, "Video decode error \n");
                 }
                 av_frame_free(&videoFrame);
             } else if(packet->stream_index == audioStreamIndex ){
