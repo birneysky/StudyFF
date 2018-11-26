@@ -8,6 +8,11 @@
 
 #include <stdio.h>
 #include "test.h"
+#include <thread>
+#include <chrono>
+#include <iostream>
+
+
 
 int main(int argc, char* argv[]) {
     Test t = Test();
@@ -15,5 +20,10 @@ int main(int argc, char* argv[]) {
     t.testLambda();
     t.testSmartPoint();
     t.testTypeId();
-    return 0;
+    t.testThread();
+    t.testThread2();
+    t.testThread3();
+    std::this_thread::sleep_for(std::chrono::seconds(2));
+    std::cout << "Hello C++ 11" << std::endl;
+    return EXIT_SUCCESS;
 }

@@ -1,6 +1,13 @@
 #include "test.h"
 #include<iostream>
 #include <fstream>
+#include <thread>
+
+
+void function_1() {
+    std::cout << "Hello C++11 thread" << std::endl;
+    
+}
 
 Test::Test() {
 	std::cout << "test" << std::endl;	
@@ -27,9 +34,9 @@ void Test::testFileStream() {
         std::cout << "error opening file" << std::endl;
         return;
     }
-    std::streambuf buf;
-    w_test_file >> buf;
-    std::cout << buf << std::endl;
+//    std::streambuf buf;
+//    w_test_file >> buf;
+//    std::cout << buf << std::endl;
     //w_test_file.read(<#char_type *__s#>, <#streamsize __n#>)
 }
 
@@ -98,4 +105,53 @@ void Test::testTypeId() {
     auto simlambda = []()->void{ std::cout << "Hello, Lambda" << std::endl; };
     std::cout << typeid(simlambda).name() << std::endl;
     std::cout << "***************" <<  "end"  << "***************" << std::endl;
+}
+
+void Test::testThread() {
+    std::cout << "***************" <<  __func__ << "***************" << std::endl;
+    std::thread th(&Test::doSomeThreadWork,this);
+    th.join();
+    std::cout << "***************" <<  __func__ <<  "end"  << "***************" << std::endl;
+}
+
+void Test::doSomeThreadWork() {
+    std::cout << "***************" <<  __func__ << "***************" << std::endl;
+    std::cout << "***************" <<  "end"  << "***************" << std::endl;
+}
+
+void Test::testThread2() {
+    /*
+     this_thread::get_id: 返回当前线程的id
+     this_thread::yield: 让调度器先运行其它的线程，这在忙于等待状态时很有用
+     this_thread::sleep_for: 将当前线程置于阻塞状态，时间不少于参数所指定的时间段
+     this_thread::sleep_util: 在指定的时刻来临前，一直将当前的线程置于阻塞状态
+     */
+    std::cout << "***************" <<  __func__ << "***************" << std::endl;
+    std::thread tx(&Test::doSomeThreadWork2,this,3);
+    tx.detach();
+    std::cout << "***************" <<  __func__ <<  "end"  << "***************" << std::endl;
+}
+
+void Test::doSomeThreadWork2(int a) {
+    std::cout << "***************" <<  __func__ << "***************" << std::endl;
+    std::cout << "arg:" << a << std::endl;
+    /// 获取最佳的线程数量
+    std::cout << std::thread::hardware_concurrency()  << std::endl;
+    std::cout << "***************" <<  __func__ <<  "end"  << "***************" << std::endl;
+}
+
+void Test::testThread3() {
+    std::thread th1(function_1);
+    th1.detach();
+    if (th1.joinable()) {
+        th1.join();
+    }
+}
+
+void Test::testStdFunction() {
+    /// https://www.jianshu.com/p/2dad1cad2661
+}
+
+void Test::testStdMove() {
+    ///// https://www.jianshu.com/p/ff4dc98f4a8c
 }
