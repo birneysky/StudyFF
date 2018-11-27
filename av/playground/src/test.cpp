@@ -3,7 +3,9 @@
 #include <fstream>
 #include <thread>
 #include <map>
-
+#include <vector>
+#include <ostream>
+#include <sstream>
 
 void function_1() {
     std::cout << "Hello C++11 thread" << std::endl;
@@ -215,7 +217,27 @@ void Test::testStdMove() {
     ///// https://www.jianshu.com/p/ff4dc98f4a8c
 }
 
+template <typename T>
+std::ostream& operator <<(std::ostream& out, std::vector<T> vec) {
+    std::stringstream stream;
+    stream << "[" << *vec.begin();
+    std::for_each(vec.begin(), vec.end(), [&stream](const T& value){
+        stream << "," << value;
+    });
+    stream << "]";
+    out << stream.str();
+    return out;
+}
+
+
 void Test::testStdforeach() {
     /// std::
-    std::for_each(<#_InputIterator __first#>, <#_InputIterator __last#>, <#_Function __f#>)
+    int a[] = {1,2,3,5,6,7,8,9,10};
+    std::vector<int> tt(a,a+sizeof(a)/sizeof(int));
+    std::for_each(tt.begin(), tt.end(), [&tt](int& value){
+        value += 10;
+    });
+    std::cout << "tt:" << tt << std::endl;
+    std::vector<int> aa = {10,9,8,9,6,5,4,3,2,1};
+    std::cout << "aa:" << aa << std::endl;
 }
