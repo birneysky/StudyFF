@@ -25,5 +25,6 @@ int main(int argc, char* argv[]) {
     t.testThread3();
     std::this_thread::sleep_for(std::chrono::seconds(2));
     std::cout << "Hello C++ 11" << std::endl;
+    t.testStdFunction();
     return EXIT_SUCCESS;
 }

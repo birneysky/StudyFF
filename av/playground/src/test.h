@@ -16,6 +16,7 @@ public:
     void testThread3();
     void testStdFunction();
     void testStdMove();
+    void testStdforeach();
 };
 
 #endif

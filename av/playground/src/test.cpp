@@ -2,6 +2,7 @@
 #include<iostream>
 #include <fstream>
 #include <thread>
+#include <map>
 
 
 void function_1() {
@@ -62,6 +63,7 @@ void Test::testSmartPoint() {
     std::cout << "***************" <<  "end"  << "***************" << std::endl;
 }
 
+
 void Test::testLambda() {
     /// https://www.jianshu.com/p/d686ad9de817
     std::cout << "***************" <<  __func__ << "***************" << std::endl;
@@ -97,6 +99,7 @@ void Test::testLambda() {
     std::cout << "muti_x:" << muti_x(4) << " x:" << x << std::endl;
     std::cout << "***************" <<  "end"  << "***************" << std::endl;
 }
+
 
 void Test::testTypeId() {
     /// typeid操作符的返回结果是名为type_info的标准库类型的对象的引用 可以使用.name 方法获取
@@ -148,10 +151,71 @@ void Test::testThread3() {
     }
 }
 
+// 普通函数
+int add(int i, int j) {
+    return i + j;
+    
+}
+
 void Test::testStdFunction() {
     /// https://www.jianshu.com/p/2dad1cad2661
+    /// https://blog.csdn.net/wangshubo1989/article/details/49134235
+    /*
+            通常std::function是一个函数对象类，它包装其它任意的函数对象，
+            被包装的函数对象具有类型为T1, …,TN的N个参数，并且返回一个可转换到R类型的值。
+            std::function使用 模板转换构造函数接收被包装的函数对象；
+            特别是，闭包类型可以隐式地转换为std::function。
+        */
+    
+    /*
+            std::function<Layer*()> 表示一个可调用调用对象 接受0个参数，返回Layer*
+        */
+    
+
+    // lambda表达式
+    auto mod = [](int i, int j){return i % j; };
+    // 函数对象类
+    struct divide
+    {
+        int operator() (int denominator, int divisor)
+        {
+            return denominator / divisor;
+        }
+    };
+    
+    /// 受限的map
+    std::map<char, int(*)(int,int)> ops_limit;
+    ops_limit.insert({'+', add});
+    ops_limit.insert(std::make_pair('%', mod));
+    //ops_limit.insert({'/',divide()})
+    
+    std::map<std::string, std::function<int(int,int)>> ops;
+    ops.insert({"+",add});
+    ops.insert({"%",mod});
+    ops.insert({"÷",divide()});
+    ops.insert({"-",std::minus<int>()});
+    ops.insert({"*",[](int i, int j){ return i * j; }});
+    
+    std::map<char, std::function<int(int,int)>> ops1 = {
+        {'+',add},
+        {'%',mod},
+        {'/',divide()},
+        {'-',std::minus<int>()},
+        {'*',[](int i, int j){return i * j; }}
+    };
+    
+    std::cout << ops1['+'](3,5) << std::endl;
+    std::cout << ops1['%'](5,3) << std::endl;
+    std::cout << ops1['/'](3,5) << std::endl;
+    std::cout << ops1['-'](3,5) << std::endl;
+    std::cout << ops1['*'](3,5) << std::endl;
 }
 
 void Test::testStdMove() {
     ///// https://www.jianshu.com/p/ff4dc98f4a8c
+}
+
+void Test::testStdforeach() {
+    /// std::
+    std::for_each(<#_InputIterator __first#>, <#_InputIterator __last#>, <#_Function __f#>)
 }
