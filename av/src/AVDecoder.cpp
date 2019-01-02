@@ -11,6 +11,8 @@
 
 AVDecoder::AVDecoder(AVCodecParameters* parameters) {
     codecParam = parameters;
+    codecCtx = nullptr;
+    swsCtx = nullptr;
 }
 
 bool AVDecoder::open() {
@@ -69,4 +71,8 @@ AVFrame* AVDecoder::decode(AVPacket* packet) {
     }
     
     return avFrame;
+}
+
+enum AVPixelFormat AVDecoder::getPixelFormat() {
+    return codecCtx->pix_fmt;
 }

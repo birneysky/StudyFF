@@ -10,6 +10,10 @@ extern "C"{
 }
 //using namespace std;
 
+void read_audio_data(void *udata, Uint8 *stream, int len){
+
+}
+
 int main( int argc, char *argv[] ) {
     av_log_set_level(AV_LOG_INFO);
     av_log(NULL, AV_LOG_INFO, "%s\n", "Hello AV World");
@@ -46,7 +50,7 @@ int main( int argc, char *argv[] ) {
     audioDecoder->open();
     
     /// 初始化SDL
-    SDL_Init(SDL_INIT_VIDEO);
+    SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO);
     
     SDL_Window* window = SDL_CreateWindow("SDL2 Window",
                                             SDL_WINDOWPOS_UNDEFINED,
@@ -85,6 +89,26 @@ int main( int argc, char *argv[] ) {
         SDL_Quit();
         return -1;
     }
+    
+    
+    SDL_AudioSpec spec;
+    
+    spec.freq = 44100;
+    spec.format = AUDIO_S16SYS;
+    spec.channels = 2;
+    spec.silence = 0;
+    spec.samples = 2048;
+    spec.callback = read_audio_data;
+    spec.userdata = NULL;
+    
+    if(SDL_OpenAudio(&spec, NULL)){
+        fprintf(stderr, "Failed to open audio device, %s\n", SDL_GetError());
+        return -1;
+    }
+    
+    //play audio
+    SDL_PauseAudio(0);
+    
     while (quit) {
 
         SDL_Event event;
@@ -104,13 +128,19 @@ int main( int argc, char *argv[] ) {
                 av_log(nullptr, AV_LOG_INFO, "视频包 \n");
                 AVFrame* videoFrame = videoDecoder->decode(packet);
                 if (videoFrame) {
-                    SDL_UpdateYUVTexture(texture,nullptr,
-                                         videoFrame->data[0],
-                                         videoFrame->linesize[0],
-                                         videoFrame->data[1],
-                                         videoFrame->linesize[1],
-                                         videoFrame->data[2],
-                                         videoFrame->linesize[2]);
+                    AVPixelFormat pixFormat = videoDecoder->getPixelFormat();
+                    if (pixFormat == AV_PIX_FMT_YUV420P || pixFormat == AV_PIX_FMT_YUVJ420P) {
+                        SDL_UpdateYUVTexture(texture,nullptr,
+                                             videoFrame->data[0],
+                                             videoFrame->linesize[0],
+                                             videoFrame->data[1],
+                                             videoFrame->linesize[1],
+                                             videoFrame->data[2],
+                                             videoFrame->linesize[2]);
+                    } else {
+                        
+                    }
+
                 } else {
                     SDL_SetRenderDrawColor(render, 0x00, 0x00, 0x00, 0x00);
                     SDL_RenderClear(render);

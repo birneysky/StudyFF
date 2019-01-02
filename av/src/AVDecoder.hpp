@@ -19,11 +19,13 @@ class AVDecoder {
 private:
     AVCodecParameters* codecParam;
     AVCodecContext* codecCtx;
+    struct SwsContext * swsCtx;
 public:
     AVDecoder(AVCodecParameters* parameters);
     ~AVDecoder();
     bool open();
     bool close();
+    enum AVPixelFormat getPixelFormat();
     AVFrame* decode(AVPacket* packet);
 };
 
