@@ -42,41 +42,6 @@
     
 }
 
-
-const uint8_t ADTS_HEADER_LEN = 7;
-
-void adts_header(char *szAdtsHeader, int dataLen){
-
-    int audio_object_type = 2;
-    int sampling_frequency_index = 7;
-    int channel_config = 2;
-
-    int adtsLen = dataLen + 7;
-
-    szAdtsHeader[0] = 0xff;         //syncword:0xfff                          高8bits
-    szAdtsHeader[1] = 0xf0;         //syncword:0xfff                          低4bits
-    szAdtsHeader[1] |= (0 << 3);    //MPEG Version:0 for MPEG-4,1 for MPEG-2  1bit
-    szAdtsHeader[1] |= (0 << 1);    //Layer:0                                 2bits
-    szAdtsHeader[1] |= 1;           //protection absent:1                     1bit
-
-    szAdtsHeader[2] = (audio_object_type - 1)<<6;            //profile:audio_object_type - 1                      2bits
-    szAdtsHeader[2] |= (sampling_frequency_index & 0x0f)<<2; //sampling frequency index:sampling_frequency_index  4bits
-    szAdtsHeader[2] |= (0 << 1);                             //private bit:0                                      1bit
-    szAdtsHeader[2] |= (channel_config & 0x04)>>2;           //channel configuration:channel_config               高1bit
-
-    szAdtsHeader[3] = (channel_config & 0x03)<<6;     //channel configuration:channel_config      低2bits
-    szAdtsHeader[3] |= (0 << 5);                      //original：0                               1bit
-    szAdtsHeader[3] |= (0 << 4);                      //home：0                                   1bit
-    szAdtsHeader[3] |= (0 << 3);                      //copyright id bit：0                       1bit
-    szAdtsHeader[3] |= (0 << 2);                      //copyright id start：0                     1bit
-    szAdtsHeader[3] |= ((adtsLen & 0x1800) >> 11);           //frame length：value   高2bits
-
-    szAdtsHeader[4] = (uint8_t)((adtsLen & 0x7f8) >> 3);     //frame length:value    中间8bits
-    szAdtsHeader[5] = (uint8_t)((adtsLen & 0x7) << 5);       //frame length:value    低3bits
-    szAdtsHeader[5] |= 0x1f;                                 //buffer fullness:0x7ff 高5bits
-    szAdtsHeader[6] = 0xfc;
-}
-
 - (void)testExtractAudioData {
     ///API  av_init_packet   av_find_best_stream av_read_frame  av_packet_unref
     
@@ -91,37 +56,66 @@ void adts_header(char *szAdtsHeader, int dataLen){
     
     int audio_index = av_find_best_stream(fmt_ctx, AVMEDIA_TYPE_AUDIO, -1, -1, NULL, 0);
     XCTAssert(audio_index >= 0, "find best stream failure: %s",av_err2str(ret));
-    AVStream* audio_stream =  fmt_ctx->streams[audio_index];
-    const AVCodecDescriptor* desc = avcodec_descriptor_get(audio_stream->codecpar->codec_id);
+    AVStream* in_audio_stream =  fmt_ctx->streams[audio_index];
+    const AVCodecDescriptor* desc = avcodec_descriptor_get(in_audio_stream->codecpar->codec_id);
     NSLog(@"audio codec name: %s",desc->name);
     
     long long millSeconds =  [[NSDate date] timeIntervalSince1970] * 1000;
     NSString* destPath = [NSTemporaryDirectory() stringByAppendingFormat:@"%lld.%s",millSeconds,desc->name];
     NSLog(@"destPath = %@",destPath);
     
+    AVFormatContext* out_fmt_ctx = avformat_alloc_context();
+    AVOutputFormat* out_fmt = av_guess_format(NULL, destPath.UTF8String, NULL);
+    XCTAssert(out_fmt);
+    out_fmt_ctx->oformat = out_fmt;
+    AVStream* out_stream = avformat_new_stream(out_fmt_ctx, NULL);
+    XCTAssert(out_stream);
+
+    int error_code = avcodec_parameters_copy(out_stream->codecpar, in_audio_stream->codecpar);
+    XCTAssert(error_code >= 0,
+              @"Failed to copy codec parameter, %d(%s)\n",error_code,av_err2str(error_code));
+    out_stream->codecpar->codec_tag = 0;
+    
+    
+    
+    error_code = avio_open(&out_fmt_ctx->pb, destPath.UTF8String, AVIO_FLAG_WRITE);
+    XCTAssert(error_code >= 0, @"Can't open file %d(%s)",error_code,av_err2str(error_code));
+    
+    av_dump_format(out_fmt_ctx, 0, destPath.UTF8String, 1);
+    
+    error_code = avformat_write_header(out_fmt_ctx, NULL);
+    XCTAssert(error_code >= 0,@"occured error when writing header %s",av_err2str(error_code));
+    
     AVPacket pkt;
     av_init_packet(&pkt);
+    pkt.data = NULL;
+    pkt.size = 0;
     
-    NSURL* destURL = [NSURL fileURLWithPath:destPath];
-    NSOutputStream* audio_output = [[NSOutputStream alloc] initWithURL:destURL append:YES];
-    [audio_output open];
     while (av_read_frame(fmt_ctx, &pkt) >= 0) {
         if (pkt.stream_index == audio_index) {
-            char adts_header_buf[ADTS_HEADER_LEN] = {};
-            adts_header(adts_header_buf, pkt.size);
-            [audio_output write:(const uint8_t*)adts_header_buf maxLength:ADTS_HEADER_LEN];
+            pkt.pts = av_rescale_q_rnd(pkt.pts,
+                                       in_audio_stream->time_base,
+                                       out_stream->time_base,
+                                       (AV_ROUND_NEAR_INF|AV_ROUND_PASS_MINMAX));
+            pkt.dts = pkt.pts;
+            pkt.duration = av_rescale_q(pkt.duration,
+                                        in_audio_stream->time_base,
+                                        out_stream->time_base);
             
-            NSInteger len = [audio_output write:pkt.data maxLength:pkt.size];
-            if (len != pkt.size) {
-                XCTAssert(false);
-                NSLog(@"write failed");
-            }
+            pkt.pos = -1;
+            pkt.stream_index = 0;
+            av_interleaved_write_frame(out_fmt_ctx, &pkt);
         }
         av_packet_unref(&pkt);
     }
-    [audio_output close];
-    avformat_close_input(&fmt_ctx);
     
+    av_write_trailer(out_fmt_ctx);
+    
+    avformat_close_input(&fmt_ctx);
+    avformat_free_context(out_fmt_ctx);
+    
+    avio_close(out_fmt_ctx->pb);
+
 }
 
 
