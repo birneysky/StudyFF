@@ -358,9 +358,9 @@
 @c @set have-opencl-vaapi-intel-media no
 @set have-perl yes
 @set have-pod2man yes
-@set have-texi2html yes
+@c @set have-texi2html no
 @c @set config-doc no
-@set config-htmlpages yes
+@c @set config-htmlpages no
 @set config-manpages yes
 @set config-podpages yes
 @set config-txtpages yes
@@ -538,7 +538,7 @@
 @set config-lsp yes
 @c @set config-lzo no
 @set config-mdct yes
-@c @set config-pixelutils no
+@set config-pixelutils yes
 @set config-network yes
 @set config-rdft yes
 @c @set config-autodetect no
@@ -1514,375 +1514,375 @@
 @c @set config-sndio-outdev no
 @c @set config-v4l2-outdev no
 @c @set config-xv-outdev no
-@c @set config-abench-filter no
-@c @set config-acompressor-filter no
-@c @set config-acontrast-filter no
-@c @set config-acopy-filter no
-@c @set config-acrossfade-filter no
-@c @set config-acrusher-filter no
-@c @set config-adelay-filter no
-@c @set config-aecho-filter no
-@c @set config-aemphasis-filter no
-@c @set config-aeval-filter no
-@c @set config-afade-filter no
-@c @set config-afftfilt-filter no
-@c @set config-afir-filter no
-@c @set config-aformat-filter no
-@c @set config-agate-filter no
-@c @set config-aiir-filter no
-@c @set config-ainterleave-filter no
-@c @set config-alimiter-filter no
-@c @set config-allpass-filter no
-@c @set config-aloop-filter no
-@c @set config-amerge-filter no
-@c @set config-ametadata-filter no
-@c @set config-amix-filter no
-@c @set config-anequalizer-filter no
-@c @set config-anull-filter no
-@c @set config-apad-filter no
-@c @set config-aperms-filter no
-@c @set config-aphaser-filter no
-@c @set config-apulsator-filter no
-@c @set config-arealtime-filter no
+@set config-abench-filter yes
+@set config-acompressor-filter yes
+@set config-acontrast-filter yes
+@set config-acopy-filter yes
+@set config-acrossfade-filter yes
+@set config-acrusher-filter yes
+@set config-adelay-filter yes
+@set config-aecho-filter yes
+@set config-aemphasis-filter yes
+@set config-aeval-filter yes
+@set config-afade-filter yes
+@set config-afftfilt-filter yes
+@set config-afir-filter yes
+@set config-aformat-filter yes
+@set config-agate-filter yes
+@set config-aiir-filter yes
+@set config-ainterleave-filter yes
+@set config-alimiter-filter yes
+@set config-allpass-filter yes
+@set config-aloop-filter yes
+@set config-amerge-filter yes
+@set config-ametadata-filter yes
+@set config-amix-filter yes
+@set config-anequalizer-filter yes
+@set config-anull-filter yes
+@set config-apad-filter yes
+@set config-aperms-filter yes
+@set config-aphaser-filter yes
+@set config-apulsator-filter yes
+@set config-arealtime-filter yes
 @set config-aresample-filter yes
-@c @set config-areverse-filter no
-@c @set config-aselect-filter no
-@c @set config-asendcmd-filter no
-@c @set config-asetnsamples-filter no
-@c @set config-asetpts-filter no
-@c @set config-asetrate-filter no
-@c @set config-asettb-filter no
-@c @set config-ashowinfo-filter no
-@c @set config-asidedata-filter no
-@c @set config-asplit-filter no
-@c @set config-astats-filter no
-@c @set config-astreamselect-filter no
-@c @set config-atempo-filter no
-@c @set config-atrim-filter no
+@set config-areverse-filter yes
+@set config-aselect-filter yes
+@set config-asendcmd-filter yes
+@set config-asetnsamples-filter yes
+@set config-asetpts-filter yes
+@set config-asetrate-filter yes
+@set config-asettb-filter yes
+@set config-ashowinfo-filter yes
+@set config-asidedata-filter yes
+@set config-asplit-filter yes
+@set config-astats-filter yes
+@set config-astreamselect-filter yes
+@set config-atempo-filter yes
+@set config-atrim-filter yes
 @c @set config-azmq-filter no
-@c @set config-bandpass-filter no
-@c @set config-bandreject-filter no
-@c @set config-bass-filter no
-@c @set config-biquad-filter no
+@set config-bandpass-filter yes
+@set config-bandreject-filter yes
+@set config-bass-filter yes
+@set config-biquad-filter yes
 @c @set config-bs2b-filter no
-@c @set config-channelmap-filter no
-@c @set config-channelsplit-filter no
-@c @set config-chorus-filter no
-@c @set config-compand-filter no
-@c @set config-compensationdelay-filter no
-@c @set config-crossfeed-filter no
-@c @set config-crystalizer-filter no
-@c @set config-dcshift-filter no
-@c @set config-drmeter-filter no
-@c @set config-dynaudnorm-filter no
-@c @set config-earwax-filter no
-@c @set config-ebur128-filter no
-@c @set config-equalizer-filter no
-@c @set config-extrastereo-filter no
-@c @set config-firequalizer-filter no
-@c @set config-flanger-filter no
-@c @set config-haas-filter no
-@c @set config-hdcd-filter no
-@c @set config-headphone-filter no
-@c @set config-highpass-filter no
-@c @set config-join-filter no
+@set config-channelmap-filter yes
+@set config-channelsplit-filter yes
+@set config-chorus-filter yes
+@set config-compand-filter yes
+@set config-compensationdelay-filter yes
+@set config-crossfeed-filter yes
+@set config-crystalizer-filter yes
+@set config-dcshift-filter yes
+@set config-drmeter-filter yes
+@set config-dynaudnorm-filter yes
+@set config-earwax-filter yes
+@set config-ebur128-filter yes
+@set config-equalizer-filter yes
+@set config-extrastereo-filter yes
+@set config-firequalizer-filter yes
+@set config-flanger-filter yes
+@set config-haas-filter yes
+@set config-hdcd-filter yes
+@set config-headphone-filter yes
+@set config-highpass-filter yes
+@set config-join-filter yes
 @c @set config-ladspa-filter no
-@c @set config-loudnorm-filter no
-@c @set config-lowpass-filter no
+@set config-loudnorm-filter yes
+@set config-lowpass-filter yes
 @c @set config-lv2-filter no
-@c @set config-mcompand-filter no
-@c @set config-pan-filter no
-@c @set config-replaygain-filter no
+@set config-mcompand-filter yes
+@set config-pan-filter yes
+@set config-replaygain-filter yes
 @c @set config-resample-filter no
 @c @set config-rubberband-filter no
-@c @set config-sidechaincompress-filter no
-@c @set config-sidechaingate-filter no
-@c @set config-silencedetect-filter no
-@c @set config-silenceremove-filter no
+@set config-sidechaincompress-filter yes
+@set config-sidechaingate-filter yes
+@set config-silencedetect-filter yes
+@set config-silenceremove-filter yes
 @c @set config-sofalizer-filter no
-@c @set config-stereotools-filter no
-@c @set config-stereowiden-filter no
-@c @set config-superequalizer-filter no
-@c @set config-surround-filter no
-@c @set config-treble-filter no
-@c @set config-tremolo-filter no
-@c @set config-vibrato-filter no
-@c @set config-volume-filter no
-@c @set config-volumedetect-filter no
-@c @set config-aevalsrc-filter no
-@c @set config-anoisesrc-filter no
-@c @set config-anullsrc-filter no
+@set config-stereotools-filter yes
+@set config-stereowiden-filter yes
+@set config-superequalizer-filter yes
+@set config-surround-filter yes
+@set config-treble-filter yes
+@set config-tremolo-filter yes
+@set config-vibrato-filter yes
+@set config-volume-filter yes
+@set config-volumedetect-filter yes
+@set config-aevalsrc-filter yes
+@set config-anoisesrc-filter yes
+@set config-anullsrc-filter yes
 @c @set config-flite-filter no
-@c @set config-hilbert-filter no
-@c @set config-sine-filter no
-@c @set config-anullsink-filter no
-@c @set config-alphaextract-filter no
-@c @set config-alphamerge-filter no
+@set config-hilbert-filter yes
+@set config-sine-filter yes
+@set config-anullsink-filter yes
+@set config-alphaextract-filter yes
+@set config-alphamerge-filter yes
 @c @set config-ass-filter no
-@c @set config-atadenoise-filter no
-@c @set config-avgblur-filter no
+@set config-atadenoise-filter yes
+@set config-avgblur-filter yes
 @c @set config-avgblur-opencl-filter no
-@c @set config-bbox-filter no
-@c @set config-bench-filter no
-@c @set config-bitplanenoise-filter no
-@c @set config-blackdetect-filter no
-@c @set config-blackframe-filter no
-@c @set config-blend-filter no
-@c @set config-boxblur-filter no
-@c @set config-bwdif-filter no
-@c @set config-chromakey-filter no
-@c @set config-ciescope-filter no
-@c @set config-codecview-filter no
-@c @set config-colorbalance-filter no
-@c @set config-colorchannelmixer-filter no
-@c @set config-colorkey-filter no
-@c @set config-colorlevels-filter no
-@c @set config-colormatrix-filter no
-@c @set config-colorspace-filter no
-@c @set config-convolution-filter no
+@set config-bbox-filter yes
+@set config-bench-filter yes
+@set config-bitplanenoise-filter yes
+@set config-blackdetect-filter yes
+@set config-blackframe-filter yes
+@set config-blend-filter yes
+@set config-boxblur-filter yes
+@set config-bwdif-filter yes
+@set config-chromakey-filter yes
+@set config-ciescope-filter yes
+@set config-codecview-filter yes
+@set config-colorbalance-filter yes
+@set config-colorchannelmixer-filter yes
+@set config-colorkey-filter yes
+@set config-colorlevels-filter yes
+@set config-colormatrix-filter yes
+@set config-colorspace-filter yes
+@set config-convolution-filter yes
 @c @set config-convolution-opencl-filter no
-@c @set config-convolve-filter no
-@c @set config-copy-filter no
+@set config-convolve-filter yes
+@set config-copy-filter yes
 @c @set config-coreimage-filter no
-@c @set config-cover-rect-filter no
-@c @set config-crop-filter no
-@c @set config-cropdetect-filter no
-@c @set config-curves-filter no
-@c @set config-datascope-filter no
-@c @set config-dctdnoiz-filter no
-@c @set config-deband-filter no
-@c @set config-decimate-filter no
-@c @set config-deconvolve-filter no
-@c @set config-deflate-filter no
-@c @set config-deflicker-filter no
+@set config-cover-rect-filter yes
+@set config-crop-filter yes
+@set config-cropdetect-filter yes
+@set config-curves-filter yes
+@set config-datascope-filter yes
+@set config-dctdnoiz-filter yes
+@set config-deband-filter yes
+@set config-decimate-filter yes
+@set config-deconvolve-filter yes
+@set config-deflate-filter yes
+@set config-deflicker-filter yes
 @c @set config-deinterlace-qsv-filter no
 @c @set config-deinterlace-vaapi-filter no
-@c @set config-dejudder-filter no
-@c @set config-delogo-filter no
+@set config-dejudder-filter yes
+@set config-delogo-filter yes
 @c @set config-denoise-vaapi-filter no
-@c @set config-deshake-filter no
-@c @set config-despill-filter no
-@c @set config-detelecine-filter no
-@c @set config-dilation-filter no
-@c @set config-displace-filter no
-@c @set config-doubleweave-filter no
-@c @set config-drawbox-filter no
-@c @set config-drawgraph-filter no
-@c @set config-drawgrid-filter no
+@set config-deshake-filter yes
+@set config-despill-filter yes
+@set config-detelecine-filter yes
+@set config-dilation-filter yes
+@set config-displace-filter yes
+@set config-doubleweave-filter yes
+@set config-drawbox-filter yes
+@set config-drawgraph-filter yes
+@set config-drawgrid-filter yes
 @c @set config-drawtext-filter no
-@c @set config-edgedetect-filter no
-@c @set config-elbg-filter no
-@c @set config-entropy-filter no
-@c @set config-eq-filter no
-@c @set config-erosion-filter no
-@c @set config-extractplanes-filter no
-@c @set config-fade-filter no
-@c @set config-fftfilt-filter no
-@c @set config-field-filter no
-@c @set config-fieldhint-filter no
-@c @set config-fieldmatch-filter no
-@c @set config-fieldorder-filter no
-@c @set config-fillborders-filter no
-@c @set config-find-rect-filter no
-@c @set config-floodfill-filter no
-@c @set config-format-filter no
-@c @set config-fps-filter no
-@c @set config-framepack-filter no
-@c @set config-framerate-filter no
-@c @set config-framestep-filter no
+@set config-edgedetect-filter yes
+@set config-elbg-filter yes
+@set config-entropy-filter yes
+@set config-eq-filter yes
+@set config-erosion-filter yes
+@set config-extractplanes-filter yes
+@set config-fade-filter yes
+@set config-fftfilt-filter yes
+@set config-field-filter yes
+@set config-fieldhint-filter yes
+@set config-fieldmatch-filter yes
+@set config-fieldorder-filter yes
+@set config-fillborders-filter yes
+@set config-find-rect-filter yes
+@set config-floodfill-filter yes
+@set config-format-filter yes
+@set config-fps-filter yes
+@set config-framepack-filter yes
+@set config-framerate-filter yes
+@set config-framestep-filter yes
 @c @set config-frei0r-filter no
-@c @set config-fspp-filter no
-@c @set config-gblur-filter no
-@c @set config-geq-filter no
-@c @set config-gradfun-filter no
-@c @set config-haldclut-filter no
-@c @set config-hflip-filter no
-@c @set config-histeq-filter no
-@c @set config-histogram-filter no
-@c @set config-hqdn3d-filter no
-@c @set config-hqx-filter no
-@c @set config-hstack-filter no
-@c @set config-hue-filter no
-@c @set config-hwdownload-filter no
-@c @set config-hwmap-filter no
-@c @set config-hwupload-filter no
+@set config-fspp-filter yes
+@set config-gblur-filter yes
+@set config-geq-filter yes
+@set config-gradfun-filter yes
+@set config-haldclut-filter yes
+@set config-hflip-filter yes
+@set config-histeq-filter yes
+@set config-histogram-filter yes
+@set config-hqdn3d-filter yes
+@set config-hqx-filter yes
+@set config-hstack-filter yes
+@set config-hue-filter yes
+@set config-hwdownload-filter yes
+@set config-hwmap-filter yes
+@set config-hwupload-filter yes
 @c @set config-hwupload-cuda-filter no
-@c @set config-hysteresis-filter no
-@c @set config-idet-filter no
-@c @set config-il-filter no
-@c @set config-inflate-filter no
-@c @set config-interlace-filter no
-@c @set config-interleave-filter no
-@c @set config-kerndeint-filter no
-@c @set config-lenscorrection-filter no
+@set config-hysteresis-filter yes
+@set config-idet-filter yes
+@set config-il-filter yes
+@set config-inflate-filter yes
+@set config-interlace-filter yes
+@set config-interleave-filter yes
+@set config-kerndeint-filter yes
+@set config-lenscorrection-filter yes
 @c @set config-libvmaf-filter no
-@c @set config-limiter-filter no
-@c @set config-loop-filter no
-@c @set config-lumakey-filter no
-@c @set config-lut-filter no
-@c @set config-lut2-filter no
-@c @set config-lut3d-filter no
-@c @set config-lutrgb-filter no
-@c @set config-lutyuv-filter no
-@c @set config-maskedclamp-filter no
-@c @set config-maskedmerge-filter no
-@c @set config-mcdeint-filter no
-@c @set config-mergeplanes-filter no
-@c @set config-mestimate-filter no
-@c @set config-metadata-filter no
-@c @set config-midequalizer-filter no
-@c @set config-minterpolate-filter no
-@c @set config-mix-filter no
-@c @set config-mpdecimate-filter no
-@c @set config-negate-filter no
-@c @set config-nlmeans-filter no
-@c @set config-nnedi-filter no
-@c @set config-noformat-filter no
-@c @set config-noise-filter no
-@c @set config-normalize-filter no
-@c @set config-null-filter no
+@set config-limiter-filter yes
+@set config-loop-filter yes
+@set config-lumakey-filter yes
+@set config-lut-filter yes
+@set config-lut2-filter yes
+@set config-lut3d-filter yes
+@set config-lutrgb-filter yes
+@set config-lutyuv-filter yes
+@set config-maskedclamp-filter yes
+@set config-maskedmerge-filter yes
+@set config-mcdeint-filter yes
+@set config-mergeplanes-filter yes
+@set config-mestimate-filter yes
+@set config-metadata-filter yes
+@set config-midequalizer-filter yes
+@set config-minterpolate-filter yes
+@set config-mix-filter yes
+@set config-mpdecimate-filter yes
+@set config-negate-filter yes
+@set config-nlmeans-filter yes
+@set config-nnedi-filter yes
+@set config-noformat-filter yes
+@set config-noise-filter yes
+@set config-normalize-filter yes
+@set config-null-filter yes
 @c @set config-ocr-filter no
 @c @set config-ocv-filter no
-@c @set config-oscilloscope-filter no
-@c @set config-overlay-filter no
+@set config-oscilloscope-filter yes
+@set config-overlay-filter yes
 @c @set config-overlay-opencl-filter no
 @c @set config-overlay-qsv-filter no
-@c @set config-owdenoise-filter no
-@c @set config-pad-filter no
-@c @set config-palettegen-filter no
-@c @set config-paletteuse-filter no
-@c @set config-perms-filter no
-@c @set config-perspective-filter no
-@c @set config-phase-filter no
-@c @set config-pixdesctest-filter no
-@c @set config-pixscope-filter no
+@set config-owdenoise-filter yes
+@set config-pad-filter yes
+@set config-palettegen-filter yes
+@set config-paletteuse-filter yes
+@set config-perms-filter yes
+@set config-perspective-filter yes
+@set config-phase-filter yes
+@set config-pixdesctest-filter yes
+@set config-pixscope-filter yes
 @c @set config-pp-filter no
-@c @set config-pp7-filter no
-@c @set config-premultiply-filter no
-@c @set config-prewitt-filter no
+@set config-pp7-filter yes
+@set config-premultiply-filter yes
+@set config-prewitt-filter yes
 @c @set config-procamp-vaapi-filter no
 @c @set config-program-opencl-filter no
-@c @set config-pseudocolor-filter no
-@c @set config-psnr-filter no
-@c @set config-pullup-filter no
-@c @set config-qp-filter no
-@c @set config-random-filter no
-@c @set config-readeia608-filter no
-@c @set config-readvitc-filter no
-@c @set config-realtime-filter no
-@c @set config-remap-filter no
-@c @set config-removegrain-filter no
-@c @set config-removelogo-filter no
-@c @set config-repeatfields-filter no
-@c @set config-reverse-filter no
-@c @set config-roberts-filter no
-@c @set config-rotate-filter no
-@c @set config-sab-filter no
-@c @set config-scale-filter no
+@set config-pseudocolor-filter yes
+@set config-psnr-filter yes
+@set config-pullup-filter yes
+@set config-qp-filter yes
+@set config-random-filter yes
+@set config-readeia608-filter yes
+@set config-readvitc-filter yes
+@set config-realtime-filter yes
+@set config-remap-filter yes
+@set config-removegrain-filter yes
+@set config-removelogo-filter yes
+@set config-repeatfields-filter yes
+@set config-reverse-filter yes
+@set config-roberts-filter yes
+@set config-rotate-filter yes
+@set config-sab-filter yes
+@set config-scale-filter yes
 @c @set config-scale-cuda-filter no
 @c @set config-scale-npp-filter no
 @c @set config-scale-qsv-filter no
 @c @set config-scale-vaapi-filter no
-@c @set config-scale2ref-filter no
-@c @set config-select-filter no
-@c @set config-selectivecolor-filter no
-@c @set config-sendcmd-filter no
-@c @set config-separatefields-filter no
-@c @set config-setdar-filter no
-@c @set config-setfield-filter no
-@c @set config-setpts-filter no
-@c @set config-setrange-filter no
-@c @set config-setsar-filter no
-@c @set config-settb-filter no
+@set config-scale2ref-filter yes
+@set config-select-filter yes
+@set config-selectivecolor-filter yes
+@set config-sendcmd-filter yes
+@set config-separatefields-filter yes
+@set config-setdar-filter yes
+@set config-setfield-filter yes
+@set config-setpts-filter yes
+@set config-setrange-filter yes
+@set config-setsar-filter yes
+@set config-settb-filter yes
 @c @set config-sharpness-vaapi-filter no
-@c @set config-showinfo-filter no
-@c @set config-showpalette-filter no
-@c @set config-shuffleframes-filter no
-@c @set config-shuffleplanes-filter no
-@c @set config-sidedata-filter no
-@c @set config-signalstats-filter no
-@c @set config-signature-filter no
-@c @set config-smartblur-filter no
-@c @set config-sobel-filter no
-@c @set config-split-filter no
-@c @set config-spp-filter no
-@c @set config-ssim-filter no
-@c @set config-stereo3d-filter no
-@c @set config-streamselect-filter no
+@set config-showinfo-filter yes
+@set config-showpalette-filter yes
+@set config-shuffleframes-filter yes
+@set config-shuffleplanes-filter yes
+@set config-sidedata-filter yes
+@set config-signalstats-filter yes
+@set config-signature-filter yes
+@set config-smartblur-filter yes
+@set config-sobel-filter yes
+@set config-split-filter yes
+@set config-spp-filter yes
+@set config-ssim-filter yes
+@set config-stereo3d-filter yes
+@set config-streamselect-filter yes
 @c @set config-subtitles-filter no
-@c @set config-super2xsai-filter no
-@c @set config-swaprect-filter no
-@c @set config-swapuv-filter no
-@c @set config-tblend-filter no
-@c @set config-telecine-filter no
-@c @set config-threshold-filter no
-@c @set config-thumbnail-filter no
+@set config-super2xsai-filter yes
+@set config-swaprect-filter yes
+@set config-swapuv-filter yes
+@set config-tblend-filter yes
+@set config-telecine-filter yes
+@set config-threshold-filter yes
+@set config-thumbnail-filter yes
 @c @set config-thumbnail-cuda-filter no
-@c @set config-tile-filter no
-@c @set config-tinterlace-filter no
-@c @set config-tlut2-filter no
-@c @set config-tonemap-filter no
-@c @set config-transpose-filter no
-@c @set config-trim-filter no
-@c @set config-unpremultiply-filter no
-@c @set config-unsharp-filter no
+@set config-tile-filter yes
+@set config-tinterlace-filter yes
+@set config-tlut2-filter yes
+@set config-tonemap-filter yes
+@set config-transpose-filter yes
+@set config-trim-filter yes
+@set config-unpremultiply-filter yes
+@set config-unsharp-filter yes
 @c @set config-unsharp-opencl-filter no
-@c @set config-uspp-filter no
-@c @set config-vaguedenoiser-filter no
-@c @set config-vectorscope-filter no
-@c @set config-vflip-filter no
-@c @set config-vfrdet-filter no
+@set config-uspp-filter yes
+@set config-vaguedenoiser-filter yes
+@set config-vectorscope-filter yes
+@set config-vflip-filter yes
+@set config-vfrdet-filter yes
 @c @set config-vidstabdetect-filter no
 @c @set config-vidstabtransform-filter no
-@c @set config-vignette-filter no
-@c @set config-vmafmotion-filter no
+@set config-vignette-filter yes
+@set config-vmafmotion-filter yes
 @c @set config-vpp-qsv-filter no
-@c @set config-vstack-filter no
-@c @set config-w3fdif-filter no
-@c @set config-waveform-filter no
-@c @set config-weave-filter no
-@c @set config-xbr-filter no
-@c @set config-yadif-filter no
+@set config-vstack-filter yes
+@set config-w3fdif-filter yes
+@set config-waveform-filter yes
+@set config-weave-filter yes
+@set config-xbr-filter yes
+@set config-yadif-filter yes
 @c @set config-zmq-filter no
-@c @set config-zoompan-filter no
+@set config-zoompan-filter yes
 @c @set config-zscale-filter no
-@c @set config-allrgb-filter no
-@c @set config-allyuv-filter no
-@c @set config-cellauto-filter no
-@c @set config-color-filter no
+@set config-allrgb-filter yes
+@set config-allyuv-filter yes
+@set config-cellauto-filter yes
+@set config-color-filter yes
 @c @set config-coreimagesrc-filter no
 @c @set config-frei0r-src-filter no
-@c @set config-haldclutsrc-filter no
-@c @set config-life-filter no
-@c @set config-mandelbrot-filter no
-@c @set config-mptestsrc-filter no
-@c @set config-nullsrc-filter no
+@set config-haldclutsrc-filter yes
+@set config-life-filter yes
+@set config-mandelbrot-filter yes
+@set config-mptestsrc-filter yes
+@set config-nullsrc-filter yes
 @c @set config-openclsrc-filter no
-@c @set config-rgbtestsrc-filter no
-@c @set config-smptebars-filter no
-@c @set config-smptehdbars-filter no
-@c @set config-testsrc-filter no
-@c @set config-testsrc2-filter no
-@c @set config-yuvtestsrc-filter no
-@c @set config-nullsink-filter no
-@c @set config-abitscope-filter no
-@c @set config-adrawgraph-filter no
-@c @set config-ahistogram-filter no
-@c @set config-aphasemeter-filter no
-@c @set config-avectorscope-filter no
-@c @set config-concat-filter no
-@c @set config-showcqt-filter no
-@c @set config-showfreqs-filter no
-@c @set config-showspectrum-filter no
-@c @set config-showspectrumpic-filter no
-@c @set config-showvolume-filter no
-@c @set config-showwaves-filter no
-@c @set config-showwavespic-filter no
-@c @set config-spectrumsynth-filter no
-@c @set config-amovie-filter no
-@c @set config-movie-filter no
-@c @set config-afifo-filter no
-@c @set config-fifo-filter no
+@set config-rgbtestsrc-filter yes
+@set config-smptebars-filter yes
+@set config-smptehdbars-filter yes
+@set config-testsrc-filter yes
+@set config-testsrc2-filter yes
+@set config-yuvtestsrc-filter yes
+@set config-nullsink-filter yes
+@set config-abitscope-filter yes
+@set config-adrawgraph-filter yes
+@set config-ahistogram-filter yes
+@set config-aphasemeter-filter yes
+@set config-avectorscope-filter yes
+@set config-concat-filter yes
+@set config-showcqt-filter yes
+@set config-showfreqs-filter yes
+@set config-showspectrum-filter yes
+@set config-showspectrumpic-filter yes
+@set config-showvolume-filter yes
+@set config-showwaves-filter yes
+@set config-showwavespic-filter yes
+@set config-spectrumsynth-filter yes
+@set config-amovie-filter yes
+@set config-movie-filter yes
+@set config-afifo-filter yes
+@set config-fifo-filter yes
 @c @set config-aa-demuxer no
 @set config-aac-demuxer yes
 @c @set config-ac3-demuxer no

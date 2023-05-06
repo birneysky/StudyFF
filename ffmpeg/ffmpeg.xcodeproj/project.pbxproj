@@ -46,6 +46,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		327EC2852A0623C9000EDAA1 /* build_ffmpeg.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = build_ffmpeg.sh; sourceTree = "<group>"; };
 		742175EE2369D1A700BE7C5E /* FFmpegTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FFmpegTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		742175F02369D1A700BE7C5E /* FFmpegTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FFmpegTests.m; sourceTree = "<group>"; };
 		742175F22369D1A700BE7C5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -107,6 +108,7 @@
 		74FE725820FE4F87005F024C = {
 			isa = PBXGroup;
 			children = (
+				327EC2852A0623C9000EDAA1 /* build_ffmpeg.sh */,
 				74FE726320FE4F87005F024C /* ffmpeg */,
 				742175EF2369D1A700BE7C5E /* FFmpegTests */,
 				74FE726220FE4F87005F024C /* Products */,

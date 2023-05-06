@@ -25,6 +25,7 @@ CONFIGURE_FLAGS="--enable-gpl \
 --disable-indevs \
 --disable-outdevs \
 --enable-cross-compile \
+--enable-filters
 --enable-filter=aresample \
 --enable-bsf=aac_adtstoasc \
 --enable-small \

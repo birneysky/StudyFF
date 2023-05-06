@@ -25,6 +25,7 @@ CONFIGURE_FLAGS="--enable-gpl \
 --disable-indevs \
 --disable-outdevs \
 --enable-cross-compile \
+--enable-filters \
 --enable-filter=aresample \
 --enable-bsf=aac_adtstoasc \
 --enable-small \
@@ -41,6 +42,7 @@ CONFIGURE_FLAGS="--enable-gpl \
 --enable-encoder=pcm_s16le \
 --enable-encoder=aac \
 --enable-encoder=mp2 \
+--enable-encoder=h264 \
 --disable-decoders \
 --enable-decoder=aac \
 --enable-decoder=mp3 \
