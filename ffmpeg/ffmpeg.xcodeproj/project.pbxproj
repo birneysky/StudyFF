@@ -282,6 +282,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 52L4X5R86L;
 				HEADER_SEARCH_PATHS = "${PROJECT_DIR}/lib";
 				INFOPLIST_FILE = FFmpegTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
@@ -303,6 +304,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 52L4X5R86L;
 				HEADER_SEARCH_PATHS = "${PROJECT_DIR}/lib";
 				INFOPLIST_FILE = FFmpegTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		32D8A3EE2A05CCCA008E060F /* 123456.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 32D8A3EC2A05CCCA008E060F /* 123456.mp4 */; };
+		32D8A3EF2A05CCCA008E060F /* trailer.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 32D8A3ED2A05CCCA008E060F /* trailer.mp4 */; };
 		74FE721720FE43A3005F024C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 74FE721620FE43A3005F024C /* AppDelegate.m */; };
 		74FE721A20FE43A4005F024C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74FE721920FE43A4005F024C /* ViewController.m */; };
 		74FE721D20FE43A4005F024C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74FE721B20FE43A4005F024C /* Main.storyboard */; };
@@ -41,6 +43,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		32D8A3EC2A05CCCA008E060F /* 123456.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 123456.mp4; sourceTree = "<group>"; };
+		32D8A3ED2A05CCCA008E060F /* trailer.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = trailer.mp4; sourceTree = "<group>"; };
 		74FE721220FE43A3005F024C /* ApiDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ApiDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74FE721520FE43A3005F024C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		74FE721620FE43A3005F024C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -125,6 +129,8 @@
 				74FE721820FE43A3005F024C /* ViewController.h */,
 				74FE721920FE43A4005F024C /* ViewController.m */,
 				74FE72F320FF8C02005F024C /* test.MP4 */,
+				32D8A3EC2A05CCCA008E060F /* 123456.mp4 */,
+				32D8A3ED2A05CCCA008E060F /* trailer.mp4 */,
 				74FE721B20FE43A4005F024C /* Main.storyboard */,
 				74FE721E20FE43A7005F024C /* Assets.xcassets */,
 				74FE722020FE43A7005F024C /* LaunchScreen.storyboard */,
@@ -268,10 +274,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32D8A3EE2A05CCCA008E060F /* 123456.mp4 in Resources */,
 				74FE722220FE43A7005F024C /* LaunchScreen.storyboard in Resources */,
 				74FE721F20FE43A7005F024C /* Assets.xcassets in Resources */,
 				74FE721D20FE43A4005F024C /* Main.storyboard in Resources */,
 				74FE72F420FF8C02005F024C /* test.MP4 in Resources */,
+				32D8A3EF2A05CCCA008E060F /* trailer.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -468,7 +476,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6K45GAZW62;
+				DEVELOPMENT_TEAM = 52L4X5R86L;
 				FRAMEWORK_SEARCH_PATHS = "";
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../ffmpeg/lib";
 				INFOPLIST_FILE = ApiDemo/Info.plist;
@@ -488,7 +496,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6K45GAZW62;
+				DEVELOPMENT_TEAM = 52L4X5R86L;
 				FRAMEWORK_SEARCH_PATHS = "";
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../ffmpeg/lib";
 				INFOPLIST_FILE = ApiDemo/Info.plist;

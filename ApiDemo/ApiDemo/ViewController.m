@@ -13,6 +13,15 @@
 #include <libavutil/pixdesc.h>
 #include <libavutil/imgutils.h>
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <libavcodec/avcodec.h>
+#include <libavformat/avformat.h>
+#include <libavfilter/avfilter.h>
+#include <libavfilter/buffersink.h>
+#include <libavfilter/buffersrc.h>
+
 
 int pcmf32le_to_wave(const char *pcmpath, int channels, int sample_rate, const char *wavepath);
 
@@ -62,7 +71,159 @@ static int interruptCallBack(void* arg) {
     [super viewDidLoad];
     [self.videoOutput open];
     [self.audioOutput open];
+    [self testFilter];
+}
+
+void testfilters(void) {
+    AVFormatContext *ifmt_ctx1, *ifmt_ctx2;
+    AVOutputFormat *ofmt = NULL;
+    AVStream *out_stream = NULL;
+    AVCodecContext *ofmt_ctx_codec = NULL;
+    AVCodec *video_codec = NULL;
+    AVFilterContext *buffersink_ctx = NULL;
+    AVFilterContext *buffersrc_ctx = NULL;
+    AVFilterGraph *filter_graph = NULL;
+    int video_stream_index1 = -1;
+    int video_stream_index2 = -1;
+    int ret;
+    int frames = 0;
     
+    
+    // 打开输入文件1
+    NSString* path1 = [[NSBundle mainBundle] pathForResource:@"trailer" ofType:@"mp4"];
+    if ((ret = avformat_open_input(&ifmt_ctx1, path1.UTF8String, NULL, NULL)) < 0) {
+        printf("Cannot open input file1\n");
+        return;
+    }
+
+    // 查找流信息
+    if ((ret = avformat_find_stream_info(ifmt_ctx1, NULL)) < 0) {
+        printf("Cannot find input file1 stream information\n");
+        return;
+    }
+
+    // 打开输入文件2
+    NSString* path2 = [[NSBundle mainBundle] pathForResource:@"trailer" ofType:@"mp4"];
+    if ((ret = avformat_open_input(&ifmt_ctx2, path2.UTF8String, NULL, NULL)) < 0) {
+        printf("Cannot open input file2\n");
+        return;
+    }
+
+    // 查找流信息
+    if ((ret = avformat_find_stream_info(ifmt_ctx2, NULL)) < 0) {
+        printf("Cannot find input file2 stream information\n");
+        return;
+    }
+
+    // 打印输入文件1的流信息
+    av_dump_format(ifmt_ctx1, 0, path1.UTF8String, 0);
+
+    // 打印输入文件2的流信息
+    av_dump_format(ifmt_ctx2, 0, path2.UTF8String, 0);
+
+    // 创建输出文件
+    NSString* path3 = [NSString stringWithFormat:@"%@%@",NSTemporaryDirectory(),@"124.mp4"];
+    if ((ret = avformat_alloc_output_context2(&ofmt, NULL, NULL, path3.UTF8String)) < 0) {
+        printf("Cannot allocate output context\n");
+        return;
+    }
+
+
+    // 添加视频输出流
+    video_stream_index1 = av_find_best_stream(ifmt_ctx1, AVMEDIA_TYPE_VIDEO, -1, -1, &video_codec, 0);
+    if (video_stream_index1 < 0) {
+        printf("Cannot find video stream in input file1\n");
+        return;
+    }
+
+    out_stream = avformat_new_stream(ofmt, video_codec);
+    out_stream->codecpar->width = ifmt_ctx1->streams[video_stream_index1]->codecpar->width;
+    out_stream->codecpar->height = ifmt_ctx1->streams[video_stream_index1]->codecpar->height;
+    out_stream->codecpar->format = video_codec->id;
+    ofmt_ctx_codec = avcodec_alloc_context3(video_codec);
+    avcodec_parameters_to_context(ofmt_ctx_codec, out_stream->codecpar);
+    out_stream->codec = ofmt_ctx_codec;
+
+    // 添加视频输出流
+    video_stream_index2 = av_find_best_stream(ifmt_ctx2, AVMEDIA_TYPE_VIDEO, -1, -1, &video_codec, 0);
+    if (video_stream_index2 < 0) {
+        printf("Cannot find video stream in input file2\n");
+        return;
+    }
+    
+    
+    // 初始化滤镜图
+       filter_graph = avfilter_graph_alloc();
+       // 创建源滤镜
+       AVFilter *buffersrc = avfilter_get_by_name("buffer");
+       char args[512];
+       sprintf(args, "video_size=%dx%d:pix_fmt=%d:time_base=%d/%d:pixel_aspect=%d/%d",
+               ifmt_ctx1->streams[video_stream_index1]->codecpar->width,
+               ifmt_ctx1->streams[video_stream_index1]->codecpar->height,
+               ifmt_ctx1->streams[video_stream_index1]->codecpar->format,
+               ifmt_ctx1->streams[video_stream_index1]->time_base.num, ifmt_ctx1->streams[video_stream_index1]->time_base.den,
+               ifmt_ctx1->streams[video_stream_index1]->codecpar->sample_aspect_ratio.num,
+               ifmt_ctx1->streams[video_stream_index1]->codecpar->sample_aspect_ratio.den);
+
+       if ((ret = avfilter_graph_create_filter(&buffersrc_ctx, buffersrc, "in1", args, NULL, filter_graph)) < 0) {
+           printf("Cannot create buffer source filter for input file1\n");
+           return;
+       }
+
+       sprintf(args, "video_size=%dx%d:pix_fmt=%d:time_base=%d/%d:pixel_aspect=%d/%d",
+               ifmt_ctx2->streams[video_stream_index2]->codecpar->width,
+               ifmt_ctx2->streams[video_stream_index2]->codecpar->height,
+               ifmt_ctx2->streams[video_stream_index2]->codecpar->format,
+               ifmt_ctx2->streams[video_stream_index2]->time_base.num, ifmt_ctx2->streams[video_stream_index2]->time_base.den,
+               ifmt_ctx2->streams[video_stream_index2]->codecpar->sample_aspect_ratio.num,
+               ifmt_ctx2->streams[video_stream_index2]->codecpar->sample_aspect_ratio.den);
+
+       if ((ret = avfilter_graph_create_filter(&buffersrc_ctx, buffersrc, "in2", args, NULL, filter_graph)) < 0) {
+           printf("Cannot create buffer source filter for input file2\n");
+           return;
+       }
+
+       // 创建目标滤镜
+       AVFilter *buffersink = avfilter_get_by_name("buffersink");
+    enum AVPixelFormat pix_fmts[] = { AV_PIX_FMT_YUV420P, AV_PIX_FMT_NONE };
+
+       if ((ret = avfilter_graph_create_filter(&buffersink_ctx, buffersink, "out", NULL, NULL, filter_graph)) < 0) {
+           printf("Cannot create buffer sink filter\n");
+           return;
+       }
+
+       
+    if (ifmt_ctx1) {
+        avformat_close_input(&ifmt_ctx1);
+    }
+
+    if (ifmt_ctx2) {
+        avformat_close_input(&ifmt_ctx2);
+    }
+
+    if (ofmt_ctx_codec) {
+        avcodec_free_context(&ofmt_ctx_codec);
+    }
+
+    if (ofmt) {
+        avformat_free_context(ofmt);
+    }
+
+    if (buffersrc_ctx) {
+        avfilter_free(buffersrc_ctx);
+    }
+
+    if (buffersink_ctx) {
+        avfilter_free(buffersink_ctx);
+    }
+
+    if (filter_graph) {
+        avfilter_graph_free(&filter_graph);
+    }
+
+}
+- (void)testFilter {
+    testfilters();
 }
 
 
