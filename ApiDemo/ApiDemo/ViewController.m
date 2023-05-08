@@ -200,38 +200,38 @@ void testfilters(void) {
     
     // 添加滤镜到滤镜图
     
-    AVFilterInOut *outputs2 = avfilter_inout_alloc();
-    outputs2->name = av_strdup("in2");
-    outputs2->filter_ctx = buffersrc_ctx2;
-    outputs2->pad_idx = 0;
-    outputs2->next = NULL;
-    
-    
-    AVFilterInOut *outputs = avfilter_inout_alloc();
-    outputs->name = av_strdup("in1");
-    outputs->filter_ctx = buffersrc_ctx1;
-    outputs->pad_idx = 0;
-    outputs->next = outputs2;
-    
-    
+//    AVFilterInOut *outputs2 = avfilter_inout_alloc();
+//    outputs2->name = av_strdup("in2");
+//    outputs2->filter_ctx = buffersrc_ctx2;
+//    outputs2->pad_idx = 0;
+//    outputs2->next = NULL;
+//
+//
+//    AVFilterInOut *outputs = avfilter_inout_alloc();
+//    outputs->name = av_strdup("in1");
+//    outputs->filter_ctx = buffersrc_ctx1;
+//    outputs->pad_idx = 0;
+//    outputs->next = outputs2;
+//
+//
+//
+//    AVFilterInOut *inputs = avfilter_inout_alloc();
+//    inputs->name = av_strdup("out");
+//    inputs->filter_ctx = buffersink_ctx;
+//    inputs->pad_idx = 0;
+//    inputs->next = NULL;
 
-    AVFilterInOut *inputs = avfilter_inout_alloc();
-    inputs->name = av_strdup("out");
-    inputs->filter_ctx = buffersink_ctx;
-    inputs->pad_idx = 0;
-    inputs->next = NULL;
-
-    char filter_descr[256];
-    snprintf(filter_descr, sizeof(filter_descr), "null");
+//    char filter_descr[256];
+//    snprintf(filter_descr, sizeof(filter_descr), "null");
     const AVFilter *overlay = avfilter_get_by_name("overlay");
     AVFilterContext *overlay_ctx = nil;//avfilter_graph_alloc_filter(filter_graph, overlay, "overlay");
     
-    if ((ret = avfilter_graph_create_filter(&overlay_ctx, overlay, "overlay", NULL, NULL, filter_graph)) < 0) {
-        char errbuf[AV_ERROR_MAX_STRING_SIZE] = {};
-        av_strerror(ret, errbuf, AV_ERROR_MAX_STRING_SIZE);
-        printf("Cannot create filter\n");
-        return;
-    }
+//    if ((ret = avfilter_graph_create_filter(&overlay_ctx, overlay, "overlay", NULL, NULL, filter_graph)) < 0) {
+//        char errbuf[AV_ERROR_MAX_STRING_SIZE] = {};
+//        av_strerror(ret, errbuf, AV_ERROR_MAX_STRING_SIZE);
+//        printf("Cannot create filter\n");
+//        return;
+//    }
 //    ret = avfilter_init_str(overlay_ctx, "overlay=x=(W-w)/2:y=(H-h)/2");
 //    if (ret < 0) {
 //        printf("Cannot create filter\n");
@@ -245,10 +245,37 @@ void testfilters(void) {
         return;
     }
 
-    if ((ret = avfilter_graph_parse_ptr(filter_graph, filter_descr, &inputs, &outputs, NULL)) < 0) {
-        printf("Cannot parse filter graph\n");
-        return;
-    }
+//    if ((ret = avfilter_graph_parse_ptr(filter_graph, filter_descr, &inputs, &outputs, NULL)) < 0) {
+//        printf("Cannot parse filter graph\n");
+//        return;
+//    }
+    
+    
+    // 连接滤镜
+      ret = avfilter_link(buffersrc_ctx1, 0, overlay_ctx, 0);
+      if (ret < 0) {
+          fprintf(stderr, "Cannot link buffer source1 to overlay\n");
+          return;
+      }
+
+      ret = avfilter_link(buffersrc_ctx2, 0, overlay_ctx, 1);
+      if (ret < 0) {
+          fprintf(stderr, "Cannot link buffer source2 to overlay\n");
+          return;
+      }
+
+      ret = avfilter_link(overlay_ctx, 0, buffersink_ctx, 0);
+      if (ret < 0) {
+          fprintf(stderr, "Cannot link overlay to buffer sink\n");
+          return;
+      }
+
+      // 配置滤镜图
+      ret = avfilter_graph_config(filter_graph, NULL);
+      if (ret < 0) {
+          fprintf(stderr, "Cannot configure filter graph\n");
+          return;
+      }
 
        
     if (ifmt_ctx1) {
