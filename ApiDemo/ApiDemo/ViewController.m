@@ -75,8 +75,9 @@ static int interruptCallBack(void* arg) {
 }
 
 void testfilters(void) {
+    av_register_all();
     AVFormatContext *ifmt_ctx1, *ifmt_ctx2;
-    AVOutputFormat *ofmt = NULL;
+    AVFormatContext *ofmt_ctx = NULL;
     AVStream *out_stream = NULL;
     AVCodecContext *ofmt_ctx_codec = NULL;
     AVCodec *video_codec = NULL;
@@ -128,10 +129,11 @@ void testfilters(void) {
 
     // 创建输出文件
     NSString* path3 = [NSString stringWithFormat:@"%@%@",NSTemporaryDirectory(),@"124.mp4"];
-    if ((ret = avformat_alloc_output_context2(&ofmt, NULL, NULL, path3.UTF8String)) < 0) {
+    if ((ret = avformat_alloc_output_context2(&ofmt_ctx, NULL, NULL, path3.UTF8String)) < 0) {
         printf("Cannot allocate output context\n");
         return;
     }
+    
 
 
     // 添加视频输出流
@@ -140,27 +142,124 @@ void testfilters(void) {
         printf("Cannot find video stream in input file1\n");
         return;
     }
-
-    out_stream = avformat_new_stream(ofmt, video_codec);
-    out_stream->codecpar->width = ifmt_ctx1->streams[video_stream_index1]->codecpar->width;
-    out_stream->codecpar->height = ifmt_ctx1->streams[video_stream_index1]->codecpar->height;
-    out_stream->codecpar->format = video_codec->id;
-    ofmt_ctx_codec = avcodec_alloc_context3(video_codec);
-    avcodec_parameters_to_context(ofmt_ctx_codec, out_stream->codecpar);
-    out_stream->codec = ofmt_ctx_codec;
-
+    
+    AVStream* video_stream1 = ifmt_ctx1->streams[video_stream_index1];
+    // 创建解码器
+   AVCodec *codec1 = avcodec_find_decoder(video_stream1->codecpar->codec_id);
+   if (!codec1) {
+       av_log(NULL, AV_LOG_ERROR, "Failed to find decoder for stream #%u\n",video_stream1);
+       return;
+   }
+   AVCodecContext *codec_ctx1 = avcodec_alloc_context3(codec1);
+   if (!codec_ctx1) {
+       av_log(NULL, AV_LOG_ERROR, "Failed to allocate the codec context\n");
+       return;
+   }
+   ret = avcodec_parameters_to_context(codec_ctx1, video_stream1->codecpar);
+   if (ret < 0) {
+       av_log(NULL, AV_LOG_ERROR, "Failed to copy codec parameters to decoder context\n");
+       return;
+   }
+   ret = avcodec_open2(codec_ctx1, codec1, NULL);
+   if (ret < 0) {
+       av_log(NULL, AV_LOG_ERROR, "Failed to open codec\n");
+       return;
+   }
+    
     // 添加视频输出流
     video_stream_index2 = av_find_best_stream(ifmt_ctx2, AVMEDIA_TYPE_VIDEO, -1, -1, &video_codec, 0);
     if (video_stream_index2 < 0) {
-        printf("Cannot find video stream in input file2\n");
+        printf("Cannot find video stream in input file1\n");
         return;
     }
     
     
+    AVStream* video_stream2 = ifmt_ctx2->streams[video_stream_index2];
+    // 创建解码器
+   AVCodec *codec2 = avcodec_find_decoder(video_stream2->codecpar->codec_id);
+   if (!codec1) {
+       av_log(NULL, AV_LOG_ERROR, "Failed to find decoder for stream #%u\n",video_stream1);
+       return;
+   }
+    
+   AVCodecContext *codec_ctx2 = avcodec_alloc_context3(codec2);
+   if (!codec_ctx1) {
+       av_log(NULL, AV_LOG_ERROR, "Failed to allocate the codec context\n");
+       return;
+   }
+    
+   ret = avcodec_parameters_to_context(codec_ctx2, video_stream1->codecpar);
+   if (ret < 0) {
+       av_log(NULL, AV_LOG_ERROR, "Failed to copy codec parameters to decoder context\n");
+       return;
+   }
+    
+   ret = avcodec_open2(codec_ctx2, codec1, NULL);
+   if (ret < 0) {
+       av_log(NULL, AV_LOG_ERROR, "Failed to open codec\n");
+       return;
+   }
+    
+
+    out_stream = avformat_new_stream(ofmt_ctx, NULL);
+    out_stream->codecpar->width = ifmt_ctx1->streams[video_stream_index1]->codecpar->width;
+    out_stream->codecpar->height = ifmt_ctx1->streams[video_stream_index1]->codecpar->height;
+    out_stream->codecpar->codec_id = video_codec->id;
+    out_stream->codecpar->codec_type = AVMEDIA_TYPE_VIDEO;
+    out_stream->codecpar->codec_id = AV_CODEC_ID_H264;
+    out_stream->codecpar->format = AV_PIX_FMT_YUV420P;
+    out_stream->codecpar->bit_rate = 400000;
+    out_stream->time_base = (AVRational){1, 25};
+    
+    ofmt_ctx_codec = avcodec_alloc_context3(video_codec);
+    avcodec_parameters_to_context(ofmt_ctx_codec, out_stream->codecpar);
+    //out_stream->codec = ofmt_ctx_codec;
+    
+    
+    
+    
+    // 初始化编码器
+    AVCodec *out_codec = avcodec_find_encoder(out_stream->codecpar->codec_id);
+    if (!out_codec) {
+        av_log(NULL, AV_LOG_ERROR, "Failed to find encoder for stream #%u\n", out_stream->index);
+        return;
+    }
+    AVCodecContext *codec_ctx_out = avcodec_alloc_context3(out_codec);
+    if (!codec_ctx_out) {
+        av_log(NULL, AV_LOG_ERROR, "Failed to allocate the encoder context\n");
+        return;
+    }
+    ret = avcodec_parameters_to_context(codec_ctx_out, out_stream->codecpar);
+    if (ret < 0) {
+        av_log(NULL, AV_LOG_ERROR, "Failed to copy codec parameters to encoder context\n");
+        return;
+    }
+    codec_ctx_out->time_base = out_stream->time_base;
+    ret = avcodec_open2(codec_ctx_out, out_codec, NULL);
+    if (ret < 0) {
+        av_log(NULL, AV_LOG_ERROR, "Failed to open encoder\n");
+        return;
+    }
+    
+    // 打开输出文件
+       ret = avio_open(&ofmt_ctx->pb, path3.UTF8String, AVIO_FLAG_WRITE);
+       if (ret < 0) {
+           fprintf(stderr, "Error opening output file: %s\n", av_err2str(ret));
+           return ;
+       }
+
+    
+    // 写文件头
+      ret = avformat_write_header(ofmt_ctx, NULL);
+      if (ret < 0) {
+          fprintf(stderr, "Error writing file header: %s\n", av_err2str(ret));
+          return;
+      }
+
     // 初始化滤镜图
        filter_graph = avfilter_graph_alloc();
        // 创建源滤镜
-       AVFilter *buffersrc = avfilter_get_by_name("buffer");
+       const AVFilter *buffersrc = avfilter_get_by_name("buffer");
        char args[512];
        sprintf(args, "video_size=%dx%d:pix_fmt=%d:time_base=%d/%d:pixel_aspect=%d/%d",
                ifmt_ctx1->streams[video_stream_index1]->codecpar->width,
@@ -189,13 +288,12 @@ void testfilters(void) {
        }
 
        // 创建目标滤镜
-       AVFilter *buffersink = avfilter_get_by_name("buffersink");
-    enum AVPixelFormat pix_fmts[] = { AV_PIX_FMT_YUV420P, AV_PIX_FMT_NONE };
-
-       if ((ret = avfilter_graph_create_filter(&buffersink_ctx, buffersink, "out", NULL, NULL, filter_graph)) < 0) {
-           printf("Cannot create buffer sink filter\n");
-           return;
-       }
+        const AVFilter *buffersink = avfilter_get_by_name("buffersink");
+        enum AVPixelFormat pix_fmts[] = { AV_PIX_FMT_YUV420P, AV_PIX_FMT_NONE };
+        if ((ret = avfilter_graph_create_filter(&buffersink_ctx, buffersink, "out", NULL, NULL, filter_graph)) < 0) {
+            printf("Cannot create buffer sink filter\n");
+            return;
+        }
     
     
     // 添加滤镜到滤镜图
@@ -223,6 +321,30 @@ void testfilters(void) {
 
 //    char filter_descr[256];
 //    snprintf(filter_descr, sizeof(filter_descr), "null");
+    
+    
+    const AVFilter *scale = avfilter_get_by_name("scale");
+    AVFilterContext *scale_ctx = nil;//avfilter_graph_alloc_filter(filter_graph, overlay, "overlay");
+    
+//    if ((ret = avfilter_graph_create_filter(&overlay_ctx, overlay, "overlay", NULL, NULL, filter_graph)) < 0) {
+//        char errbuf[AV_ERROR_MAX_STRING_SIZE] = {};
+//        av_strerror(ret, errbuf, AV_ERROR_MAX_STRING_SIZE);
+//        printf("Cannot create filter\n");
+//        return;
+//    }
+//    ret = avfilter_init_str(overlay_ctx, "overlay=x=(W-w)/2:y=(H-h)/2");
+//    if (ret < 0) {
+//        printf("Cannot create filter\n");
+//        return;
+//    }
+
+    if ((ret = avfilter_graph_create_filter(&scale_ctx, scale, "scale", "176:h=144:force_original_aspect_ratio=1", NULL, filter_graph)) < 0) {
+        char errbuf[AV_ERROR_MAX_STRING_SIZE] = {};
+        av_strerror(ret, errbuf, AV_ERROR_MAX_STRING_SIZE);
+        printf("Cannot create filter\n");
+        return;
+    }
+    
     const AVFilter *overlay = avfilter_get_by_name("overlay");
     AVFilterContext *overlay_ctx = nil;//avfilter_graph_alloc_filter(filter_graph, overlay, "overlay");
     
@@ -238,7 +360,7 @@ void testfilters(void) {
 //        return;
 //    }
 
-    if ((ret = avfilter_graph_create_filter(&overlay_ctx, overlay, "overlay", "x=10:y=10", NULL, filter_graph)) < 0) {
+    if ((ret = avfilter_graph_create_filter(&overlay_ctx, overlay, "overlay", "x=10:y=60", NULL, filter_graph)) < 0) {
         char errbuf[AV_ERROR_MAX_STRING_SIZE] = {};
         av_strerror(ret, errbuf, AV_ERROR_MAX_STRING_SIZE);
         printf("Cannot create filter\n");
@@ -250,6 +372,8 @@ void testfilters(void) {
 //        return;
 //    }
     
+
+    
     
     // 连接滤镜
       ret = avfilter_link(buffersrc_ctx1, 0, overlay_ctx, 0);
@@ -257,8 +381,14 @@ void testfilters(void) {
           fprintf(stderr, "Cannot link buffer source1 to overlay\n");
           return;
       }
-
-      ret = avfilter_link(buffersrc_ctx2, 0, overlay_ctx, 1);
+    
+    
+     ret = avfilter_link(buffersrc_ctx2, 0, scale_ctx, 0);
+    if (ret < 0) {
+        fprintf(stderr, "Cannot link buffer source2 to overlay\n");
+        return;
+    }
+      ret = avfilter_link(scale_ctx, 0, overlay_ctx, 1);
       if (ret < 0) {
           fprintf(stderr, "Cannot link buffer source2 to overlay\n");
           return;
@@ -276,7 +406,189 @@ void testfilters(void) {
           fprintf(stderr, "Cannot configure filter graph\n");
           return;
       }
+    
+    
+    // 读取帧和应用滤镜
+    
+    AVFrame *filterFrame = av_frame_alloc();
+    AVFrame *filtered_frame = av_frame_alloc();
+    
+    AVPacket* packet1 = av_packet_alloc();
+    packet1->data = NULL;
+    packet1->size = 0;
+    av_init_packet(packet1);
+    
+    
+    AVPacket* packet2 = av_packet_alloc();
+    packet2->data = NULL;
+    packet2->size = 0;
+    av_init_packet(packet2);
+    
+    
+    
+    while (true) {
+        BOOL file1Done = NO;
+        while (!file1Done) {
+            ret = av_read_frame(ifmt_ctx1, packet1);
+            if (ret < 0) {
+                file1Done = YES;
+                break;
+            }
+            
+            if (packet1->stream_index == video_stream_index1) {
+                ret = avcodec_send_packet(codec_ctx1, packet1);
+                if (ret < 0) {
+                    av_log(NULL, AV_LOG_ERROR, "Error sending a packet to the decoder\n");
+                    break;
+                }
 
+                BOOL exit1 = NO;
+                while (ret >= 0) {
+                    AVFrame *frame1 = av_frame_alloc();
+                    ret = avcodec_receive_frame(codec_ctx1, frame1);
+                    if (ret == AVERROR(EAGAIN) || ret == AVERROR_EOF) {
+                        //av_frame_free(&frame1);
+                        break;
+                    }
+                    if (ret < 0) {
+                        //av_frame_free(&frame1);
+                        return;
+                    }
+
+                    // 发送帧到输入滤镜1
+                    if (av_buffersrc_add_frame_flags(buffersrc_ctx1, frame1, AV_BUFFERSRC_FLAG_PUSH) < 0) {
+                        av_log(NULL, AV_LOG_ERROR, "Error while feeding the filtergraph\n");
+                    } else {
+                        av_frame_free(&frame1);
+                        av_packet_unref(packet1);
+                        exit1 = YES;
+                    }
+                    
+                    break;
+                }
+                if(exit1) {
+                    break;
+                }
+            }
+        }
+        
+        BOOL file2Done = NO;
+        while (!file2Done) {
+            ret = av_read_frame(ifmt_ctx2, packet2);
+            if (ret < 0) {
+                file2Done = YES;
+                break;
+            }
+            
+            if (packet2->stream_index == video_stream_index2) {
+                ret = avcodec_send_packet(codec_ctx2, packet2);
+                if (ret < 0) {
+                    av_log(NULL, AV_LOG_ERROR, "Error sending a packet to the decoder\n");
+                    break;
+                }
+                
+                BOOL exit2 = NO;
+                while (ret >= 0) {
+                    AVFrame *frame2 = av_frame_alloc();
+                    ret = avcodec_receive_frame(codec_ctx2, frame2);
+                    if (ret == AVERROR(EAGAIN) || ret == AVERROR_EOF) {
+                        //av_frame_free(&frame1);
+                        break;
+                    }
+                    if (ret < 0) {
+                        //av_frame_free(&frame1);
+                        break;
+                    }
+                    
+                    // 发送帧到输入滤镜1
+                    if (av_buffersrc_add_frame_flags(buffersrc_ctx2, frame2, AV_BUFFERSRC_FLAG_PUSH) < 0) {
+                        av_log(NULL, AV_LOG_ERROR, "Error while feeding the filtergraph\n");
+                    } else {
+                        av_frame_free(&frame2);
+                        av_packet_unref(packet2);
+                        exit2 = YES;
+                    }
+                    break;
+                }
+                if(exit2) {
+                    break;
+                }
+            }
+        }
+        
+        
+        // 从滤镜图形中获取处理后的帧
+        
+        BOOL exit = NO;
+    while (!exit) {
+        
+        if (file1Done && file2Done) {
+            break;
+        }
+        
+        ret = av_buffersink_get_frame_flags(buffersink_ctx, filterFrame, AV_BUFFERSRC_FLAG_KEEP_REF);//av_buffersink_get_frame(buffersink_ctx, filterFrame);
+        if (ret == AVERROR_EOF) {
+            break;;
+        }
+        
+        if (ret == AVERROR(EAGAIN)) {
+            break;
+        }
+        if (ret < 0) {
+            break;
+        }
+        filterFrame->pts = av_rescale_q(filterFrame->pts, buffersink_ctx->inputs[0]->time_base, out_stream->time_base);
+        filterFrame->pkt_dts = av_rescale_q(filterFrame->pkt_dts, buffersink_ctx->inputs[0]->time_base, out_stream->time_base);
+        filterFrame->pkt_duration = av_rescale_q(filterFrame->pkt_duration, buffersink_ctx->inputs[0]->time_base, out_stream->time_base);
+        
+        ret = avcodec_send_frame(codec_ctx_out, filterFrame);
+        if (ret < 0) {
+            fprintf(stderr, "Error sending frame to codec: %s\n", av_err2str(ret));
+        }
+               while (ret >= 0) {
+                   AVPacket* pkt = av_packet_alloc();
+                    av_init_packet(pkt);
+                    pkt->data = NULL;
+                   pkt->size = 0;
+                   ret = avcodec_receive_packet(codec_ctx_out, pkt);
+                   if (ret == AVERROR(EAGAIN) || ret == AVERROR_EOF) {
+                       break;
+                   }
+                   if (ret < 0) {
+                       fprintf(stderr, "Error receiving packet from codec: %s\n", av_err2str(ret));
+                       return;
+                   }
+
+                   // 写入帧
+                   
+//                   av_packet_rescale_ts(&pkt, codec_ctx_out->time_base, out_stream->time_base);
+//                   pkt.stream_index = out_stream->index;
+                   ret = av_interleaved_write_frame(ofmt_ctx, pkt);
+                   if (ret < 0) {
+                       fprintf(stderr, "Error writing frame to file: %s\n", av_err2str(ret));
+                       return;
+                   }
+                   av_interleaved_write_frame(ofmt_ctx, NULL);
+                   av_packet_free(&pkt);
+               }
+
+//        // 将帧写入输出文件
+
+//        ret = av_interleaved_write_frame(ofmt_ctx, filterFrame);
+//        if (ret < 0) {
+//            return;
+//        }
+    }
+
+        if (file1Done && file2Done) {
+            av_write_trailer(ofmt_ctx);
+            break;
+        }
+        
+        
+
+    }
+    
        
     if (ifmt_ctx1) {
         avformat_close_input(&ifmt_ctx1);
@@ -290,8 +602,8 @@ void testfilters(void) {
         avcodec_free_context(&ofmt_ctx_codec);
     }
 
-    if (ofmt) {
-        avformat_free_context(ofmt);
+    if (ofmt_ctx) {
+        avformat_free_context(ofmt_ctx);
     }
 
     if (buffersrc_ctx1) {
@@ -305,12 +617,21 @@ void testfilters(void) {
     if (buffersink_ctx) {
         avfilter_free(buffersink_ctx);
     }
+    
+    if (scale_ctx) {
+        avfilter_free(scale_ctx);
+    }
+    
+    if (overlay_ctx) {
+        avfilter_free(overlay_ctx);
+    }
 
     if (filter_graph) {
         avfilter_graph_free(&filter_graph);
     }
 
 }
+
 - (void)testFilter {
     testfilters();
 }
