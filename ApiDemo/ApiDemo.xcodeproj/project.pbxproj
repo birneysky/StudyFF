@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		32227F8C2A14E11700D9E94F /* ffmpeg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32227F872A14D94000D9E94F /* ffmpeg.framework */; };
+		32227F8D2A14E11700D9E94F /* ffmpeg.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 32227F872A14D94000D9E94F /* ffmpeg.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		32D8A3EE2A05CCCA008E060F /* 123456.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 32D8A3EC2A05CCCA008E060F /* 123456.mp4 */; };
 		32D8A3EF2A05CCCA008E060F /* trailer.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 32D8A3ED2A05CCCA008E060F /* trailer.mp4 */; };
 		74FE721720FE43A3005F024C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 74FE721620FE43A3005F024C /* AppDelegate.m */; };
-		74FE721A20FE43A4005F024C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74FE721920FE43A4005F024C /* ViewController.m */; };
+		74FE721A20FE43A4005F024C /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 74FE721920FE43A4005F024C /* ViewController.mm */; };
 		74FE721D20FE43A4005F024C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74FE721B20FE43A4005F024C /* Main.storyboard */; };
 		74FE721F20FE43A7005F024C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74FE721E20FE43A7005F024C /* Assets.xcassets */; };
 		74FE722220FE43A7005F024C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74FE722020FE43A7005F024C /* LaunchScreen.storyboard */; };
@@ -18,10 +20,7 @@
 		74FE722F20FE43A7005F024C /* ApiDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 74FE722E20FE43A7005F024C /* ApiDemoTests.m */; };
 		74FE723A20FE43A7005F024C /* ApiDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 74FE723920FE43A7005F024C /* ApiDemoUITests.m */; };
 		74FE725120FE4D30005F024C /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FE725020FE4D30005F024C /* VideoToolbox.framework */; };
-		74FE725320FE4D85005F024C /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FE725220FE4D85005F024C /* libiconv.tbd */; };
 		74FE725520FE4D9B005F024C /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FE725420FE4D9B005F024C /* CoreMedia.framework */; };
-		74FE725720FE4DBA005F024C /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FE725620FE4DBA005F024C /* libz.tbd */; };
-		74FE72F220FE517F005F024C /* libffmpeg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FE72F120FE517F005F024C /* libffmpeg.a */; };
 		74FE72F420FF8C02005F024C /* test.MP4 in Resources */ = {isa = PBXBuildFile; fileRef = 74FE72F320FF8C02005F024C /* test.MP4 */; };
 /* End PBXBuildFile section */
 
@@ -42,14 +41,56 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		32227F8E2A14E11700D9E94F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				32227F8D2A14E11700D9E94F /* ffmpeg.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		32227F872A14D94000D9E94F /* ffmpeg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ffmpeg.framework; path = "../build-extra/frameworks/ffmpeg.framework"; sourceTree = "<group>"; };
+		324E38FD2A14E41500FA25BC /* CIImageReader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CIImageReader.hpp; sourceTree = "<group>"; };
+		324E38FE2A14E41500FA25BC /* TextureRender.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TextureRender.hpp; sourceTree = "<group>"; };
+		324E38FF2A14E41500FA25BC /* NV12Reader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NV12Reader.hpp; sourceTree = "<group>"; };
+		324E39002A14E41500FA25BC /* GLTextureReader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLTextureReader.hpp; sourceTree = "<group>"; };
+		324E39012A14E41500FA25BC /* I420Reader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = I420Reader.hpp; sourceTree = "<group>"; };
+		324E39022A14E41500FA25BC /* CIFileInput.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CIFileInput.hpp; sourceTree = "<group>"; };
+		324E39032A14E41500FA25BC /* CIFilterOverlay.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CIFilterOverlay.hpp; sourceTree = "<group>"; };
+		324E39042A14E41500FA25BC /* CIFilterGray.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CIFilterGray.hpp; sourceTree = "<group>"; };
+		324E39052A14E41500FA25BC /* Reader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Reader.hpp; sourceTree = "<group>"; };
+		324E39062A14E41500FA25BC /* CIFilterScale.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CIFilterScale.hpp; sourceTree = "<group>"; };
+		324E39072A14E41500FA25BC /* Linkable.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Linkable.hpp; sourceTree = "<group>"; };
+		324E39082A14E41500FA25BC /* I420TextureCache.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = I420TextureCache.hpp; sourceTree = "<group>"; };
+		324E39092A14E41500FA25BC /* AVFileReader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AVFileReader.hpp; sourceTree = "<group>"; };
+		324E390A2A14E41500FA25BC /* GLNV12ToRGBFilter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLNV12ToRGBFilter.hpp; sourceTree = "<group>"; };
+		324E390B2A14E41500FA25BC /* i420Shader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = i420Shader.hpp; sourceTree = "<group>"; };
+		324E390C2A14E41500FA25BC /* CIScreen.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CIScreen.hpp; sourceTree = "<group>"; };
+		324E390D2A14E41500FA25BC /* GLFileInput.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLFileInput.hpp; sourceTree = "<group>"; };
+		324E390E2A14E41500FA25BC /* GLTextureFrame.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLTextureFrame.hpp; sourceTree = "<group>"; };
+		324E390F2A14E41500FA25BC /* GLProgram.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLProgram.hpp; sourceTree = "<group>"; };
+		324E39102A14E41500FA25BC /* Filter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Filter.hpp; sourceTree = "<group>"; };
+		324E39112A14E41500FA25BC /* GLFrameInput.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLFrameInput.hpp; sourceTree = "<group>"; };
+		324E39122A14E41500FA25BC /* NV12Shader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NV12Shader.hpp; sourceTree = "<group>"; };
+		324E39132A14E41500FA25BC /* GLScreen.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLScreen.hpp; sourceTree = "<group>"; };
+		324E39142A14E41500FA25BC /* NV12TextCache.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NV12TextCache.hpp; sourceTree = "<group>"; };
+		324E39152A14E41500FA25BC /* GLFilter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLFilter.hpp; sourceTree = "<group>"; };
+		324E39162A14E41500FA25BC /* GLNV12TextureFrame.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLNV12TextureFrame.hpp; sourceTree = "<group>"; };
+		324E39172A14E41500FA25BC /* GLContext.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLContext.hpp; sourceTree = "<group>"; };
 		32D8A3EC2A05CCCA008E060F /* 123456.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 123456.mp4; sourceTree = "<group>"; };
 		32D8A3ED2A05CCCA008E060F /* trailer.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = trailer.mp4; sourceTree = "<group>"; };
 		74FE721220FE43A3005F024C /* ApiDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ApiDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74FE721520FE43A3005F024C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		74FE721620FE43A3005F024C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		74FE721820FE43A3005F024C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		74FE721920FE43A4005F024C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		74FE721920FE43A4005F024C /* ViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
 		74FE721C20FE43A4005F024C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		74FE721E20FE43A7005F024C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		74FE722120FE43A7005F024C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -75,10 +116,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				74FE72F220FE517F005F024C /* libffmpeg.a in Frameworks */,
-				74FE725720FE4DBA005F024C /* libz.tbd in Frameworks */,
 				74FE725520FE4D9B005F024C /* CoreMedia.framework in Frameworks */,
-				74FE725320FE4D85005F024C /* libiconv.tbd in Frameworks */,
+				32227F8C2A14E11700D9E94F /* ffmpeg.framework in Frameworks */,
 				74FE725120FE4D30005F024C /* VideoToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -100,6 +139,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		324E38FC2A14E41500FA25BC /* core */ = {
+			isa = PBXGroup;
+			children = (
+				324E38FD2A14E41500FA25BC /* CIImageReader.hpp */,
+				324E38FE2A14E41500FA25BC /* TextureRender.hpp */,
+				324E38FF2A14E41500FA25BC /* NV12Reader.hpp */,
+				324E39002A14E41500FA25BC /* GLTextureReader.hpp */,
+				324E39012A14E41500FA25BC /* I420Reader.hpp */,
+				324E39022A14E41500FA25BC /* CIFileInput.hpp */,
+				324E39032A14E41500FA25BC /* CIFilterOverlay.hpp */,
+				324E39042A14E41500FA25BC /* CIFilterGray.hpp */,
+				324E39052A14E41500FA25BC /* Reader.hpp */,
+				324E39062A14E41500FA25BC /* CIFilterScale.hpp */,
+				324E39072A14E41500FA25BC /* Linkable.hpp */,
+				324E39082A14E41500FA25BC /* I420TextureCache.hpp */,
+				324E39092A14E41500FA25BC /* AVFileReader.hpp */,
+				324E390A2A14E41500FA25BC /* GLNV12ToRGBFilter.hpp */,
+				324E390B2A14E41500FA25BC /* i420Shader.hpp */,
+				324E390C2A14E41500FA25BC /* CIScreen.hpp */,
+				324E390D2A14E41500FA25BC /* GLFileInput.hpp */,
+				324E390E2A14E41500FA25BC /* GLTextureFrame.hpp */,
+				324E390F2A14E41500FA25BC /* GLProgram.hpp */,
+				324E39102A14E41500FA25BC /* Filter.hpp */,
+				324E39112A14E41500FA25BC /* GLFrameInput.hpp */,
+				324E39122A14E41500FA25BC /* NV12Shader.hpp */,
+				324E39132A14E41500FA25BC /* GLScreen.hpp */,
+				324E39142A14E41500FA25BC /* NV12TextCache.hpp */,
+				324E39152A14E41500FA25BC /* GLFilter.hpp */,
+				324E39162A14E41500FA25BC /* GLNV12TextureFrame.hpp */,
+				324E39172A14E41500FA25BC /* GLContext.hpp */,
+			);
+			path = core;
+			sourceTree = "<group>";
+		};
 		74FE720920FE43A3005F024C = {
 			isa = PBXGroup;
 			children = (
@@ -124,10 +197,11 @@
 		74FE721420FE43A3005F024C /* ApiDemo */ = {
 			isa = PBXGroup;
 			children = (
+				324E38FC2A14E41500FA25BC /* core */,
 				74FE721520FE43A3005F024C /* AppDelegate.h */,
 				74FE721620FE43A3005F024C /* AppDelegate.m */,
 				74FE721820FE43A3005F024C /* ViewController.h */,
-				74FE721920FE43A4005F024C /* ViewController.m */,
+				74FE721920FE43A4005F024C /* ViewController.mm */,
 				74FE72F320FF8C02005F024C /* test.MP4 */,
 				32D8A3EC2A05CCCA008E060F /* 123456.mp4 */,
 				32D8A3ED2A05CCCA008E060F /* trailer.mp4 */,
@@ -161,6 +235,7 @@
 		74FE724720FE4405005F024C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				32227F872A14D94000D9E94F /* ffmpeg.framework */,
 				74FE72F120FE517F005F024C /* libffmpeg.a */,
 				74FE725620FE4DBA005F024C /* libz.tbd */,
 				74FE725420FE4D9B005F024C /* CoreMedia.framework */,
@@ -181,6 +256,7 @@
 				74FE720E20FE43A3005F024C /* Sources */,
 				74FE720F20FE43A3005F024C /* Frameworks */,
 				74FE721020FE43A3005F024C /* Resources */,
+				32227F8E2A14E11700D9E94F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -304,7 +380,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				74FE721A20FE43A4005F024C /* ViewController.m in Sources */,
+				74FE721A20FE43A4005F024C /* ViewController.mm in Sources */,
 				74FE722520FE43A7005F024C /* main.m in Sources */,
 				74FE721720FE43A3005F024C /* AppDelegate.m in Sources */,
 			);
@@ -477,14 +553,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PVG8K4727B;
-				FRAMEWORK_SEARCH_PATHS = "";
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../ffmpeg/lib";
+				FRAMEWORK_SEARCH_PATHS = "${PROJECT_DIR}/../build-extra/frameworks";
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../build-extra/frameworks/ffmpeg.framework/Headers/";
 				INFOPLIST_FILE = ApiDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../ffmpeg/lib";
+				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tech.ffmpeg;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -497,14 +574,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PVG8K4727B;
-				FRAMEWORK_SEARCH_PATHS = "";
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../ffmpeg/lib";
+				FRAMEWORK_SEARCH_PATHS = "${PROJECT_DIR}/../build-extra/frameworks";
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../build-extra/frameworks/ffmpeg.framework/Headers/";
 				INFOPLIST_FILE = ApiDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../ffmpeg/lib";
+				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tech.ffmpeg;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
