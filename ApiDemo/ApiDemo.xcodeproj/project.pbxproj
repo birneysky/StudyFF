@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		32227F8C2A14E11700D9E94F /* ffmpeg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32227F872A14D94000D9E94F /* ffmpeg.framework */; };
 		32227F8D2A14E11700D9E94F /* ffmpeg.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 32227F872A14D94000D9E94F /* ffmpeg.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		32BA19902A162D7F0007708E /* CoreImageViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 32BA198F2A162D7F0007708E /* CoreImageViewController.mm */; };
+		32BA19932A162D900007708E /* GLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32BA19922A162D900007708E /* GLViewController.m */; };
 		32D8A3EE2A05CCCA008E060F /* 123456.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 32D8A3EC2A05CCCA008E060F /* 123456.mp4 */; };
 		32D8A3EF2A05CCCA008E060F /* trailer.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 32D8A3ED2A05CCCA008E060F /* trailer.mp4 */; };
 		32FF45DA2A150D0B008B2A2A /* TextureRender.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FF45D62A150D0B008B2A2A /* TextureRender.m */; };
@@ -86,6 +88,10 @@
 		324E39152A14E41500FA25BC /* GLFilter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLFilter.hpp; sourceTree = "<group>"; };
 		324E39162A14E41500FA25BC /* GLNV12TextureFrame.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLNV12TextureFrame.hpp; sourceTree = "<group>"; };
 		324E39172A14E41500FA25BC /* GLContext.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLContext.hpp; sourceTree = "<group>"; };
+		32BA198E2A162D7F0007708E /* CoreImageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreImageViewController.h; sourceTree = "<group>"; };
+		32BA198F2A162D7F0007708E /* CoreImageViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CoreImageViewController.mm; sourceTree = "<group>"; };
+		32BA19912A162D900007708E /* GLViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLViewController.h; sourceTree = "<group>"; };
+		32BA19922A162D900007708E /* GLViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GLViewController.m; sourceTree = "<group>"; };
 		32D8A3EC2A05CCCA008E060F /* 123456.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 123456.mp4; sourceTree = "<group>"; };
 		32D8A3ED2A05CCCA008E060F /* trailer.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = trailer.mp4; sourceTree = "<group>"; };
 		32FF45D62A150D0B008B2A2A /* TextureRender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextureRender.m; sourceTree = "<group>"; };
@@ -208,6 +214,10 @@
 				74FE721620FE43A3005F024C /* AppDelegate.m */,
 				74FE721820FE43A3005F024C /* ViewController.h */,
 				74FE721920FE43A4005F024C /* ViewController.mm */,
+				32BA198E2A162D7F0007708E /* CoreImageViewController.h */,
+				32BA198F2A162D7F0007708E /* CoreImageViewController.mm */,
+				32BA19912A162D900007708E /* GLViewController.h */,
+				32BA19922A162D900007708E /* GLViewController.m */,
 				32FF45D72A150D0B008B2A2A /* TextureRender.h */,
 				32FF45D62A150D0B008B2A2A /* TextureRender.m */,
 				32FF45D92A150D0B008B2A2A /* VideoView.h */,
@@ -390,9 +400,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32BA19932A162D900007708E /* GLViewController.m in Sources */,
 				74FE721A20FE43A4005F024C /* ViewController.mm in Sources */,
 				32FF45DB2A150D0B008B2A2A /* VideoView.m in Sources */,
 				74FE722520FE43A7005F024C /* main.m in Sources */,
+				32BA19902A162D7F0007708E /* CoreImageViewController.mm in Sources */,
 				74FE721720FE43A3005F024C /* AppDelegate.m in Sources */,
 				32FF45DA2A150D0B008B2A2A /* TextureRender.m in Sources */,
 			);
