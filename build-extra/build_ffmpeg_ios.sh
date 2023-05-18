@@ -42,7 +42,7 @@ echo "created av1d.pc at $TOP_DIR/extra/av1/iOS/fat/lib/pkgconfig/av1d.pc"
 }
 
 FFMPEG_CONFIGURE_FLAGS="$FFMPEG_CONFIGURE_FLAGS --enable-libx264 --enable-gpl --enable-encoder=libx264"
-FFMPEG_CONFIGURE_FLAGS="$FFMPEG_CONFIGURE_FLAGS --enable-videotoolbox  --enable-encoder=h264_videotoolbox"
+FFMPEG_CONFIGURE_FLAGS="$FFMPEG_CONFIGURE_FLAGS --enable-videotoolbox"
 FFMPEG_CONFIGURE_FLAGS="$FFMPEG_CONFIGURE_FLAGS --enable-filters --enable-coreimage --enable-avfoundation"
 
 build() {

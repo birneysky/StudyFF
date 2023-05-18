@@ -77,6 +77,9 @@ static int interruptCallBack(void* arg) {
     [self.audioOutput open];
     [self testFilter];
     
+    const AVCodec* codec  =  avcodec_find_encoder_by_name("h264_videotoolbox");
+    const AVCodec* codec1 = avcodec_find_decoder_by_name("h264_videotoolbox");
+    NSLog(@"codec %p", codec);
     
     /**
      
