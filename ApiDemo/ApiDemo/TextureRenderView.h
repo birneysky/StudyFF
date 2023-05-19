@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TextureRender : UIView
+@interface TextureRenderView : UIView
 
 - (void)setContext:(EAGLContext*)context;
 

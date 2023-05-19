@@ -26,7 +26,7 @@ public:
     virtual int getNumInputs() const = 0;
     virtual int getNumOutputs() const = 0;
 
-    virtual T* getFrame(int index = 0) const = 0;
+    virtual T* getFrame(int index = 0) = 0;
     void connect(Linkable& dst, int dst_port, int src_port = 0) {
         dst.setInput(dst_port, *this, src_port);
     };

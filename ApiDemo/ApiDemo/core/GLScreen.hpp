@@ -47,7 +47,7 @@ public:
     virtual void setOutput(int index, Linkable& filter, int port) override {
     }
     
-    virtual GLTextureFrame* getFrame(int index = 0) const override {
+    virtual GLTextureFrame* getFrame(int index = 0) override {
         Link link = getInputLink(0);
         if (!link.target) {
             return nullptr;

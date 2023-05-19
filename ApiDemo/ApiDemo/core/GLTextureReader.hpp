@@ -19,7 +19,7 @@ private:
     I420Reader* reader = nullptr;
     EAGLContext* _context =  nullptr;
     GLTextureFrame* _textureFrame;
-    TextureRender1* render = nullptr;
+    TextureRender* render = nullptr;
     EAGLContext* _glContext;
     CVPixelBufferRef pixelBuffer = NULL;
 public:
@@ -74,7 +74,7 @@ public:
 //        }
 
         if (!render) {
-            render = new TextureRender1(_glContext);
+            render = new TextureRender(_glContext);
         }
         
         if (render) {

@@ -10,6 +10,7 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <map>
 #include <OpenGLES/ES2/gl.h>
 #include <OpenGLES/ES2/glext.h>
 
@@ -53,6 +54,7 @@ private:
     }
 public:
     GLProgram(const std::string& vShader, const std::string& fShader) {
+        program = glCreateProgram();
         if (!compileShader(&vertShader, GL_VERTEX_SHADER, vShader)) {
             std::cout << "Failed to compile vertex shader" << std::endl;
         }
@@ -95,12 +97,7 @@ public:
     
     
     GLuint getAttributeIndex(const std::string& name) {
-        auto it = attributes.find(name);
-        if (it == attributes.end()) {
-            return -1;
-        }
-        
-        return it->second;
+        return glGetAttribLocation(program, name.c_str());
     }
     
     GLuint getUniformIndex(const std::string& uniformName) {

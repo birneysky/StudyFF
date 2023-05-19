@@ -9,15 +9,18 @@
 #define GLFileInput_hpp
 
 #include "Linkable.hpp"
+#include "AssetReader.hpp"
 #include "GLTextureReader.hpp"
 #include "GLTextureFrame.hpp"
 
 class GLFileInput: public Linkable <GLTextureFrame>{
 private:
-    GLTextureReader* reader;
+    AssetReader* reader;
+    //GLTextureReader* _reader;
 public:
-    GLFileInput(GLTextureReader& reader) {
+    GLFileInput(AssetReader& reader) {
         this->reader = &reader;
+        //_reader = &reader;
     }
     
     virtual int getNumInputs() const override {
@@ -34,8 +37,12 @@ public:
         
     }
     
-    virtual GLTextureFrame* getFrame(int index = 0) const override {
-        return reader->read();
+    virtual GLTextureFrame* getFrame(int index = 0) override {
+        //return _reader->read();
+        if (reader->status() == AssetReader::Status::unknown) {
+            reader->startReading();
+        }
+        return reader->getNextFrame(AssetReader::MediaType::Video);
     }
     //GLTextureReader
 };

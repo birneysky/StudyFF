@@ -26,7 +26,7 @@ public:
         
     }
     
-    virtual CIImage* getFrame(int index = 0) const  override {
+    virtual CIImage* getFrame(int index = 0) override {
         Link link0 = getInputLink(0);
         if (!link0.target) {
             abort();

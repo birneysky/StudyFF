@@ -146,15 +146,15 @@ public:
         glUseProgram(_nv12Program);
 
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+//        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+//        glEnable(GL_BLEND);
+//        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
         
-        for (int i = 0; i < len; i++) {
-            glActiveTexture(static_cast<GLenum>(GL_TEXTURE0 + i));
-            glBindTexture(GL_TEXTURE_2D, textures[i]);
-        }
+//        for (int i = 0; i < len; i++) {
+//            glActiveTexture(static_cast<GLenum>(GL_TEXTURE0 + i));
+//            glBindTexture(GL_TEXTURE_2D, textures[i]);
+//        }
 
         glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
         

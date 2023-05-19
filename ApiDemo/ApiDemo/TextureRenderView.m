@@ -5,7 +5,8 @@
 //  Created by Bruce on 2023/5/16.
 //
 
-#import "TextureRender.h"
+#import "TextureRenderView.h"
+#import <AVFoundation/AVFoundation.h>
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
 
@@ -39,7 +40,7 @@ NSString *const rgbFragmentShaderString = SHADER_STRING
 
 
 
-@implementation TextureRender {
+@implementation TextureRenderView {
     EAGLContext* _context;
     GLuint                                  _framebuffer;
     GLuint                                  _renderbuffer;
@@ -131,8 +132,6 @@ NSString *const rgbFragmentShaderString = SHADER_STRING
 
 - (void)setprogram {
     
-    frameWidth = 210;
-    frameHeight = 210;
     if([self buildProgram:vertexShaderString fragmentShader:rgbFragmentShaderString]) {
     }
 }
@@ -204,19 +203,28 @@ static inline BOOL validateProgram(GLuint prog)
     return YES;
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    frameWidth = self.bounds.size.width;
+    frameHeight = self.bounds.size.height;
+}
+
 
 - (void)renderTexture:(GLuint)texture with:(int)width height:(int)height {
     [EAGLContext setCurrentContext:_context];
     glBindFramebuffer(GL_FRAMEBUFFER, _framebuffer);
-    //glViewport((_backingWidth - width)/2, (_backingHeight - height) / 2, width, height);
+    
+  //  CGRect rect = AVMakeRectWithAspectRatioInsideRect(CGSizeMake(width, height), (CGRect){0, 0, frameWidth, frameHeight});
+    //glViewport(rect.origin.x, rect.origin.y, (GLsizei)rect.size.width, (GLsizei)rect.size.height);
+//    glViewport((_backingWidth - width)/2, (_backingHeight - height) / 2, width, height);
     glViewport(0, 0, width, height);
     //[_frameCopier renderFrame:_frame->pixels];
     
     glUseProgram(_filterProgram);
     glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+//    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+//    glEnable(GL_BLEND);
+//    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
     static const GLfloat imageVertices[] = {
         -1.0f, -1.0f,
@@ -231,6 +239,9 @@ static inline BOOL validateProgram(GLuint prog)
         1.0f, 1.0f,
         0.0f, 1.0f,
     };
+    
+    
+    
     
     glVertexAttribPointer(filterPositionAttribute, 2, GL_FLOAT, 0, 0, imageVertices);
     glEnableVertexAttribArray(filterPositionAttribute);

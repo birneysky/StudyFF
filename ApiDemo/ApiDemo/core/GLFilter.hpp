@@ -10,38 +10,31 @@
 
 #include "GLProgram.hpp"
 #include "GLTextureFrame.hpp"
+#import "Filter.hpp"
 #import <OpenGLES/ES3/gl.h>
 #import <OpenGLES/ES3/glext.h>
 #import <OpenGLES/gltypes.h>
 
-class GLFilter {
+
+
+class GLFilter : public Filter<GLTextureFrame>{
 private:
-    const std::string vertexShader = R"(
-             attribute vec4 position;
-             attribute vec4 texcoord;
-             
-             varying vec2 textureCoordinate;
-             
-             void main()
-             {
-                 gl_Position = position;
-                 textureCoordinate = texcoord.xy;
-             }
-    )";
-    
     
     const std::string fragmentShader = R"(
         varying highp vec2 textureCoordinate;
         uniform sampler2D inputImageTexture;
-     
+       // const mediump vec3 LUMINANCE_FACTOR = vec3(0.2125, 0.7154, 0.0721);
         void main()
         {
+//            highp vec4 sampleColor = texture2D(inputImageTexture, textureCoordinate);
+//            lowp float luminance = dot(sampleColor.rgb, LUMINANCE_FACTOR);
+//            gl_FragColor = vec4(mix(vec3(luminance), sampleColor.rgb, 1.0 - 0.9), 1.0);
             gl_FragColor = texture2D(inputImageTexture, textureCoordinate);
         }
     )";
-
+    
 private:
-    static GLContext context;
+    //static GLContext context;
     GLProgram* program = nullptr;
     GLTextureFrame* inputTexure = nullptr;
     GLuint _frameBuffer;
@@ -50,33 +43,46 @@ private:
     GLint _Height;
     GLint  _position;
     GLint _textureCoord;
+    GLuint _inputTextureIndex;
     GLuint _vao;
     GLuint _vbo;
-     
-protected:
-    virtual void process(GLTextureFrame* frame) {
+    
+    GLuint _targetTexture;
+    GLuint _targetFBO;
+    GLTextureFrame* output = nullptr;
+public:
+    static const std::string vertexShader;
+    GLFilter() {
         
+        //GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
     }
     
-public:
-    GLFilter() {
-        program =  new GLProgram(vertexShader, fragmentShader);
-        if (!program->link()) {
-            abort();
+    virtual ~GLFilter() {
+        if (output) {
+            delete output;
+            output = nullptr;
         }
-//        glGenRenderbuffers(1, &_renderBuffer);
-        _position = program->getAttributeIndex("position");
-        _textureCoord = program->getAttributeIndex("texcoord");
         
+        if (program) {
+            delete  program;
+            program = nullptr;
+        }
     }
     
     const std::string& getVertexShader() {
         return vertexShader;
     }
     
-    virtual const std::string getfragmentShader() {
+    virtual const std::string& getfragmentShader() {
         return fragmentShader;
     };
+    
+    virtual GLProgram* getProgram() {
+        if (!program) {
+            program = new GLProgram(vertexShader, fragmentShader);
+        }
+        return program;
+    }
     
     void setInput(GLTextureFrame* frame) {
         inputTexure = frame;
@@ -84,58 +90,69 @@ public:
     
     GLTextureFrame* getOutput() {
         if (inputTexure) {
-            /// set context
-            context.useCurrentContext();
-            /// set buffers
+            if (!program) {
+                program = getProgram();
+                if (!program->link()) {
+                    abort();
+                }
+        //        glGenRenderbuffers(1, &_renderBuffer);
+                _position = program->getAttributeIndex("position");
+                _textureCoord = program->getAttributeIndex("texcoord");
+                _inputTextureIndex = program->getUniformIndex("inputImageTexture");
+            }
             
-            glGenBuffers(1, &_vbo);
-            glGenVertexArrays(1, &_vao);
-            /// 左侧顶点坐标，右侧纹理坐标
-            static const GLfloat vertices[] = {
-                -1.0f, -1.0f,  0.0f, 1.0f,
-                 1.0f, -1.0f,  1.0f, 1.0f,
-                 1.0f,  1.0f,  1.0f, 0.0f,
-                -1.0f,  1.0f,  0.0f, 0.0f,
+            if (!output) {
+                output = new GLTextureFrame(inputTexure->getWidth(), inputTexure->getHeight());
+                glGenFramebuffers(1, &_targetFBO);
+                glBindFramebuffer(GL_FRAMEBUFFER, _targetFBO);
+                glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, output->getTexture(), 0);
+            }
+            
+            
+            glBindFramebuffer(GL_FRAMEBUFFER, _targetFBO);
+            glActiveTexture(GL_TEXTURE0);
+            glBindTexture(GL_TEXTURE_2D, inputTexure->getTexture());
+            
+            static const GLfloat imageVertices[] = {
+                -1.0f, -1.0f,
+                1.0f, -1.0f,
+                1.0f,  1.0f,
+                -1.0f,  1.0f,
             };
-            glBindVertexArray(_vao);
-            glBindBuffer(GL_ARRAY_BUFFER, _vbo);
-            glBufferData(GL_ARRAY_BUFFER, 4 * 4 * sizeof(GLfloat), NULL, GL_STATIC_DRAW);
-            glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
-            
-            // 3. 设置顶点属性指针
-            glVertexAttribPointer(_position, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), (void*)0);
+
+            GLfloat noRotationTextureCoordinates[] = {
+                0.0f, 1.0f,
+                1.0f, 1.0f,
+                1.0f, 0.0f,
+                0.0f, 0.0f,
+            };
+
+            glVertexAttribPointer(_position, 2, GL_FLOAT, 0, 0, imageVertices);
             glEnableVertexAttribArray(_position);
-            
-            glVertexAttribPointer(_textureCoord, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), (void *)(2 * sizeof(GLfloat)));
+            glVertexAttribPointer(_textureCoord, 2, GL_FLOAT, 0, 0, noRotationTextureCoordinates);
             glEnableVertexAttribArray(_textureCoord);
             
-//            glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, _renderBuffer);
-//            glBindRenderbuffer(GL_RENDERBUFFER, _renderBuffer);
-            /// upload texture
-            glBindTexture(GL_TEXTURE_2D, inputTexure->getTexture());
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-            glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-            glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-            /// using gramm
-            process(inputTexure);
             program->use();
-            /// draw
             glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+            return output;
         }
         
         return inputTexure;
     }
     
-    ~GLFilter() {
-        if (program) {
-            delete program;
-            program = nullptr;
+    virtual GLTextureFrame* getFrame(int port) override {
+        Link link = getInputLink(0);
+        if (!link.target) {
+            return nullptr;
         }
+        
+        GLTextureFrame* frame = link.target->getFrame(link.port);
+        setInput(frame);
+        GLTextureFrame* outFrame = getOutput();
+        return outFrame;
     }
-    
-    
-    
 };
+
+
 
 #endif /* GLFilter_hpp */

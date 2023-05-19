@@ -57,7 +57,7 @@ public:
     }
     
     int getHeight() const {
-        return _width;
+        return _height;
     }
     
     GLuint getTexture() const {

@@ -44,25 +44,25 @@ private:
         }
     )";
     const std::string fragmentShader = R"(
-        //precision highp float;
-         varying highp vec2 v_texcoord;
-         uniform lowp sampler2D s_textureY;
-         uniform lowp sampler2D s_textureU;
-         uniform lowp sampler2D s_textureV;
-         void main() {
+        varying highp vec2 v_texcoord;
+        uniform lowp sampler2D s_textureY;
+        uniform lowp sampler2D s_textureU;
+        uniform lowp sampler2D s_textureV;
 
-             mediump vec3 yuv;
+        void main() {
+            mediump vec3 yuv;
+            yuv.x = texture2D(s_textureY, v_texcoord).r;
+            yuv.y = texture2D(s_textureU, v_texcoord).r - 0.5;
+            yuv.z = texture2D(s_textureV, v_texcoord).r - 0.5;
 
-             yuv.x = texture2D(s_textureY, v_texcoord).r;
-             yuv.y = texture2D(s_textureU, v_texcoord).r;
-             yuv.z = texture2D(s_textureV, v_texcoord).r;
+            mediump mat3 matrix = mat3( 1.0,  0.0,  1.28033,
+                                   1.0, -0.21482, -0.38059,
+                                   1.0,  2.12798,  0.0 );
 
-              mediump mat3 matrix = mat3( 1,  0, 1.28033,
-                                          1,   -0.21482, -0.38509,
-                                          1, 2.12798, 0.0 );
-             lowp vec3 rgb = matrix * yuv;
-             gl_FragColor = vec4(rgb,1.0);
-         }
+
+            lowp vec3 rgb = matrix * yuv;
+            gl_FragColor = vec4(rgb, 1.0);
+        }
     )";
     
 
@@ -70,6 +70,18 @@ private:
 //            yuv.y = yuv.y - 0.5;
 //            yuv.z = yuv.z - 0.5;
         /*
+         
+         mediump vec3 yuv;
+
+         yuv.x = texture2D(s_textureY, v_texcoord).r;
+         yuv.y = texture2D(s_textureU, v_texcoord).r;
+         yuv.z = texture2D(s_textureV, v_texcoord).r;
+
+          mediump mat3 matrix = mat3( 1,  0, 1.28033,
+                                      1,   -0.21482, -0.38509,
+                                      1, 2.12798, 0.0 );
+         lowp vec3 rgb = matrix * yuv;
+         gl_FragColor = vec4(rgb,1.0);
          
          mediump mat3 matrix = mat3( 1,  0, 1.28033,
                                      1,   -0.21482, -0.38509,
@@ -169,6 +181,7 @@ public:
             1.0f, 0.0f,
             0.0f, 0.0f,
         };
+        
         
         glVertexAttribPointer(_position, 2, GL_FLOAT, 0, 0, imageVertices);
         glEnableVertexAttribArray(_position);

@@ -35,7 +35,7 @@ public:
         
     }
     
-    virtual CIImage* getFrame(int index = 0) const override {
+    virtual CIImage* getFrame(int index = 0)  override {
         return reader->read();
     }
 };

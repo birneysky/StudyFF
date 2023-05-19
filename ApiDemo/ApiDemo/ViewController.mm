@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <string>
 extern "C" {
 #include <libavcodec/avcodec.h>
 #include <libavformat/avformat.h>
@@ -142,7 +143,7 @@ void testfilters(void) {
     AVFormatContext *ofmt_ctx = NULL;
     AVStream *out_stream = NULL;
     AVCodecContext *ofmt_ctx_codec = NULL;
-    const AVCodec *video_codec = NULL;
+     AVCodec *video_codec = NULL;
     AVFilterContext *buffersink_ctx = NULL;
     AVFilterContext *buffersrc_ctx1 = NULL;
     AVFilterContext *buffersrc_ctx2 = NULL;
@@ -482,8 +483,7 @@ void testfilters(void) {
     packet2->data = NULL;
     packet2->size = 0;
     av_init_packet(packet2);
-    
-    
+
     
     while (true) {
         BOOL file1Done = NO;
@@ -701,7 +701,7 @@ void testfilters2(void) {
     AVFormatContext *ofmt_ctx = NULL;
     AVStream *out_stream = NULL;
     AVCodecContext *ofmt_ctx_codec = NULL;
-    const AVCodec *video_codec = NULL;
+    AVCodec *video_codec = NULL;
     AVFilterContext *buffersink_ctx = NULL;
     AVFilterContext *buffersrc_ctx1 = NULL;
     AVFilterContext *buffersrc_ctx2 = NULL;
@@ -1029,7 +1029,8 @@ void testfilters2(void) {
           return;
       }
     
-    
+    std::string path = std::string(NSTemporaryDirectory().UTF8String) + "y.yuv";
+    FILE* file = fopen(path.c_str(), "wb");
     // 读取帧和应用滤镜
     while (true) {
         BOOL file1Done = NO;
@@ -1063,7 +1064,12 @@ void testfilters2(void) {
                         //av_frame_free(&frame1);
                         return;
                     }
-
+                    int width = frame1->width;
+                    int height = frame1->height;
+                    fwrite(frame1->data[0], 1, width*height, file);
+                    fwrite(frame1->data[1], 1, width*height / 4, file);
+                    fwrite(frame1->data[2], 1, width*height / 4, file);
+                    fflush(file);
                     // 发送帧到输入滤镜1
                     if (av_buffersrc_add_frame_flags(buffersrc_ctx1, frame1, AV_BUFFERSRC_FLAG_PUSH) < 0) {
                         av_log(NULL, AV_LOG_ERROR, "Error while feeding the filtergraph\n");

@@ -18,7 +18,7 @@
 #include "I420TextureCache.hpp"
 #include "i420Shader.hpp"
 
-class TextureRender1 {
+class TextureRender {
 private:
     EAGLContext* _glContext = nullptr;
     NV12Shader* shader1 = nullptr;
@@ -61,7 +61,7 @@ private:
         
     }
 public:
-    TextureRender1(EAGLContext * context) {
+    TextureRender(EAGLContext * context) {
         _glContext = context;
     }
     
@@ -81,8 +81,6 @@ public:
             setupContextAndBuffers((int)width, (int)height);
             i420shader = new I420Shader();
         }
-        
-        
         if (!i420Cache) {
             i420Cache = new I420TextureCache(width, height);
         }

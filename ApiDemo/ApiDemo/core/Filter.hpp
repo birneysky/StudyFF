@@ -17,7 +17,9 @@ public:
     virtual ~Filter() {
         
     }
-    
+    Filter(){
+        
+    }
     Filter(const std::string& name) {
         this->name = name;
     }
@@ -35,7 +37,7 @@ public:
         
     }
     
-    virtual T* getFrame(int index = 0) const  override {
+    virtual T* getFrame(int index = 0) override {
         return nullptr;
     }
     
