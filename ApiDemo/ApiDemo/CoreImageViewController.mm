@@ -15,6 +15,7 @@
 #import "CIFilterOverlay.hpp"
 #import "CIFilterGray.hpp"
 #import "CIScreen.hpp"
+#include "AssetReadeer.hpp"
 
 @interface CoreImageViewController ()
 @property (weak, nonatomic) IBOutlet VideoView *videoView;
@@ -25,6 +26,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    NSString* yuvPath = [[NSBundle mainBundle] pathForResource:@"trailer" ofType:@"mp4"];
+    
+    AssetReader reader(yuvPath.UTF8String);
     // Do any additional setup after loading the view.
 }
 

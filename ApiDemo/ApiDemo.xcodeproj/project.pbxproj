@@ -94,6 +94,8 @@
 		32BA19922A162D900007708E /* GLViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GLViewController.m; sourceTree = "<group>"; };
 		32D8A3EC2A05CCCA008E060F /* 123456.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 123456.mp4; sourceTree = "<group>"; };
 		32D8A3ED2A05CCCA008E060F /* trailer.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = trailer.mp4; sourceTree = "<group>"; };
+		32FBC0122A165545007B37D0 /* AssetReadeer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetReadeer.hpp; sourceTree = "<group>"; };
+		32FBC0152A165568007B37D0 /* TimeRange.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TimeRange.hpp; sourceTree = "<group>"; };
 		32FF45D62A150D0B008B2A2A /* TextureRender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextureRender.m; sourceTree = "<group>"; };
 		32FF45D72A150D0B008B2A2A /* TextureRender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextureRender.h; sourceTree = "<group>"; };
 		32FF45D82A150D0B008B2A2A /* VideoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoView.m; sourceTree = "<group>"; };
@@ -159,6 +161,8 @@
 				324E38FF2A14E41500FA25BC /* NV12Reader.hpp */,
 				324E39002A14E41500FA25BC /* GLTextureReader.hpp */,
 				324E39012A14E41500FA25BC /* I420Reader.hpp */,
+				32FBC0152A165568007B37D0 /* TimeRange.hpp */,
+				32FBC0122A165545007B37D0 /* AssetReadeer.hpp */,
 				324E39022A14E41500FA25BC /* CIFileInput.hpp */,
 				324E39032A14E41500FA25BC /* CIFilterOverlay.hpp */,
 				324E39042A14E41500FA25BC /* CIFilterGray.hpp */,
