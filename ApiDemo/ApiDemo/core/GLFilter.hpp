@@ -127,6 +127,7 @@ public:
                 0.0f, 0.0f,
             };
 
+            
             glVertexAttribPointer(_position, 2, GL_FLOAT, 0, 0, imageVertices);
             glEnableVertexAttribArray(_position);
             glVertexAttribPointer(_textureCoord, 2, GL_FLOAT, 0, 0, noRotationTextureCoordinates);

@@ -143,7 +143,7 @@ void testfilters(void) {
     AVFormatContext *ofmt_ctx = NULL;
     AVStream *out_stream = NULL;
     AVCodecContext *ofmt_ctx_codec = NULL;
-     AVCodec *video_codec = NULL;
+    const AVCodec *video_codec = NULL;
     AVFilterContext *buffersink_ctx = NULL;
     AVFilterContext *buffersrc_ctx1 = NULL;
     AVFilterContext *buffersrc_ctx2 = NULL;
@@ -701,7 +701,7 @@ void testfilters2(void) {
     AVFormatContext *ofmt_ctx = NULL;
     AVStream *out_stream = NULL;
     AVCodecContext *ofmt_ctx_codec = NULL;
-    AVCodec *video_codec = NULL;
+    const AVCodec *video_codec = NULL;
     AVFilterContext *buffersink_ctx = NULL;
     AVFilterContext *buffersrc_ctx1 = NULL;
     AVFilterContext *buffersrc_ctx2 = NULL;
@@ -758,7 +758,6 @@ void testfilters2(void) {
 
 
     // 添加视频输出流
-    
     video_stream_index1 = av_find_best_stream(ifmt_ctx1, AVMEDIA_TYPE_VIDEO, -1, -1, &video_codec, 0);
     if (video_stream_index1 < 0) {
         printf("Cannot find video stream in input file1\n");

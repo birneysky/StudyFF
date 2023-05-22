@@ -1,19 +1,21 @@
 //
-//  GLGrayFilter.hpp
+//  GLTransitionFilter.hpp
 //  ApiDemo
 //
-//  Created by Bruce on 2023/5/19.
+//  Created by Bruce on 2023/5/22.
 //  Copyright © 2023 Grocery. All rights reserved.
 //
 
-#ifndef GLGrayFilter_hpp
-#define GLGrayFilter_hpp
+#ifndef GLTransitionFilter_hpp
+#define GLTransitionFilter_hpp
 
 #include "Filter.hpp"
 #include "GLTextureFrame.hpp"
 #include "GLFilter.hpp"
 
-class GLGrayFilter: public GLFilter {
+class GLTransitionFilter: public GLFilter {
+private:
+    GLTextureFrame* lastFrame0;
 public:
     const std::string fragmentShader = R"(
         varying highp vec2 textureCoordinate;
@@ -28,11 +30,11 @@ public:
     )";
 public:
     
-    GLGrayFilter(){
+    GLTransitionFilter(){
     }
     
     virtual int getNumInputs() const override {
-        return 1;
+        return 2;
     }
     virtual int getNumOutputs() const override {
         return 1;
@@ -48,22 +50,41 @@ public:
     };
     
    virtual GLTextureFrame* getFrame(int port) override {
-        Link link = getInputLink(0);
-        if (!link.target) {
+        Link link0 = getInputLink(0);
+        if (!link0.target) {
             return nullptr;
             
         }
-        
-        GLTextureFrame* frame = link.target->getFrame(link.port);
-       setInput(frame);
-       GLTextureFrame* outFrame = getOutput();
-
        
+       Link link1 = getInputLink(1);
+       if (!link1.target) {
+           return nullptr;
+           
+       }
+       
+        GLTextureFrame* frame1 = link0.target->getFrame(link0.port);
+       if (!frame) {
+           
+           GLTextureFrame* frame2 = link1.target->getFrame(link1.port);
+           //lastFrame0
+           /// to do image process
+           ///
+           GLTextureFrame* outFrame = getOutput();
+           return outFrame;
+       } else {
+           lastFrame0 = frame1;
+           return frame1;
+       }
+       
+//       setInput(frame);
+
+
+
+
+
         
-        return outFrame;
     }
 };
 
 
-
-#endif /* GLGrayFilter_hpp */
+#endif /* GLTransitionFilter_hpp */

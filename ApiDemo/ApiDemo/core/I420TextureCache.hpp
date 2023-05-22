@@ -36,7 +36,7 @@ public:
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-            glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+            //glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
             //
             //glBindTexture(GL_TEXTURE_2D, 0);
             yBuffer = new uint8_t[width*height] {};
@@ -79,11 +79,11 @@ public:
 
         
         dptr = vBuffer;
-        srcPtr = frame->data[1];
+        srcPtr = frame->data[2];
         for(int i = 0; i < height / 2; i++) {
             memcpy(dptr, srcPtr, width / 2);
             dptr += width / 2;
-            srcPtr += frame->linesize[1];
+            srcPtr += frame->linesize[2];
         }
         glActiveTexture(GL_TEXTURE2);
         glBindTexture(GL_TEXTURE_2D, _texutres[2]);
