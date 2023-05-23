@@ -35,7 +35,6 @@ private:
     
 private:
     //static GLContext context;
-    GLProgram* program = nullptr;
     GLTextureFrame* inputTexure = nullptr;
     GLuint _frameBuffer;
 //    GLuint _renderBuffer;
@@ -50,6 +49,8 @@ private:
     GLuint _targetTexture;
     GLuint _targetFBO;
     GLTextureFrame* output = nullptr;
+protected:
+    GLProgram* program = nullptr;
 public:
     static const std::string vertexShader;
     GLFilter() {

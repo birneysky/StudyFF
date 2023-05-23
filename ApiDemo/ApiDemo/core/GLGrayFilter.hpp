@@ -39,7 +39,10 @@ public:
     }
     
     virtual GLProgram* getProgram() override {
-        return new GLProgram(vertexShader, fragmentShader);;
+        if (!program) {
+            program = new GLProgram(vertexShader, fragmentShader);
+        }
+        return program;
     }
     
     
@@ -57,9 +60,6 @@ public:
         GLTextureFrame* frame = link.target->getFrame(link.port);
        setInput(frame);
        GLTextureFrame* outFrame = getOutput();
-
-       
-        
         return outFrame;
     }
 };

@@ -16,16 +16,19 @@
 class GLTransitionFilter: public GLFilter {
 private:
     GLTextureFrame* lastFrame0;
+    GLTextureFrame* firstFrame1;
 public:
     const std::string fragmentShader = R"(
         varying highp vec2 textureCoordinate;
-        uniform sampler2D inputImageTexture;
-        const mediump vec3 LUMINANCE_FACTOR = vec3(0.2125, 0.7154, 0.0721);
+        uniform sampler2D s_Texture1;
+        uniform sampler2D s_Texture2;
+        uniform float progress;
         void main()
         {
-            highp vec4 sampleColor = texture2D(inputImageTexture, textureCoordinate);
-            lowp float luminance = dot(sampleColor.rgb, LUMINANCE_FACTOR);
-            gl_FragColor = vec4(mix(vec3(luminance), sampleColor.rgb, 1.0 - 0.9), 1.0);
+            vec2 p = textureCoordinate.xy/vec2(1.0).xy;
+            highp vec4 sample1 = texture2D(s_Texture1,textureCoordinate);
+            highp vec4 sample2 = texture2D(s_Texture2,textureCoordinate);
+            gl_FragColor = mix(sample1, sample2, step(1.0-p.x,progress));
         }
     )";
 public:
