@@ -92,7 +92,6 @@
 		324E39132A14E41500FA25BC /* GLScreen.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLScreen.hpp; sourceTree = "<group>"; };
 		324E39142A14E41500FA25BC /* NV12TextCache.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NV12TextCache.hpp; sourceTree = "<group>"; };
 		324E39152A14E41500FA25BC /* GLFilter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLFilter.hpp; sourceTree = "<group>"; };
-		324E39162A14E41500FA25BC /* GLNV12TextureFrame.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLNV12TextureFrame.hpp; sourceTree = "<group>"; };
 		324E39172A14E41500FA25BC /* GLContext.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLContext.hpp; sourceTree = "<group>"; };
 		32BA198E2A162D7F0007708E /* CoreImageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreImageViewController.h; sourceTree = "<group>"; };
 		32BA198F2A162D7F0007708E /* CoreImageViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CoreImageViewController.mm; sourceTree = "<group>"; };
@@ -191,7 +190,6 @@
 				320632392A17A8680071E0E7 /* GLFilter.cpp */,
 				320632372A17617A0071E0E7 /* GLGrayFilter.hpp */,
 				321555C32A1AE52D00C0E453 /* GLTransitionFilter.hpp */,
-				324E39162A14E41500FA25BC /* GLNV12TextureFrame.hpp */,
 				324E39172A14E41500FA25BC /* GLContext.hpp */,
 				3206322F2A1728A40071E0E7 /* ShadingHelper.c */,
 				320632302A1728A40071E0E7 /* ShadingHelper.h */,
