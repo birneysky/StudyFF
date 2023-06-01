@@ -77,7 +77,7 @@
         GLFileInput glInput1(reader1);
         GLGrayFilter grayfilter;
         
-        NSString* filePath2 = [[NSBundle mainBundle] pathForResource:@"trailer" ofType:@"mp4"];
+        NSString* filePath2 = [[NSBundle mainBundle] pathForResource:@"8288" ofType:@"mp4"];
         AssetReader reader2(filePath2.UTF8String, self.glContext);
         GLFileInput glInput2(reader2);
         

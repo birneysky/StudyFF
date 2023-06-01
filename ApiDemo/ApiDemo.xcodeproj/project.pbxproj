@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		320632312A1728A40071E0E7 /* ShadingHelper.c in Sources */ = {isa = PBXBuildFile; fileRef = 3206322F2A1728A40071E0E7 /* ShadingHelper.c */; };
 		3206323A2A17A8680071E0E7 /* GLFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 320632392A17A8680071E0E7 /* GLFilter.cpp */; };
+		321555C72A28DB4C00C0E453 /* 45678.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 321555C52A28DB4C00C0E453 /* 45678.mp4 */; };
+		321555C82A28DB4C00C0E453 /* 8288.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 321555C62A28DB4C00C0E453 /* 8288.mp4 */; };
 		32227F8C2A14E11700D9E94F /* ffmpeg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32227F872A14D94000D9E94F /* ffmpeg.framework */; };
 		32227F8D2A14E11700D9E94F /* ffmpeg.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 32227F872A14D94000D9E94F /* ffmpeg.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		32BA19902A162D7F0007708E /* CoreImageViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 32BA198F2A162D7F0007708E /* CoreImageViewController.mm */; };
@@ -27,7 +29,7 @@
 		74FE723A20FE43A7005F024C /* ApiDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 74FE723920FE43A7005F024C /* ApiDemoUITests.m */; };
 		74FE725120FE4D30005F024C /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FE725020FE4D30005F024C /* VideoToolbox.framework */; };
 		74FE725520FE4D9B005F024C /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FE725420FE4D9B005F024C /* CoreMedia.framework */; };
-		74FE72F420FF8C02005F024C /* test.MP4 in Resources */ = {isa = PBXBuildFile; fileRef = 74FE72F320FF8C02005F024C /* test.MP4 */; };
+		74FE72F420FF8C02005F024C /* test.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 74FE72F320FF8C02005F024C /* test.mp4 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +69,8 @@
 		320632372A17617A0071E0E7 /* GLGrayFilter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GLGrayFilter.hpp; sourceTree = "<group>"; };
 		320632392A17A8680071E0E7 /* GLFilter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GLFilter.cpp; sourceTree = "<group>"; };
 		321555C32A1AE52D00C0E453 /* GLTransitionFilter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GLTransitionFilter.hpp; sourceTree = "<group>"; };
+		321555C52A28DB4C00C0E453 /* 45678.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 45678.mp4; sourceTree = "<group>"; };
+		321555C62A28DB4C00C0E453 /* 8288.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 8288.mp4; sourceTree = "<group>"; };
 		32227F872A14D94000D9E94F /* ffmpeg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ffmpeg.framework; path = "../build-extra/frameworks/ffmpeg.framework"; sourceTree = "<group>"; };
 		324E38FD2A14E41500FA25BC /* CIImageReader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CIImageReader.hpp; sourceTree = "<group>"; };
 		324E38FE2A14E41500FA25BC /* TextureRender.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TextureRender.hpp; sourceTree = "<group>"; };
@@ -128,7 +132,7 @@
 		74FE725420FE4D9B005F024C /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		74FE725620FE4DBA005F024C /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		74FE72F120FE517F005F024C /* libffmpeg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libffmpeg.a; path = ../ffmpeg/lib/libffmpeg.a; sourceTree = "<group>"; };
-		74FE72F320FF8C02005F024C /* test.MP4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.MP4; sourceTree = "<group>"; };
+		74FE72F320FF8C02005F024C /* test.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.mp4; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -236,8 +240,10 @@
 				32FF45D62A150D0B008B2A2A /* TextureRenderView.m */,
 				32FF45D92A150D0B008B2A2A /* VideoView.h */,
 				32FF45D82A150D0B008B2A2A /* VideoView.m */,
-				74FE72F320FF8C02005F024C /* test.MP4 */,
+				74FE72F320FF8C02005F024C /* test.mp4 */,
 				32D8A3EC2A05CCCA008E060F /* 123456.mp4 */,
+				321555C62A28DB4C00C0E453 /* 8288.mp4 */,
+				321555C52A28DB4C00C0E453 /* 45678.mp4 */,
 				32D8A3ED2A05CCCA008E060F /* trailer.mp4 */,
 				74FE721B20FE43A4005F024C /* Main.storyboard */,
 				74FE721E20FE43A7005F024C /* Assets.xcassets */,
@@ -385,10 +391,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				32D8A3EE2A05CCCA008E060F /* 123456.mp4 in Resources */,
+				321555C82A28DB4C00C0E453 /* 8288.mp4 in Resources */,
 				74FE722220FE43A7005F024C /* LaunchScreen.storyboard in Resources */,
+				321555C72A28DB4C00C0E453 /* 45678.mp4 in Resources */,
 				74FE721F20FE43A7005F024C /* Assets.xcassets in Resources */,
 				74FE721D20FE43A4005F024C /* Main.storyboard in Resources */,
-				74FE72F420FF8C02005F024C /* test.MP4 in Resources */,
+				74FE72F420FF8C02005F024C /* test.mp4 in Resources */,
 				32D8A3EF2A05CCCA008E060F /* trailer.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
