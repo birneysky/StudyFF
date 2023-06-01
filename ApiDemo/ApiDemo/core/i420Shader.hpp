@@ -82,10 +82,6 @@ private:
         
         glLinkProgram(_nv12Program);
         
-        
-
-
-        
         _position = glGetAttribLocation(_nv12Program, "position");
         _textureCoord = glGetAttribLocation(_nv12Program, "texcoord");
         

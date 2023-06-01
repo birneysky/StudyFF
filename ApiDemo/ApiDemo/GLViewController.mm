@@ -14,6 +14,7 @@
 #include "I420Reader.hpp"
 #include "GLGrayFilter.hpp"
 #include "GLJoinFilter.hpp"
+#include "GLTransitionFilter.hpp"
 
 @interface GLViewController ()
 @property (weak, nonatomic) IBOutlet TextureRenderView *videoView;
@@ -81,13 +82,16 @@
         AssetReader reader2(filePath2.UTF8String, self.glContext);
         GLFileInput glInput2(reader2);
         
-        GLJoinFilter joinFilter;
+        //GLJoinFilter joinFilter;
+        GLTransitionFilter transitionFilter;
+        
+        
         glInput1.connect(grayfilter, 0);
     
-        grayfilter.connect(joinFilter, 0);
-        glInput2.connect(joinFilter, 1);
+        grayfilter.connect(transitionFilter, 0);
+        glInput2.connect(transitionFilter, 1);
         
-        joinFilter.connect(screen, 0);
+        transitionFilter.connect(screen, 0);
         screen.start();
         NSLog(@"i'm done");
     });

@@ -19,7 +19,6 @@
 
 class GLFilter : public Filter<GLTextureFrame>{
 private:
-    
     const std::string fragmentShader = R"(
         varying highp vec2 textureCoordinate;
         uniform sampler2D inputImageTexture;
@@ -82,7 +81,14 @@ public:
     }
     
     virtual void uploadTexture() {
-        
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, getInput()->getTexture());
+    }
+    
+    virtual void getAttributeAndUniformIndex() {
+        _position = program->getAttributeIndex("position");
+        _textureCoord = program->getAttributeIndex("texcoord");
+        _inputTextureIndex = program->getUniformIndex("inputImageTexture");
     }
     
     GLTextureFrame* getInput() {
@@ -92,21 +98,19 @@ public:
         inputTexure = frame;
     }
     
-    GLTextureFrame* getOutput() {
-        if (inputTexure) {
+    GLTextureFrame* getOutput(const int& width, const int& height) {
+        //if (inputTexure) {
             if (!program) {
                 program = getProgram();
                 if (!program->link()) {
                     abort();
                 }
         //        glGenRenderbuffers(1, &_renderBuffer);
-                _position = program->getAttributeIndex("position");
-                _textureCoord = program->getAttributeIndex("texcoord");
-                _inputTextureIndex = program->getUniformIndex("inputImageTexture");
+                getAttributeAndUniformIndex();
             }
             
             if (!output) {
-                output = new GLTextureFrame(inputTexure->getWidth(), inputTexure->getHeight());
+                output = new GLTextureFrame(width, height);
                 glGenFramebuffers(1, &_targetFBO);
                 glBindFramebuffer(GL_FRAMEBUFFER, _targetFBO);
                 glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, output->getTexture(), 0);
@@ -116,20 +120,6 @@ public:
             glBindFramebuffer(GL_FRAMEBUFFER, _targetFBO);
             
             uploadTexture();
-            
-//            static const GLfloat imageVertices[] = {
-//                -1.0f, -1.0f,
-//                1.0f, -1.0f,
-//                1.0f,  1.0f,
-//                -1.0f,  1.0f,
-//            };
-//
-//            GLfloat noRotationTextureCoordinates[] = {
-//                0.0f, 1.0f,
-//                1.0f, 1.0f,
-//                1.0f, 0.0f,
-//                0.0f, 0.0f,
-//            };
             
             static const GLfloat imageVertices[] = {
                 1.0f, 1.0f,
@@ -152,9 +142,9 @@ public:
             program->use();
             glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
             return output;
-        }
+        //}
         
-        return inputTexure;
+        //return inputTexure;
     }
     
     virtual GLTextureFrame* getFrame(int port) override {
@@ -165,7 +155,7 @@ public:
         
         GLTextureFrame* frame = link.target->getFrame(link.port);
         setInput(frame);
-        GLTextureFrame* outFrame = getOutput();
+        GLTextureFrame* outFrame = getOutput(frame->getWidth(), frame->getHeight());
         return outFrame;
     }
 };

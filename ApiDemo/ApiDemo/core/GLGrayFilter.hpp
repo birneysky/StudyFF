@@ -45,11 +45,7 @@ public:
         return program;
     }
     
-    
-     void uploadTexture() override {
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, getInput()->getTexture());
-    }
+
     
     virtual const std::string& getfragmentShader() override{
         return fragmentShader;
@@ -63,9 +59,13 @@ public:
         }
         
         GLTextureFrame* frame = link.target->getFrame(link.port);
+       if (!frame) {
+           return nullptr;
+       }
        setInput(frame);
-       GLTextureFrame* outFrame = getOutput();
-        return outFrame;
+       GLTextureFrame* outFrame = getOutput(frame->getWidth(), frame->getHeight());
+       return outFrame;
+        
     }
 };
 
