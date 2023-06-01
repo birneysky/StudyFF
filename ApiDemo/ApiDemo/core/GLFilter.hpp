@@ -114,19 +114,34 @@ public:
             glActiveTexture(GL_TEXTURE0);
             glBindTexture(GL_TEXTURE_2D, inputTexure->getTexture());
             
+//            static const GLfloat imageVertices[] = {
+//                -1.0f, -1.0f,
+//                1.0f, -1.0f,
+//                1.0f,  1.0f,
+//                -1.0f,  1.0f,
+//            };
+//
+//            GLfloat noRotationTextureCoordinates[] = {
+//                0.0f, 1.0f,
+//                1.0f, 1.0f,
+//                1.0f, 0.0f,
+//                0.0f, 0.0f,
+//            };
+            
             static const GLfloat imageVertices[] = {
-                -1.0f, -1.0f,
-                1.0f, -1.0f,
-                1.0f,  1.0f,
-                -1.0f,  1.0f,
-            };
-
-            GLfloat noRotationTextureCoordinates[] = {
-                0.0f, 1.0f,
                 1.0f, 1.0f,
-                1.0f, 0.0f,
-                0.0f, 0.0f,
+                -1.0, 1.0,
+                1.0, -1.0,
+                -1.0, -1.0
             };
+            
+            GLfloat noRotationTextureCoordinates[] = {
+                1.0, 1.0,
+                0.0, 1.0,
+                1.0, 0.0,
+                0.0, 0.0
+            };
+            
 
             
             glVertexAttribPointer(_position, 2, GL_FLOAT, 0, 0, imageVertices);
@@ -135,7 +150,7 @@ public:
             glEnableVertexAttribArray(_textureCoord);
             
             program->use();
-            glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+            glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
             return output;
         }
         

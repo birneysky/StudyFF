@@ -73,8 +73,8 @@
             //[self.videoView renderTexture:textFrame->getTexture() with:textFrame->getWidth() height:textFrame->getHeight()];
             [self.videoView renderTexture:textFrame->getTexture() with:textFrame->getWidth() height:textFrame->getHeight()];
         });
-        glInput.connect(screen, 0);
-        //grayfilter.connect(screen, 0);
+        glInput.connect(grayfilter, 0);
+        grayfilter.connect(screen, 0);
         screen.start();
         NSLog(@"i'm done");
     });

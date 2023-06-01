@@ -62,9 +62,7 @@ public:
             dptr += width;
             srcPtr += frame->linesize[0];
         }
-        
         glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, width, height, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, yBuffer);
-        
 
         dptr = uBuffer;
         srcPtr = frame->data[1];
@@ -75,8 +73,7 @@ public:
         }
         glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, _texutres[1]);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, width / 2, height / 2, 0, GL_LUMINANCE, GL_LUMINANCE, uBuffer);
-
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, width / 2, height / 2, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, uBuffer);
         
         dptr = vBuffer;
         srcPtr = frame->data[2];
@@ -88,7 +85,7 @@ public:
         glActiveTexture(GL_TEXTURE2);
         glBindTexture(GL_TEXTURE_2D, _texutres[2]);
         glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, width / 2, height / 2, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, vBuffer);
-
+        
 //        for (int i = 1; i < textureCount; i++) {
 //            glActiveTexture(GL_TEXTURE0 + i);
 //            glBindTexture(GL_TEXTURE_2D, _texutres[i]);

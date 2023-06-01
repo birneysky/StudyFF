@@ -221,26 +221,24 @@ static inline BOOL validateProgram(GLuint prog)
     //[_frameCopier renderFrame:_frame->pixels];
     
     glUseProgram(_filterProgram);
-    glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
+    glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
 //    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 //    glEnable(GL_BLEND);
 //    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
     static const GLfloat imageVertices[] = {
-        -1.0f, -1.0f,
-        1.0f, -1.0f,
-        -1.0f,  1.0f,
-        1.0f,  1.0f,
+        1.0f, 1.0f,
+        -1.0, 1.0,
+        1.0, -1.0,
+        -1.0, -1.0,
     };
     
     GLfloat noRotationTextureCoordinates[] = {
-        1.0f, 0.0f,
-        0.0f, 0.0f,
-        1.0f, 1.0f,
-        0.0f, 1.0f,
+        1.0, 0.0,
+        0.0, 0.0,
+        1.0, 1.0,
+        0.0, 1.0
     };
-    
-    
     
     
     glVertexAttribPointer(filterPositionAttribute, 2, GL_FLOAT, 0, 0, imageVertices);
