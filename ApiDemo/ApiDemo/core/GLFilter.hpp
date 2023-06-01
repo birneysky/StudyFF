@@ -23,12 +23,8 @@ private:
     const std::string fragmentShader = R"(
         varying highp vec2 textureCoordinate;
         uniform sampler2D inputImageTexture;
-       // const mediump vec3 LUMINANCE_FACTOR = vec3(0.2125, 0.7154, 0.0721);
         void main()
         {
-//            highp vec4 sampleColor = texture2D(inputImageTexture, textureCoordinate);
-//            lowp float luminance = dot(sampleColor.rgb, LUMINANCE_FACTOR);
-//            gl_FragColor = vec4(mix(vec3(luminance), sampleColor.rgb, 1.0 - 0.9), 1.0);
             gl_FragColor = texture2D(inputImageTexture, textureCoordinate);
         }
     )";
@@ -85,6 +81,13 @@ public:
         return program;
     }
     
+    virtual void uploadTexture() {
+        
+    }
+    
+    GLTextureFrame* getInput() {
+        return inputTexure;
+    }
     void setInput(GLTextureFrame* frame) {
         inputTexure = frame;
     }
@@ -111,8 +114,8 @@ public:
             
             
             glBindFramebuffer(GL_FRAMEBUFFER, _targetFBO);
-            glActiveTexture(GL_TEXTURE0);
-            glBindTexture(GL_TEXTURE_2D, inputTexure->getTexture());
+            
+            uploadTexture();
             
 //            static const GLfloat imageVertices[] = {
 //                -1.0f, -1.0f,
@@ -142,13 +145,10 @@ public:
                 0.0, 0.0
             };
             
-
-            
             glVertexAttribPointer(_position, 2, GL_FLOAT, 0, 0, imageVertices);
             glEnableVertexAttribArray(_position);
             glVertexAttribPointer(_textureCoord, 2, GL_FLOAT, 0, 0, noRotationTextureCoordinates);
             glEnableVertexAttribArray(_textureCoord);
-            
             program->use();
             glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
             return output;

@@ -26,8 +26,8 @@ public:
         void main()
         {
             vec2 p = textureCoordinate.xy/vec2(1.0).xy;
-            highp vec4 sample1 = texture2D(s_Texture1,textureCoordinate);
-            highp vec4 sample2 = texture2D(s_Texture2,textureCoordinate);
+            highp vec4 sample1 = texture2D(s_Texture1,p);
+            highp vec4 sample2 = texture2D(s_Texture2,p);
             gl_FragColor = mix(sample1, sample2, step(1.0-p.x,progress));
         }
     )";
@@ -36,31 +36,43 @@ public:
     GLTransitionFilter(){
     }
     
-    virtual int getNumInputs() const override {
+    int getNumInputs() const override {
         return 2;
     }
-    virtual int getNumOutputs() const override {
+    
+    int getNumOutputs() const override {
         return 1;
     }
     
-    virtual GLProgram* getProgram() override {
-        return new GLProgram(vertexShader, fragmentShader);;
+    GLProgram* getProgram() override {
+        if (!program) {
+            program = new GLProgram(vertexShader, fragmentShader);
+        }
+        return program;
     }
     
     
-    virtual const std::string& getfragmentShader() override{
+    const std::string& getfragmentShader() override{
         return fragmentShader;
     };
     
-   virtual GLTextureFrame* getFrame(int port) override {
+    
+    void uploadTexture() override {
+       glActiveTexture(GL_TEXTURE0);
+       glBindTexture(GL_TEXTURE_2D, getInput()->getTexture());
+   }
+    
+   GLTextureFrame* getFrame(int port) override {
         Link link0 = getInputLink(0);
         if (!link0.target) {
+            assert(false);
             return nullptr;
             
         }
        
        Link link1 = getInputLink(1);
        if (!link1.target) {
+           assert(false);
            return nullptr;
            
        }
@@ -80,11 +92,6 @@ public:
        }
        
 //       setInput(frame);
-
-
-
-
-
         
     }
 };

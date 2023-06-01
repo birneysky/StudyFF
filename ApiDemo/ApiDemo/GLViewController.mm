@@ -13,6 +13,7 @@
 #include "GLScreen.hpp"
 #include "I420Reader.hpp"
 #include "GLGrayFilter.hpp"
+#include "GLJoinFilter.hpp"
 
 @interface GLViewController ()
 @property (weak, nonatomic) IBOutlet TextureRenderView *videoView;
@@ -65,16 +66,28 @@
 //        I420Reader reader(yuv_filePath.UTF8String, 854, 480);
 //        GLTextureReader textReader(&reader, glContext);
 //        GLFileInput glInput(textReader);
-        NSString* filePath = [[NSBundle mainBundle] pathForResource:@"123456" ofType:@"mp4"];
-        AssetReader reader(filePath.UTF8String, self.glContext);
-        GLFileInput glInput(reader);
-        GLGrayFilter grayfilter;
+        
         GLScreen screen([self](GLTextureFrame* textFrame) {
             //[self.videoView renderTexture:textFrame->getTexture() with:textFrame->getWidth() height:textFrame->getHeight()];
             [self.videoView renderTexture:textFrame->getTexture() with:textFrame->getWidth() height:textFrame->getHeight()];
         });
-        glInput.connect(grayfilter, 0);
-        grayfilter.connect(screen, 0);
+        
+        NSString* filePath = [[NSBundle mainBundle] pathForResource:@"123456" ofType:@"mp4"];
+        AssetReader reader1(filePath.UTF8String, self.glContext);
+        GLFileInput glInput1(reader1);
+        GLGrayFilter grayfilter;
+        
+        NSString* filePath2 = [[NSBundle mainBundle] pathForResource:@"trailer" ofType:@"mp4"];
+        AssetReader reader2(filePath2.UTF8String, self.glContext);
+        GLFileInput glInput2(reader2);
+        
+        GLJoinFilter joinFilter;
+        glInput1.connect(grayfilter, 0);
+    
+        grayfilter.connect(joinFilter, 0);
+        glInput2.connect(joinFilter, 1);
+        
+        joinFilter.connect(screen, 0);
         screen.start();
         NSLog(@"i'm done");
     });

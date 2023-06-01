@@ -46,6 +46,11 @@ public:
     }
     
     
+     void uploadTexture() override {
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, getInput()->getTexture());
+    }
+    
     virtual const std::string& getfragmentShader() override{
         return fragmentShader;
     };
