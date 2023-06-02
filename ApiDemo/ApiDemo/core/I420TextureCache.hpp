@@ -15,9 +15,6 @@
 
 class I420TextureCache {
 private:
-//    GLuint _ytexture = 0;
-//    GLuint _utexture = 0;
-//    GLuint _vtexture = 0;
     GLuint* _texutres = nullptr;
     const int textureCount = 3;
     uint8_t* yBuffer = nullptr;
@@ -29,21 +26,42 @@ public:
     I420TextureCache(int width, int height) {
         glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
         _texutres = new GLuint[textureCount];
-        glGenTextures(3, _texutres);
-        for (int i = 0; i < 3; i++) {
+        glGenTextures(textureCount, _texutres);
+        for (int i = 0; i < textureCount; i++) {
             glBindTexture(GL_TEXTURE_2D, _texutres[i]);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-            //glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-            //
-            //glBindTexture(GL_TEXTURE_2D, 0);
-            yBuffer = new uint8_t[width*height] {};
-            uBuffer = new uint8_t[width*height/4] {};
-            vBuffer = new uint8_t[width*height/4] {};
         }
         
+        yBuffer = new uint8_t[width*height] {};
+        uBuffer = new uint8_t[width*height/4] {};
+        vBuffer = new uint8_t[width*height/4] {};
+        
+    }
+    
+    ~I420TextureCache() {
+        glDeleteTextures(textureCount, _texutres);
+        if (yBuffer) {
+            delete[] yBuffer;
+            yBuffer = nullptr;
+        }
+        
+        if (uBuffer) {
+            delete[] uBuffer;
+            uBuffer = nullptr;
+        }
+        
+        if (vBuffer) {
+            delete[] vBuffer;
+            vBuffer = nullptr;
+        }
+        
+        if (_texutres) {
+            delete[] _texutres;
+            _texutres = nullptr;
+        }
     }
     
     bool uploadTexturesData(AVFrame* frame) {
@@ -86,11 +104,6 @@ public:
         glBindTexture(GL_TEXTURE_2D, _texutres[2]);
         glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, width / 2, height / 2, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, vBuffer);
         
-//        for (int i = 1; i < textureCount; i++) {
-//            glActiveTexture(GL_TEXTURE0 + i);
-//            glBindTexture(GL_TEXTURE_2D, _texutres[i]);
-//            glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE_ALPHA, width / 2, height / 2, 0, GL_LUMINANCE_ALPHA, GL_UNSIGNED_BYTE, frame->data[i]);
-//        }
         return true;
     }
     

@@ -42,7 +42,7 @@ public:
         
     }
     
-    virtual GLTextureFrame* getFrame(int index = 0) override {
+    GLTextureFrame* getFrame(int index = 0) override {
         //return _reader->read();
         if (reader->status() == AssetReader::Status::unknown) {
             reader->startReading();

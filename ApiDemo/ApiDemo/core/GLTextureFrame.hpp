@@ -44,12 +44,8 @@ public:
     }
     
     ~GLTextureFrame() {
-        
-    }
-        
-    void activeFrameBuffer() {
-        glBindFramebuffer(GL_FRAMEBUFFER, _framebuffer);
-        glViewport(0, 0, (int)_width, (int)_height);
+        glDeleteTextures(1, &_texture);
+        _texture = 0;
     }
     
     int getWidth() const {

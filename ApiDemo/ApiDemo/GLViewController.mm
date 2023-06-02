@@ -73,9 +73,9 @@
         
         GLScreen screen([self](GLTextureFrame* textFrame) {
             //[self.videoView renderTexture:textFrame->getTexture() with:textFrame->getWidth() height:textFrame->getHeight()];
-            dispatch_async(dispatch_get_main_queue(), ^{
+            //dispatch_async(dispatch_get_main_queue(), ^{
                 [self.videoView renderTexture:textFrame->getTexture() with:textFrame->getWidth() height:textFrame->getHeight()];                
-            });
+            ///});
         });
         
         NSString* filePath = [[NSBundle mainBundle] pathForResource:@"8288_short" ofType:@"mp4"];

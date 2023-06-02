@@ -66,6 +66,11 @@ public:
         glAttachShader(program, fragShader);
     }
     
+    ~GLProgram() {
+        glDeleteProgram(program);
+        program = 0;
+    }
+    
     bool link() {
         GLint status;
         glLinkProgram(program);

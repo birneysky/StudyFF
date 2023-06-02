@@ -30,9 +30,6 @@ private:
     Status _status;
     TextureRender* render = nullptr;
     EAGLContext* _glContext = nullptr;
-    AVFrame* getFrame() {
-        return nullptr;
-    }
     
 public:
     enum class MediaType {Video, Audio};
@@ -44,6 +41,7 @@ public:
         _glContext = glContext;
 
     }
+    
     ~AssetReader() {
         std::cout << "~AssetReader() " << this << std::endl;
         if (codec_ctx) {
@@ -55,66 +53,67 @@ public:
             avformat_close_input(&ifmt_ctx);
             ifmt_ctx = nullptr;
         }
+        
+        if (render) {
+            delete render;
+            render = nullptr;
+        }
     }
     
     Status status()  const {
         return _status;
     }
     
-//    void setReaderOutput(AssetReaderOutput<T>& output) {
-//
-//    }
-    
     GLTextureFrame* getNextFrame(MediaType type) {
         BOOL exit = NO;
         while (!exit) {
-            AVPacket* packet = av_packet_alloc();
+            std::shared_ptr<AVPacket> packet(av_packet_alloc(), [](AVPacket* pkt) {
+                av_packet_free(&pkt);
+            });
             packet->data = NULL;
             packet->size = 0;
-            int ret = av_read_frame(ifmt_ctx, packet);
+            int ret = av_read_frame(ifmt_ctx, packet.get());
             if (ret < 0) {
                 return nullptr;
             }
             
             if (packet->stream_index == video_stream_index) {
-                ret = avcodec_send_packet(codec_ctx, packet);
+                ret = avcodec_send_packet(codec_ctx, packet.get());
                 if (ret < 0) {
                     av_log(NULL, AV_LOG_ERROR, "Error sending a packet to the decoder\n");
                     break;
                 }
 
                 while (ret >= 0) {
-                    AVFrame *frame = av_frame_alloc();
-                    ret = avcodec_receive_frame(codec_ctx, frame);
+                    std::shared_ptr<AVFrame> frame(av_frame_alloc(), [](AVFrame * frame){
+                          av_frame_free(&frame);
+                      });
+                    ret = avcodec_receive_frame(codec_ctx, frame.get());
                     if (ret == AVERROR(EAGAIN) || ret == AVERROR_EOF) {
-                        av_frame_free(&frame);
                         break;
                     }
                     if (ret < 0) {
-                        av_frame_free(&frame);
                         break;
                     }
-                    int width = frame->width;
-                    int height = frame->height;
                     if (!render) {
                         render = new TextureRender(_glContext);
                     }
                     
                     if (render) {
-                        //render->render(pixelBuffer);
-                        render->render(frame);
+                        render->render(frame.get());
                     }
-                    av_frame_free(&frame);
                     exit = YES;
                     break;
                 }
             }
-            av_packet_free(&packet);
         }
         return render->outputTexture();
     }
     
     bool startReading() {
+        if (codec_ctx) {
+            return false;
+        }
         int ret = avformat_open_input(&ifmt_ctx, path.c_str(), NULL, NULL);
         if (ret  < 0) {
             std::cout << "cannot open input file" << path <<std::endl;

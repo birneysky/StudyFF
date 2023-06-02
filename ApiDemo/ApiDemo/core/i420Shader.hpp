@@ -24,15 +24,9 @@ static const int kVTextureUnit2 = 2;
 
 class I420Shader {
 private:
-    GLuint _nv12Program;
+    GLuint _i420Program;
     GLint  _position;
     GLint _textureCoord;
-    GLint _InputTextureUniform;
-    GLuint _vao;
-    GLuint _vbo;
-    GLint ySampler;
-    GLint uSampler;
-    GLint vSampler;
     
     
     const std::string vertexShader = R"(
@@ -70,32 +64,33 @@ private:
     bool buildProgram() {
         bool result = false;
         GLuint vertShader = 0, fragShader = 0;
-        _nv12Program = glCreateProgram();
+        _i420Program = glCreateProgram();
         vertShader = compileShader(GL_VERTEX_SHADER, (GLchar*)vertexShader.c_str());
         //NSAssert(vertShader != 0, @"compile vertex shader failed");
         
         fragShader = compileShader(GL_FRAGMENT_SHADER, (GLchar*)fragmentShader.c_str());
         //NSAssert(fragShader != 0, @"compile fragment shader failed");
         
-        glAttachShader(_nv12Program, vertShader);
-        glAttachShader(_nv12Program, fragShader);
+        glAttachShader(_i420Program, vertShader);
+        glAttachShader(_i420Program, fragShader);
         
-        glLinkProgram(_nv12Program);
+        glLinkProgram(_i420Program);
         
-        _position = glGetAttribLocation(_nv12Program, "position");
-        _textureCoord = glGetAttribLocation(_nv12Program, "texcoord");
+        _position = glGetAttribLocation(_i420Program, "position");
+        _textureCoord = glGetAttribLocation(_i420Program, "texcoord");
         
         
         GLint status;
-        glGetProgramiv(_nv12Program, GL_LINK_STATUS, &status);
+        glGetProgramiv(_i420Program, GL_LINK_STATUS, &status);
         //NSAssert(status == GL_TRUE, @"Failed to link program %d", _nv12Program);
         
-        result = validateProgram(_nv12Program);
+        result = validateProgram(_i420Program);
         //NSAssert(result, @"etup GL programm failed");
-        glUseProgram(_nv12Program);
-        ySampler = glGetUniformLocation(_nv12Program, "s_textureY");
-        uSampler = glGetUniformLocation(_nv12Program, "s_textureU");
-        vSampler = glGetUniformLocation(_nv12Program, "s_textureV");
+        glUseProgram(_i420Program);
+        
+        GLint ySampler = glGetUniformLocation(_i420Program, "s_textureY");
+        GLint uSampler = glGetUniformLocation(_i420Program, "s_textureU");
+        GLint vSampler = glGetUniformLocation(_i420Program, "s_textureV");
         
         //        NSAssert(ySampler >= 0, @"Failed to get uniform variable locations in NV12 shader");
         //        NSAssert(uvSampler >= 0, @"Failed to get uniform variable locations in NV12 shader");
@@ -114,8 +109,13 @@ public:
         
     }
     
+    ~I420Shader() {
+        glDeleteProgram(_i420Program);
+        _i420Program = 0;
+    }
+    
     void applay(int width, int height, GLuint* textures, int len) {
-        if (!_nv12Program) {
+        if (!_i420Program) {
             buildProgram();
         }
  
@@ -134,7 +134,7 @@ public:
         };
         
         
-        glUseProgram(_nv12Program);
+        glUseProgram(_i420Program);
         glVertexAttribPointer(_position, 2, GL_FLOAT, 0, 0, imageVertices);
         glEnableVertexAttribArray(_position);
         glVertexAttribPointer(_textureCoord, 2, GL_FLOAT, 0, 0, noRotationTextureCoordinates);

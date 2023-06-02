@@ -25,7 +25,6 @@ private:
     NV12TextCache* textCache = nullptr;
     I420Shader* i420shader = nullptr;
     I420TextureCache* i420Cache = nullptr;
-    GLuint _targetTexture = 0;
     GLuint _targetFBO = 0;
     GLTextureFrame* textFrame = nullptr;
 private:
@@ -41,20 +40,9 @@ private:
         glGenFramebuffers(1, &_targetFBO);
         glBindFramebuffer(GL_FRAMEBUFFER, _targetFBO);
         
-//        glGenTextures(1, &_targetTexture);
-//        glBindTexture(GL_TEXTURE_2D, _targetTexture);
-//        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-//        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-//        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-//        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-//        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
-        //glBindTexture(GL_TEXTURE_2D, 0); // unbind
-        
         glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textFrame->getTexture(), 0);
-        
         GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
         //NSAssert(status == GL_FRAMEBUFFER_COMPLETE, @"failed to make complete framebuffer object %x",status);
-        
         
         GLenum glError = glGetError();
         //NSAssert(glError == GL_NO_ERROR, @"failed to setup GL %x",glError);
@@ -63,6 +51,28 @@ private:
 public:
     TextureRender(EAGLContext * context) {
         _glContext = context;
+    }
+    
+    ~TextureRender() {
+        if (textFrame) {
+            delete textFrame;
+        }
+        glDeleteFramebuffers(1, &_targetFBO);
+        if (i420shader) {
+            delete i420shader;
+        }
+        
+        if (i420Cache) {
+            delete i420Cache;
+        }
+        
+        if (shader1) {
+            delete shader1;
+        }
+        
+        if (textCache) {
+            delete textCache;
+        }
     }
     
     void render(AVFrame* frame) {

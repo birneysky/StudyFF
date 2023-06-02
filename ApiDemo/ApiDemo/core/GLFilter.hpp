@@ -27,19 +27,11 @@ private:
     )";
     
 private:
-    //static GLContext context;
     GLTextureFrame* inputTexure = nullptr;
-    GLuint _frameBuffer;
-//    GLuint _renderBuffer;
-    GLint _Width;
-    GLint _Height;
     GLint  _position;
     GLint _textureCoord;
     GLuint _inputTextureIndex;
-    GLuint _vao;
-    GLuint _vbo;
     
-    GLuint _targetTexture;
     GLuint _targetFBO;
     GLTextureFrame* output = nullptr;
 protected:
@@ -47,8 +39,6 @@ protected:
 public:
     static const std::string vertexShader;
     GLFilter() {
-        
-        //GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
     }
     
     virtual ~GLFilter() {
@@ -61,6 +51,8 @@ public:
             delete  program;
             program = nullptr;
         }
+        
+        glDeleteFramebuffers(1, &_targetFBO);
     }
     
     const std::string& getVertexShader() {
@@ -103,7 +95,6 @@ public:
                 if (!program->link()) {
                     abort();
                 }
-        //        glGenRenderbuffers(1, &_renderBuffer);
                 getAttributeAndUniformIndex();
             }
             
@@ -145,9 +136,6 @@ public:
             glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
             glUseProgram(0);
             return output;
-        //}
-        
-        //return inputTexure;
     }
     
     virtual GLTextureFrame* getFrame(int port) override {

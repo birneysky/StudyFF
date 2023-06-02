@@ -57,10 +57,6 @@ public:
     }
     
     virtual AVFrame* read() override {
-        if (!file) {
-            file = fopen(this->path.c_str(), "rb");
-        }
-        
         const AVPixelFormat pix_fmt = AV_PIX_FMT_YUV420P;
         
         if (!frame) {

@@ -39,7 +39,6 @@ public:
         inputs.insert(std::make_pair(index, link));
     };
     virtual void setOutput(int index, Linkable& dst, int port) = 0;
-    //virtual TimeRange effectiveTime() const = 0;
 };
 
 
