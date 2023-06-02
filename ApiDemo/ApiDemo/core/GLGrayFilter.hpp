@@ -30,7 +30,10 @@ public:
     
     GLGrayFilter(){
     }
-    
+        
+    ~GLGrayFilter() {
+        std::cout << "~GLGrayFilter() " << this << std::endl;
+    }
     virtual int getNumInputs() const override {
         return 1;
     }

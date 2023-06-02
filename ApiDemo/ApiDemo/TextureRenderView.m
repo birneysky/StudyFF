@@ -80,11 +80,14 @@ NSString *const rgbFragmentShaderString = SHADER_STRING
 }
 
 - (void)setContext:(EAGLContext*)context {
-    _context = context;
-    [EAGLContext setCurrentContext:_context];
-    [self setupContext];
-    [self createBuffer];
-    [self setprogram];
+    if (!_context) {
+        _context = context;
+        [EAGLContext setCurrentContext:_context];
+        [self setupContext];
+        [self createBuffer];
+        [self setprogram];
+    }
+    
 }
 
 - (void)createBuffer {

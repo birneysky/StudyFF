@@ -87,6 +87,7 @@ public:
         glUseProgram(program);
     }
     
+    
     void addAttribute(const std::string& name) {
         auto it = attributes.find(name);
         if (it == attributes.end()) {

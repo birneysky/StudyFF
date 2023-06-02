@@ -13,6 +13,7 @@
 		321555C82A28DB4C00C0E453 /* 8288.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 321555C62A28DB4C00C0E453 /* 8288.mp4 */; };
 		32227F8C2A14E11700D9E94F /* ffmpeg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32227F872A14D94000D9E94F /* ffmpeg.framework */; };
 		32227F8D2A14E11700D9E94F /* ffmpeg.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 32227F872A14D94000D9E94F /* ffmpeg.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		326A3FDC2A29BBB400073AEC /* 8288_short.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 326A3FDB2A29BBB400073AEC /* 8288_short.mp4 */; };
 		32BA19902A162D7F0007708E /* CoreImageViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 32BA198F2A162D7F0007708E /* CoreImageViewController.mm */; };
 		32BA19932A162D900007708E /* GLViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 32BA19922A162D900007708E /* GLViewController.mm */; };
 		32D8A3EE2A05CCCA008E060F /* 123456.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 32D8A3EC2A05CCCA008E060F /* 123456.mp4 */; };
@@ -97,6 +98,7 @@
 		324E39142A14E41500FA25BC /* NV12TextCache.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NV12TextCache.hpp; sourceTree = "<group>"; };
 		324E39152A14E41500FA25BC /* GLFilter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLFilter.hpp; sourceTree = "<group>"; };
 		324E39172A14E41500FA25BC /* GLContext.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLContext.hpp; sourceTree = "<group>"; };
+		326A3FDB2A29BBB400073AEC /* 8288_short.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 8288_short.mp4; sourceTree = "<group>"; };
 		32AA44522A28A56B00E700BE /* GLJoinFilter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GLJoinFilter.hpp; sourceTree = "<group>"; };
 		32BA198E2A162D7F0007708E /* CoreImageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreImageViewController.h; sourceTree = "<group>"; };
 		32BA198F2A162D7F0007708E /* CoreImageViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CoreImageViewController.mm; sourceTree = "<group>"; };
@@ -243,6 +245,7 @@
 				74FE72F320FF8C02005F024C /* test.mp4 */,
 				32D8A3EC2A05CCCA008E060F /* 123456.mp4 */,
 				321555C62A28DB4C00C0E453 /* 8288.mp4 */,
+				326A3FDB2A29BBB400073AEC /* 8288_short.mp4 */,
 				321555C52A28DB4C00C0E453 /* 45678.mp4 */,
 				32D8A3ED2A05CCCA008E060F /* trailer.mp4 */,
 				74FE721B20FE43A4005F024C /* Main.storyboard */,
@@ -390,6 +393,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				326A3FDC2A29BBB400073AEC /* 8288_short.mp4 in Resources */,
 				32D8A3EE2A05CCCA008E060F /* 123456.mp4 in Resources */,
 				321555C82A28DB4C00C0E453 /* 8288.mp4 in Resources */,
 				74FE722220FE43A7005F024C /* LaunchScreen.storyboard in Resources */,

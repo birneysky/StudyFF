@@ -21,6 +21,10 @@ public:
         renderCallBack = render;
     }
     
+    ~GLScreen() {
+        std::cout << "~GLScreen() " << this << std::endl;
+    }
+    
     void start() {
         while (true) {
             @autoreleasepool {
@@ -35,19 +39,19 @@ public:
         std::cout << "render done" << std::endl;
     }
     
-    virtual int getNumInputs() const override {
+    int getNumInputs() const override {
         return 1;
     }
     
-    virtual int getNumOutputs() const override {
+    int getNumOutputs() const override {
         return 0;
     }
     
     
-    virtual void setOutput(int index, Linkable& filter, int port) override {
+    void setOutput(int index, Linkable& filter, int port) override {
     }
     
-    virtual GLTextureFrame* getFrame(int index = 0) override {
+    GLTextureFrame* getFrame(int index = 0) override {
         Link link = getInputLink(0);
         if (!link.target) {
             return nullptr;

@@ -53,12 +53,14 @@
 - (IBAction)startAction:(id)sender {
     dispatch_async(self.dispatch_queue, ^{
         
-        EAGLContext *glContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
-        if (!glContext) {
-          glContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
+        if (!_glContext) {
+            EAGLContext *glContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
+            if (!glContext) {
+              glContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
+            }
+            _glContext = glContext;
         }
-        
-        self.glContext = glContext;
+
         
         [self.videoView setContext:self.glContext];
     
@@ -73,12 +75,12 @@
             [self.videoView renderTexture:textFrame->getTexture() with:textFrame->getWidth() height:textFrame->getHeight()];
         });
         
-        NSString* filePath = [[NSBundle mainBundle] pathForResource:@"123456" ofType:@"mp4"];
+        NSString* filePath = [[NSBundle mainBundle] pathForResource:@"8288_short" ofType:@"mp4"];
         AssetReader reader1(filePath.UTF8String, self.glContext);
         GLFileInput glInput1(reader1);
         GLGrayFilter grayfilter;
         
-        NSString* filePath2 = [[NSBundle mainBundle] pathForResource:@"8288" ofType:@"mp4"];
+        NSString* filePath2 = [[NSBundle mainBundle] pathForResource:@"45678" ofType:@"mp4"];
         AssetReader reader2(filePath2.UTF8String, self.glContext);
         GLFileInput glInput2(reader2);
         
@@ -86,9 +88,9 @@
         GLTransitionFilter transitionFilter;
         
         
-        glInput1.connect(grayfilter, 0);
+        //glInput1.connect(grayfilter, 0);
     
-        grayfilter.connect(transitionFilter, 0);
+        glInput1.connect(transitionFilter, 0);
         glInput2.connect(transitionFilter, 1);
         
         transitionFilter.connect(screen, 0);

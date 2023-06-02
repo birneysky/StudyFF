@@ -23,17 +23,22 @@ public:
         //_reader = &reader;
     }
     
-    virtual int getNumInputs() const override {
+    ~GLFileInput() {
+        std::cout << "~GLFileInput() " << this << std::endl;
+    }
+    
+    
+    int getNumInputs() const override {
         return 0;
     }
     
-    virtual int getNumOutputs() const override {
+    int getNumOutputs() const override {
         return 1;
     }
     
     
     
-    virtual void setOutput(int index, Linkable<GLTextureFrame>& filter, int port) override {
+    void setOutput(int index, Linkable<GLTextureFrame>& filter, int port) override {
         
     }
     

@@ -117,6 +117,7 @@ public:
             }
             
             
+            program->use();
             glBindFramebuffer(GL_FRAMEBUFFER, _targetFBO);
             
             uploadTexture();
@@ -134,13 +135,17 @@ public:
                 1.0, 0.0,
                 0.0, 0.0
             };
+        
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
             
             glVertexAttribPointer(_position, 2, GL_FLOAT, 0, 0, imageVertices);
             glEnableVertexAttribArray(_position);
             glVertexAttribPointer(_textureCoord, 2, GL_FLOAT, 0, 0, noRotationTextureCoordinates);
             glEnableVertexAttribArray(_textureCoord);
-            program->use();
+            
             glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+            glUseProgram(0);
             return output;
         //}
         

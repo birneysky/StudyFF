@@ -45,6 +45,7 @@ public:
 
     }
     ~AssetReader() {
+        std::cout << "~AssetReader() " << this << std::endl;
         if (codec_ctx) {
             avcodec_close(codec_ctx);
             codec_ctx = nullptr;
