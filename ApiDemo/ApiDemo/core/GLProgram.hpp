@@ -70,7 +70,13 @@ public:
         GLint status;
         glLinkProgram(program);
         glGetProgramiv(program, GL_LINK_STATUS, &status);
-        if (status == GL_FALSE) {return false;}
+        if (status == GL_FALSE) {
+            GLchar logInfo[4096] = {};
+            GLsizei logLength;
+            glGetProgramInfoLog(program, sizeof(logInfo), &logLength, logInfo);
+            std::cout << logInfo << std::endl;
+            return false;
+        }
         if (vertShader) {
             glDeleteShader(vertShader);
             vertShader = 0;

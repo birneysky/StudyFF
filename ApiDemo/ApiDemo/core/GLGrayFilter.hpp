@@ -34,23 +34,16 @@ public:
     ~GLGrayFilter() {
         std::cout << "~GLGrayFilter() " << this << std::endl;
     }
-    virtual int getNumInputs() const override {
+    
+     int getNumInputs() const override {
         return 1;
     }
-    virtual int getNumOutputs() const override {
+    
+    int getNumOutputs() const override {
         return 1;
     }
     
-    virtual GLProgram* getProgram() override {
-        if (!program) {
-            program = new GLProgram(vertexShader, fragmentShader);
-        }
-        return program;
-    }
-    
-
-    
-    virtual const std::string& getfragmentShader() override{
+    const std::string& getfragmentShader() override{
         return fragmentShader;
     };
     
@@ -68,7 +61,6 @@ public:
        setInput(frame);
        GLTextureFrame* outFrame = getOutput(frame->getWidth(), frame->getHeight());
        return outFrame;
-        
     }
 };
 

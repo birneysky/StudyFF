@@ -15,6 +15,7 @@
 #include "GLGrayFilter.hpp"
 #include "GLJoinFilter.hpp"
 #include "GLTransitionFilter.hpp"
+#include "GLOverlayFilter.hpp"
 
 @interface GLViewController ()
 @property (weak, nonatomic) IBOutlet TextureRenderView *videoView;
@@ -72,7 +73,9 @@
         
         GLScreen screen([self](GLTextureFrame* textFrame) {
             //[self.videoView renderTexture:textFrame->getTexture() with:textFrame->getWidth() height:textFrame->getHeight()];
-            [self.videoView renderTexture:textFrame->getTexture() with:textFrame->getWidth() height:textFrame->getHeight()];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.videoView renderTexture:textFrame->getTexture() with:textFrame->getWidth() height:textFrame->getHeight()];                
+            });
         });
         
         NSString* filePath = [[NSBundle mainBundle] pathForResource:@"8288_short" ofType:@"mp4"];
@@ -84,16 +87,24 @@
         AssetReader reader2(filePath2.UTF8String, self.glContext);
         GLFileInput glInput2(reader2);
         
+        
+        NSString* filePath3 = [[NSBundle mainBundle] pathForResource:@"trailer" ofType:@"mp4"];
+        AssetReader reader3(filePath3.UTF8String, self.glContext);
+        GLFileInput glInput3(reader3);
+        
         //GLJoinFilter joinFilter;
         GLTransitionFilter transitionFilter;
+        GLOverlayFilter overlayFilter;
         
-        
-        //glInput1.connect(grayfilter, 0);
+        glInput1.connect(grayfilter, 0);
     
-        glInput1.connect(transitionFilter, 0);
+        grayfilter.connect(transitionFilter, 0);
         glInput2.connect(transitionFilter, 1);
         
-        transitionFilter.connect(screen, 0);
+        transitionFilter.connect(overlayFilter,0);
+        glInput3.connect(overlayFilter, 1);
+        overlayFilter.connect(screen, 0);
+        
         screen.start();
         NSLog(@"i'm done");
     });

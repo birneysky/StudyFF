@@ -15,8 +15,6 @@
 #import <OpenGLES/ES3/glext.h>
 #import <OpenGLES/gltypes.h>
 
-
-
 class GLFilter : public Filter<GLTextureFrame>{
 private:
     const std::string fragmentShader = R"(
@@ -75,7 +73,7 @@ public:
     
     virtual GLProgram* getProgram() {
         if (!program) {
-            program = new GLProgram(vertexShader, fragmentShader);
+            program = new GLProgram(getVertexShader(), getfragmentShader());
         }
         return program;
     }
@@ -164,7 +162,5 @@ public:
         return outFrame;
     }
 };
-
-
 
 #endif /* GLFilter_hpp */

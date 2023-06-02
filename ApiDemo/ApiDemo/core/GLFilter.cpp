@@ -10,14 +10,14 @@
 
 
 const std::string GLFilter::vertexShader = R"(
-             attribute vec4 position;
-             attribute vec4 texcoord;
+    attribute vec4 position;
+    attribute vec4 texcoord;
+    varying vec2 textureCoordinate;
+    varying lowp vec2 v_postion;
 
-             varying vec2 textureCoordinate;
-
-             void main()
-             {
-                 gl_Position = position;
-                 textureCoordinate = texcoord.xy;
-             }
+    void main() {
+        gl_Position = position;
+        textureCoordinate = texcoord.xy;
+        v_postion = position.xy;
+    }
 )";

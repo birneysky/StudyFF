@@ -56,14 +56,6 @@ public:
         return 1;
     }
     
-    GLProgram* getProgram() override {
-        if (!program) {
-            program = new GLProgram(vertexShader, fragmentShader);
-        }
-        return program;
-    }
-    
-    
     const std::string& getfragmentShader() override{
         return fragmentShader;
     };
@@ -74,7 +66,6 @@ public:
             return;
         }
         
-       
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, lastFrame0->getTexture());
         glUniform1i(texture1Index, 0);
@@ -92,9 +83,6 @@ public:
          texture1Index = program->getUniformIndex("s_Texture1");
          texture2Index = program->getUniformIndex("s_Texture2");
          progreddIndex = program->getUniformIndex("progress");
-         
-         
-         
     }
     
    GLTextureFrame* getFrame(int port) override {
@@ -132,8 +120,6 @@ public:
            lastFrame0 = frame1;
            return frame1;
        }
-       
-       
        
     }
 };
