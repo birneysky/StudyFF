@@ -129,7 +129,6 @@ public:
     
     GLTextureFrame* outputTexture() {
         return textFrame;
-        //return _targetTexture;
     }
     
     

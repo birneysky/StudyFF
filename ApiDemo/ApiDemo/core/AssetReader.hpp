@@ -72,7 +72,9 @@ public:
             });
             packet->data = NULL;
             packet->size = 0;
+            AVStream* videoStream = ifmt_ctx->streams[video_stream_index];
             int ret = av_read_frame(ifmt_ctx, packet.get());
+            
             if (ret < 0) {
                 return nullptr;
             }
@@ -99,6 +101,9 @@ public:
                         render = new TextureRender(_glContext);
                     }
                     
+                    std::cout << path.substr(path.find_last_of("/") + 1) << " " << "clock:" << frame->pts * av_q2d(videoStream->time_base)
+                    << " duration:" << frame->pkt_duration * av_q2d(videoStream->time_base) <<
+                    " timebase:" << videoStream->time_base.num << "/" << videoStream->time_base.den << " pts:" << frame->pts << std::endl;
                     if (render) {
                         render->render(frame.get());
                     }
@@ -133,6 +138,7 @@ public:
         }
         
         AVStream* video_stream = ifmt_ctx->streams[video_stream_index];
+        AVRational time_base = video_stream->time_base;
         // 创建解码器
         const AVCodec *codec = avcodec_find_decoder(video_stream->codecpar->codec_id);
         codec_ctx = avcodec_alloc_context3(codec);
