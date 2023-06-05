@@ -12,22 +12,33 @@
 
 #include "GLTextureFrame.hpp"
 
-class GLScreen : public Linkable <GLTextureFrame>{
+class GLPlayer : public Linkable <GLTextureFrame>{
 private:
     std::function<void (GLTextureFrame* frame)> renderCallBack;
+    enum class Status {unknown, playing, pause, stop};
+    
+    Status _status;
 public:
     
-    GLScreen(std::function<void (GLTextureFrame* frame)> render) {
+    GLPlayer(std::function<void (GLTextureFrame* frame)> render) {
         renderCallBack = render;
     }
     
-    ~GLScreen() {
+    ~GLPlayer() {
         std::cout << "~GLScreen() " << this << std::endl;
     }
     
     void start() {
+        _status = Status::playing;
         while (true) {
             @autoreleasepool {
+                if (_status == Status::stop) {
+                    break;
+                }
+                if (_status != Status::playing) {
+                    [NSThread sleepForTimeInterval:0.05];
+                    continue;
+                }
                 GLTextureFrame* frame = getFrame();
                 if (!frame) {
                     break;
@@ -37,6 +48,14 @@ public:
             }
         }
         std::cout << "render done" << std::endl;
+    }
+    
+    void pause() {
+        _status = Status::pause;
+    }
+    
+    void resume() {
+        _status = Status::playing;
     }
     
     int getNumInputs() const override {
