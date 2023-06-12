@@ -38,7 +38,7 @@ public:
             if (v_postion.x >= lb_position.x && v_postion.y >= lb_position.y &&
                 v_postion.x <= rt_position.x && v_postion.y <= rt_position.y) {
                 
-                lowp vec2 pos = vec2(1.0 - (v_postion.x - lb_position.x) / (rt_position.x - lb_position.x),
+                lowp vec2 pos = vec2((v_postion.x - lb_position.x) / (rt_position.x - lb_position.x),
                                     (v_postion.y - lb_position.y) / (rt_position.y - lb_position.y));
                 lowp vec4 overlayColor = texture2D(s_overlayTexture, pos);
                 lowp float r = overlayColor.r + (1.0 - overlayColor.a)*rgb.r;
@@ -84,8 +84,8 @@ public:
         
         //glUniform1f(progreddIndex, progress);
 
-        glUniform2f(lbPositionIndex, 0.6, 0.3);
-        glUniform2f(rtPositionIndex, 0.95, 0.75);
+        glUniform2f(lbPositionIndex, 0.0, 0.0);
+        glUniform2f(rtPositionIndex, 0.4, 0.3);
    }
      void getAttributeAndUniformIndex() override {
          GLFilter::getAttributeAndUniformIndex();
@@ -112,7 +112,10 @@ public:
        }
        
        GLTextureFrame* background = link0.target->getFrame(link0.port);
-       backgroundFrame = background;
+       if (background) {
+           backgroundFrame = background;
+       }
+       
        
        GLTextureFrame* overlay = link1.target->getFrame(link1.port);
        overlayFrame = overlay;

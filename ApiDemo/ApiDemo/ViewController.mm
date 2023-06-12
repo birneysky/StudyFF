@@ -143,7 +143,7 @@ void testfilters(void) {
     AVFormatContext *ofmt_ctx = NULL;
     AVStream *out_stream = NULL;
     AVCodecContext *ofmt_ctx_codec = NULL;
-    AVCodec *video_codec = NULL;
+    const AVCodec *video_codec = NULL;
     AVFilterContext *buffersink_ctx = NULL;
     AVFilterContext *buffersrc_ctx1 = NULL;
     AVFilterContext *buffersrc_ctx2 = NULL;
@@ -701,7 +701,7 @@ void testfilters2(void) {
     AVFormatContext *ofmt_ctx = NULL;
     AVStream *out_stream = NULL;
     AVCodecContext *ofmt_ctx_codec = NULL;
-    AVCodec *video_codec = NULL;
+    const AVCodec *video_codec = NULL;
     AVFilterContext *buffersink_ctx = NULL;
     AVFilterContext *buffersrc_ctx1 = NULL;
     AVFilterContext *buffersrc_ctx2 = NULL;

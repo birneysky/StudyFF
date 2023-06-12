@@ -10,7 +10,7 @@
 #import "TextureRenderView.h"
 #include "AssetReader.hpp"
 #include "GLFileInput.hpp"
-#include "GLScreen.hpp"
+#include "GLPlayer.hpp"
 #include "I420Reader.hpp"
 #include "GLGrayFilter.hpp"
 #include "GLJoinFilter.hpp"
@@ -21,9 +21,12 @@
 @property (weak, nonatomic) IBOutlet TextureRenderView *videoView;
 @property (nonatomic, strong) dispatch_queue_t dispatch_queue;
 @property (nonatomic, strong) EAGLContext* glContext;
+@property (nonatomic,  assign) GLPlayer* screen;
 @end
 
-@implementation GLViewController
+@implementation GLViewController {
+    
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -52,9 +55,12 @@
 */
 
 - (IBAction)startAction:(id)sender {
+    
+    __weak typeof(self) weakSelf = self;
+    
     dispatch_async(self.dispatch_queue, ^{
         
-        if (!_glContext) {
+        if (!weakSelf.glContext) {
             EAGLContext *glContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
             if (!glContext) {
               glContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
@@ -63,7 +69,7 @@
         }
 
         
-        [self.videoView setContext:self.glContext];
+        [weakSelf.videoView setContext:weakSelf.glContext];
     
         
 //        NSString* yuv_filePath = [[NSBundle mainBundle] pathForResource:@"trailer_i420" ofType:@"yuv"];
@@ -71,19 +77,21 @@
 //        GLTextureReader textReader(&reader, glContext);
 //        GLFileInput glInput(textReader);
         
-        GLScreen screen([self](GLTextureFrame* textFrame) {
+        GLPlayer screen([weakSelf](GLTextureFrame* textFrame) {
             //[self.videoView renderTexture:textFrame->getTexture() with:textFrame->getWidth() height:textFrame->getHeight()];
             //dispatch_async(dispatch_get_main_queue(), ^{
-                [self.videoView renderTexture:textFrame->getTexture() with:textFrame->getWidth() height:textFrame->getHeight()];                
+                [weakSelf.videoView renderTexture:textFrame->getTexture() with:textFrame->getWidth() height:textFrame->getHeight()];
             ///});
         });
         
-        NSString* filePath = [[NSBundle mainBundle] pathForResource:@"8288_short" ofType:@"mp4"];
+        
+        weakSelf.screen = &screen;
+        NSString* filePath = [[NSBundle mainBundle] pathForResource:@"04_quasar" ofType:@"mp4"];
         AssetReader reader1(filePath.UTF8String, self.glContext);
         GLFileInput glInput1(reader1);
         GLGrayFilter grayfilter;
         
-        NSString* filePath2 = [[NSBundle mainBundle] pathForResource:@"45678" ofType:@"mp4"];
+        NSString* filePath2 = [[NSBundle mainBundle] pathForResource:@"02_blackhole" ofType:@"mp4"];
         AssetReader reader2(filePath2.UTF8String, self.glContext);
         GLFileInput glInput2(reader2);
         
@@ -107,7 +115,18 @@
         
         screen.start();
         NSLog(@"i'm done");
+        weakSelf.screen = nullptr;
     });
-    
+}
+- (IBAction)pauseAction:(id)sender {
+    if (self.screen) {
+        self.screen->pause();
+    }
+}
+
+- (IBAction)resumeAction:(id)sender {
+    if (self.screen) {
+        self.screen->resume();
+    }
 }
 @end

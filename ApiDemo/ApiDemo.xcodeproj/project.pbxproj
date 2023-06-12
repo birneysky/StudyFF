@@ -14,6 +14,11 @@
 		32227F8C2A14E11700D9E94F /* ffmpeg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32227F872A14D94000D9E94F /* ffmpeg.framework */; };
 		32227F8D2A14E11700D9E94F /* ffmpeg.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 32227F872A14D94000D9E94F /* ffmpeg.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		326A3FDC2A29BBB400073AEC /* 8288_short.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 326A3FDB2A29BBB400073AEC /* 8288_short.mp4 */; };
+		3275C3722A3632FB00C2A48B /* 02_blackhole.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3275C36D2A3632FA00C2A48B /* 02_blackhole.mp4 */; };
+		3275C3732A3632FB00C2A48B /* 01_nebula.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3275C36E2A3632FB00C2A48B /* 01_nebula.mp4 */; };
+		3275C3742A3632FB00C2A48B /* 04_quasar.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3275C36F2A3632FB00C2A48B /* 04_quasar.mp4 */; };
+		3275C3752A3632FB00C2A48B /* 03_nebula.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3275C3702A3632FB00C2A48B /* 03_nebula.mp4 */; };
+		3275C3762A3632FB00C2A48B /* 05_blackhole.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3275C3712A3632FB00C2A48B /* 05_blackhole.mp4 */; };
 		32BA19902A162D7F0007708E /* CoreImageViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 32BA198F2A162D7F0007708E /* CoreImageViewController.mm */; };
 		32BA19932A162D900007708E /* GLViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 32BA19922A162D900007708E /* GLViewController.mm */; };
 		32D8A3EE2A05CCCA008E060F /* 123456.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 32D8A3EC2A05CCCA008E060F /* 123456.mp4 */; };
@@ -94,12 +99,17 @@
 		324E39102A14E41500FA25BC /* Filter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Filter.hpp; sourceTree = "<group>"; };
 		324E39112A14E41500FA25BC /* GLFrameInput.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLFrameInput.hpp; sourceTree = "<group>"; };
 		324E39122A14E41500FA25BC /* NV12Shader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NV12Shader.hpp; sourceTree = "<group>"; };
-		324E39132A14E41500FA25BC /* GLScreen.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLScreen.hpp; sourceTree = "<group>"; };
+		324E39132A14E41500FA25BC /* GLPlayer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLPlayer.hpp; sourceTree = "<group>"; };
 		324E39142A14E41500FA25BC /* NV12TextCache.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NV12TextCache.hpp; sourceTree = "<group>"; };
 		324E39152A14E41500FA25BC /* GLFilter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLFilter.hpp; sourceTree = "<group>"; };
 		324E39172A14E41500FA25BC /* GLContext.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLContext.hpp; sourceTree = "<group>"; };
 		326A3FDB2A29BBB400073AEC /* 8288_short.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 8288_short.mp4; sourceTree = "<group>"; };
 		326A3FDE2A29D41400073AEC /* GLOverlayFilter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GLOverlayFilter.hpp; sourceTree = "<group>"; };
+		3275C36D2A3632FA00C2A48B /* 02_blackhole.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 02_blackhole.mp4; sourceTree = "<group>"; };
+		3275C36E2A3632FB00C2A48B /* 01_nebula.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 01_nebula.mp4; sourceTree = "<group>"; };
+		3275C36F2A3632FB00C2A48B /* 04_quasar.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 04_quasar.mp4; sourceTree = "<group>"; };
+		3275C3702A3632FB00C2A48B /* 03_nebula.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 03_nebula.mp4; sourceTree = "<group>"; };
+		3275C3712A3632FB00C2A48B /* 05_blackhole.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 05_blackhole.mp4; sourceTree = "<group>"; };
 		32AA44522A28A56B00E700BE /* GLJoinFilter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GLJoinFilter.hpp; sourceTree = "<group>"; };
 		32BA198E2A162D7F0007708E /* CoreImageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreImageViewController.h; sourceTree = "<group>"; };
 		32BA198F2A162D7F0007708E /* CoreImageViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CoreImageViewController.mm; sourceTree = "<group>"; };
@@ -192,7 +202,7 @@
 				324E39102A14E41500FA25BC /* Filter.hpp */,
 				324E39112A14E41500FA25BC /* GLFrameInput.hpp */,
 				324E39122A14E41500FA25BC /* NV12Shader.hpp */,
-				324E39132A14E41500FA25BC /* GLScreen.hpp */,
+				324E39132A14E41500FA25BC /* GLPlayer.hpp */,
 				324E39142A14E41500FA25BC /* NV12TextCache.hpp */,
 				324E39152A14E41500FA25BC /* GLFilter.hpp */,
 				320632392A17A8680071E0E7 /* GLFilter.cpp */,
@@ -250,6 +260,11 @@
 				326A3FDB2A29BBB400073AEC /* 8288_short.mp4 */,
 				321555C52A28DB4C00C0E453 /* 45678.mp4 */,
 				32D8A3ED2A05CCCA008E060F /* trailer.mp4 */,
+				3275C36E2A3632FB00C2A48B /* 01_nebula.mp4 */,
+				3275C36D2A3632FA00C2A48B /* 02_blackhole.mp4 */,
+				3275C3702A3632FB00C2A48B /* 03_nebula.mp4 */,
+				3275C36F2A3632FB00C2A48B /* 04_quasar.mp4 */,
+				3275C3712A3632FB00C2A48B /* 05_blackhole.mp4 */,
 				74FE721B20FE43A4005F024C /* Main.storyboard */,
 				74FE721E20FE43A7005F024C /* Assets.xcassets */,
 				74FE722020FE43A7005F024C /* LaunchScreen.storyboard */,
@@ -398,12 +413,17 @@
 				326A3FDC2A29BBB400073AEC /* 8288_short.mp4 in Resources */,
 				32D8A3EE2A05CCCA008E060F /* 123456.mp4 in Resources */,
 				321555C82A28DB4C00C0E453 /* 8288.mp4 in Resources */,
+				3275C3722A3632FB00C2A48B /* 02_blackhole.mp4 in Resources */,
+				3275C3742A3632FB00C2A48B /* 04_quasar.mp4 in Resources */,
 				74FE722220FE43A7005F024C /* LaunchScreen.storyboard in Resources */,
 				321555C72A28DB4C00C0E453 /* 45678.mp4 in Resources */,
+				3275C3752A3632FB00C2A48B /* 03_nebula.mp4 in Resources */,
 				74FE721F20FE43A7005F024C /* Assets.xcassets in Resources */,
 				74FE721D20FE43A4005F024C /* Main.storyboard in Resources */,
+				3275C3762A3632FB00C2A48B /* 05_blackhole.mp4 in Resources */,
 				74FE72F420FF8C02005F024C /* test.mp4 in Resources */,
 				32D8A3EF2A05CCCA008E060F /* trailer.mp4 in Resources */,
+				3275C3732A3632FB00C2A48B /* 01_nebula.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -46,22 +46,44 @@
                                     <constraint firstAttribute="width" secondItem="dDY-14-xjQ" secondAttribute="height" multiplier="16:9" id="6Wl-ft-pcd"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FOe-SE-ee5">
-                                <rect key="frame" x="157.5" y="275" width="60" height="35"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="start"/>
-                                <connections>
-                                    <action selector="startAction:" destination="FR6-lb-MRO" eventType="touchUpInside" id="q8m-4E-sW1"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="P8t-iJ-vsU">
+                                <rect key="frame" x="0.0" y="275" width="375" height="34.5"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FOe-SE-ee5">
+                                        <rect key="frame" x="0.0" y="0.0" width="121" height="34.5"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="start"/>
+                                        <connections>
+                                            <action selector="startAction:" destination="FR6-lb-MRO" eventType="touchUpInside" id="q8m-4E-sW1"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E0h-bD-Psd">
+                                        <rect key="frame" x="127" y="0.0" width="121" height="34.5"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="pause"/>
+                                        <connections>
+                                            <action selector="pauseAction:" destination="FR6-lb-MRO" eventType="touchUpInside" id="iTf-Gc-ecf"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Xu-94-XH3">
+                                        <rect key="frame" x="254" y="0.0" width="121" height="34.5"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="resume"/>
+                                        <connections>
+                                            <action selector="resumeAction:" destination="FR6-lb-MRO" eventType="touchUpInside" id="1M9-Ft-77r"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="h6S-py-c3y"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="FOe-SE-ee5" firstAttribute="centerX" secondItem="hOk-CO-C23" secondAttribute="centerX" id="5th-BV-Smq"/>
+                            <constraint firstAttribute="trailing" secondItem="P8t-iJ-vsU" secondAttribute="trailing" id="3VO-mu-mJW"/>
+                            <constraint firstItem="P8t-iJ-vsU" firstAttribute="top" secondItem="dDY-14-xjQ" secondAttribute="bottom" constant="20" id="AHO-iU-raZ"/>
                             <constraint firstItem="dDY-14-xjQ" firstAttribute="top" secondItem="h6S-py-c3y" secondAttribute="top" id="F61-w9-bjt"/>
                             <constraint firstItem="dDY-14-xjQ" firstAttribute="trailing" secondItem="h6S-py-c3y" secondAttribute="trailing" id="Kbd-i7-uyr"/>
-                            <constraint firstItem="FOe-SE-ee5" firstAttribute="top" secondItem="dDY-14-xjQ" secondAttribute="bottom" constant="20" id="MxF-1B-Vip"/>
+                            <constraint firstItem="P8t-iJ-vsU" firstAttribute="leading" secondItem="hOk-CO-C23" secondAttribute="leading" id="Qxh-0X-ZuV"/>
                             <constraint firstItem="dDY-14-xjQ" firstAttribute="leading" secondItem="h6S-py-c3y" secondAttribute="leading" id="zcw-WG-Vlg"/>
                         </constraints>
                     </view>
@@ -72,7 +94,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="85I-Bc-e07" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2631" y="1443"/>
+            <point key="canvasLocation" x="2629.5999999999999" y="1442.4287856071965"/>
         </scene>
         <!--Core Image View Controller-->
         <scene sceneID="MPs-5z-j6Y">
